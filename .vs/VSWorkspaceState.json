@@ -1,6 +1,11 @@
 {
   "ExpandedNodes": [
-    ""
+    "",
+    "\\Elaboration",
+    "\\Elaboration\\E1",
+    "\\Elaboration\\E1\\Implementation",
+    "\\Elaboration\\E1\\Implementation\\Rasmus Solution"
   ],
+  "SelectedNode": "\\Elaboration\\E1\\Implementation\\Rasmus Solution",
   "PreviewInSolutionExplorer": false
 }
