@@ -1,0 +1,17 @@
+{ "flexyId": "fb2123",
+"name": "Tim Brun",
+"cusTel": "22334455",
+"quoteBooking": "0",
+"cusTelAlt": "",
+"cusMail": "timb@gmail.com",
+"date": "2019-04-28",
+"times":[ 
+{ "start": "2019-04-28T14:00", "timeDesc": "Escape" , "end": "2019-04-28T15:30" },
+{ "start": "#", "timeDesc": "#", "end":"#"} ],
+"products":[ 
+{ "product": "Vælg antal prs. i alt ", "prodAmount": "8,00", "prodPrice": "0,00", "prodTotPrice": "kr. 0,00" },
+{ "product": "Juvel-kuppet Max ", "prodAmount": "1,00", "prodPrice": "1500,00", "prodTotPrice": "kr. 1.500,00" },
+{ "product": "#", "prodAmount": "#", "prodPrice": "#", "prodTotPrice": "#"} ],
+"totalPrice": "kr. 1.500,00", 
+"cusComment": "Polterabend", 
+"intComment": "" }
