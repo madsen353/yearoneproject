@@ -24,15 +24,15 @@ namespace CheckInAppVS
 
             RemoteServerConfig config = ConfigurationReader.Read();
             RemoteServer server = new RemoteServer(config);
-            List<Booking> Bookings = new List<Booking>();
+            List<Booking> _bookings = new List<Booking>();
             using (server)
             {
-                Bookings = server.ReadAllBookings();
+                _bookings = server.ReadAllBookings();
             }
 
             //Made by Eby
 
-            foreach (var booking in Bookings)
+            foreach (var booking in _bookings)
             {
                 booking.InsertBookingToDb();
                 booking.InsertBookedActivitiesToDb();
