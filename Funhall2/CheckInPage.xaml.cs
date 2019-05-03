@@ -16,14 +16,20 @@ using System.Windows.Shapes;
 namespace Funhall2
 {
     /// <summary>
-    /// Interaction logic for MainWindow.xaml
+    /// Interaction logic for CheckInPage.xaml
     /// </summary>
-    public partial class MainWindow : Window
+    public partial class CheckInPage : Page
     {
-        public MainWindow()
+        public CheckInPage()
         {
             InitializeComponent();
-            NewPage.Content = new CheckInPage();
+        }
+       
+
+
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+            NewPage.Content = new AllBookingsPage();
         }
     }
 }

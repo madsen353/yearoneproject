@@ -10,20 +10,18 @@ using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
 using System.Windows.Shapes;
 
 namespace Funhall2
 {
     /// <summary>
-    /// Interaction logic for MainWindow.xaml
+    /// Interaction logic for SegwayAnsvarsFragivelse.xaml
     /// </summary>
-    public partial class MainWindow : Window
+    public partial class SegwayAnsvarsFragivelse : Window
     {
-        public MainWindow()
+        public SegwayAnsvarsFragivelse()
         {
             InitializeComponent();
-            NewPage.Content = new CheckInPage();
         }
     }
 }

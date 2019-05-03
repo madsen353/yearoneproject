@@ -1,12 +1,13 @@
-﻿<Window x:Class="Funhall2.MainWindow"
+﻿<Window x:Class="Funhall2.SegwayAnsvarsFragivelse"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Funhall2"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
+        Title="SegwayAnsvarsFragivelse" Height="450" Width="800">
     <Grid>
-        <Frame x:Name="NewPage" Grid.ColumnSpan="3" Margin="0,0,-0.4,0" Grid.RowSpan="3" />
+        <Image Margin="10,0,10,-19" Source="Image1.png" Stretch="Fill"/>
+
     </Grid>
 </Window>
