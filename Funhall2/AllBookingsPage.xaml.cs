@@ -27,7 +27,8 @@ namespace Funhall2
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {
-            NewPage.Content = new CheckInPage();
+            CheckInPage checkIn = new CheckInPage();
+            this.NavigationService.Navigate(checkIn);
         }
     }
 }

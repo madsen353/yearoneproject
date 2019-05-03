@@ -29,7 +29,8 @@ namespace Funhall2
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {
-            NewPage.Content = new AllBookingsPage();
+            AllBookingsPage AllBookings = new AllBookingsPage();
+            this.NavigationService.Navigate(AllBookings);
         }
     }
 }
