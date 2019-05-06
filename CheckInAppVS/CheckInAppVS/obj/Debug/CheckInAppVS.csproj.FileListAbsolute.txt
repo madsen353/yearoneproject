@@ -1,0 +1,72 @@
+C:\Users\eby\source\repos\CheckInAppVS\CheckInAppVS\obj\Debug\CheckInAppVS.csprojAssemblyReference.cache
+C:\Users\eby\source\repos\CheckInAppVS\CheckInAppVS\obj\Debug\MainWindow.g.cs
+C:\Users\eby\source\repos\CheckInAppVS\CheckInAppVS\obj\Debug\App.g.cs
+C:\Users\eby\source\repos\CheckInAppVS\CheckInAppVS\obj\Debug\CheckInAppVS_MarkupCompile.cache
+C:\Users\eby\source\repos\CheckInAppVS\CheckInAppVS\obj\Debug\CheckInAppVS_MarkupCompile.lref
+C:\Users\eby\source\repos\CheckInAppVS\CheckInAppVS\bin\Debug\CheckInAppVS.exe.config
+C:\Users\eby\source\repos\CheckInAppVS\CheckInAppVS\bin\Debug\CheckInAppVS.exe
+C:\Users\eby\source\repos\CheckInAppVS\CheckInAppVS\bin\Debug\CheckInAppVS.pdb
+C:\Users\eby\source\repos\CheckInAppVS\CheckInAppVS\bin\Debug\Newtonsoft.Json.dll
+C:\Users\eby\source\repos\CheckInAppVS\CheckInAppVS\bin\Debug\Renci.SshNet.dll
+C:\Users\eby\source\repos\CheckInAppVS\CheckInAppVS\bin\Debug\System.Configuration.ConfigurationManager.dll
+C:\Users\eby\source\repos\CheckInAppVS\CheckInAppVS\bin\Debug\System.Security.AccessControl.dll
+C:\Users\eby\source\repos\CheckInAppVS\CheckInAppVS\bin\Debug\System.Security.Permissions.dll
+C:\Users\eby\source\repos\CheckInAppVS\CheckInAppVS\bin\Debug\System.Security.Principal.Windows.dll
+C:\Users\eby\source\repos\CheckInAppVS\CheckInAppVS\bin\Debug\Newtonsoft.Json.xml
+C:\Users\eby\source\repos\CheckInAppVS\CheckInAppVS\bin\Debug\Renci.SshNet.xml
+C:\Users\eby\source\repos\CheckInAppVS\CheckInAppVS\obj\Debug\MainWindow.baml
+C:\Users\eby\source\repos\CheckInAppVS\CheckInAppVS\obj\Debug\CheckInAppVS.g.resources
+C:\Users\eby\source\repos\CheckInAppVS\CheckInAppVS\obj\Debug\CheckInAppVS.Properties.Resources.resources
+C:\Users\eby\source\repos\CheckInAppVS\CheckInAppVS\obj\Debug\CheckInAppVS.csproj.GenerateResource.cache
+C:\Users\eby\source\repos\CheckInAppVS\CheckInAppVS\obj\Debug\CheckInAppVS.csproj.CoreCompileInputs.cache
+C:\Users\eby\source\repos\CheckInAppVS\CheckInAppVS\obj\Debug\CheckInAppVS.csproj.CopyComplete
+C:\Users\eby\source\repos\CheckInAppVS\CheckInAppVS\obj\Debug\CheckInAppVS.exe
+C:\Users\eby\source\repos\CheckInAppVS\CheckInAppVS\obj\Debug\CheckInAppVS.pdb
+C:\Users\eby\Desktop\2ndSemExam\yearoneproject\CheckInAppVS\CheckInAppVS\bin\Debug\CheckInAppVS.exe.config
+C:\Users\eby\Desktop\2ndSemExam\yearoneproject\CheckInAppVS\CheckInAppVS\bin\Debug\CheckInAppVS.exe
+C:\Users\eby\Desktop\2ndSemExam\yearoneproject\CheckInAppVS\CheckInAppVS\bin\Debug\CheckInAppVS.pdb
+C:\Users\eby\Desktop\2ndSemExam\yearoneproject\CheckInAppVS\CheckInAppVS\bin\Debug\Newtonsoft.Json.dll
+C:\Users\eby\Desktop\2ndSemExam\yearoneproject\CheckInAppVS\CheckInAppVS\bin\Debug\Renci.SshNet.dll
+C:\Users\eby\Desktop\2ndSemExam\yearoneproject\CheckInAppVS\CheckInAppVS\bin\Debug\System.Configuration.ConfigurationManager.dll
+C:\Users\eby\Desktop\2ndSemExam\yearoneproject\CheckInAppVS\CheckInAppVS\bin\Debug\System.Security.AccessControl.dll
+C:\Users\eby\Desktop\2ndSemExam\yearoneproject\CheckInAppVS\CheckInAppVS\bin\Debug\System.Security.Permissions.dll
+C:\Users\eby\Desktop\2ndSemExam\yearoneproject\CheckInAppVS\CheckInAppVS\bin\Debug\System.Security.Principal.Windows.dll
+C:\Users\eby\Desktop\2ndSemExam\yearoneproject\CheckInAppVS\CheckInAppVS\bin\Debug\Newtonsoft.Json.xml
+C:\Users\eby\Desktop\2ndSemExam\yearoneproject\CheckInAppVS\CheckInAppVS\bin\Debug\Renci.SshNet.xml
+C:\Users\eby\Desktop\2ndSemExam\yearoneproject\CheckInAppVS\CheckInAppVS\obj\Debug\CheckInAppVS.csprojAssemblyReference.cache
+C:\Users\eby\Desktop\2ndSemExam\yearoneproject\CheckInAppVS\CheckInAppVS\obj\Debug\MainWindow.g.cs
+C:\Users\eby\Desktop\2ndSemExam\yearoneproject\CheckInAppVS\CheckInAppVS\obj\Debug\App.g.cs
+C:\Users\eby\Desktop\2ndSemExam\yearoneproject\CheckInAppVS\CheckInAppVS\obj\Debug\CheckInAppVS_MarkupCompile.cache
+C:\Users\eby\Desktop\2ndSemExam\yearoneproject\CheckInAppVS\CheckInAppVS\obj\Debug\CheckInAppVS_MarkupCompile.lref
+C:\Users\eby\Desktop\2ndSemExam\yearoneproject\CheckInAppVS\CheckInAppVS\obj\Debug\MainWindow.baml
+C:\Users\eby\Desktop\2ndSemExam\yearoneproject\CheckInAppVS\CheckInAppVS\obj\Debug\CheckInAppVS.g.resources
+C:\Users\eby\Desktop\2ndSemExam\yearoneproject\CheckInAppVS\CheckInAppVS\obj\Debug\CheckInAppVS.Properties.Resources.resources
+C:\Users\eby\Desktop\2ndSemExam\yearoneproject\CheckInAppVS\CheckInAppVS\obj\Debug\CheckInAppVS.csproj.GenerateResource.cache
+C:\Users\eby\Desktop\2ndSemExam\yearoneproject\CheckInAppVS\CheckInAppVS\obj\Debug\CheckInAppVS.csproj.CoreCompileInputs.cache
+C:\Users\eby\Desktop\2ndSemExam\yearoneproject\CheckInAppVS\CheckInAppVS\obj\Debug\CheckInAppVS.csproj.CopyComplete
+C:\Users\eby\Desktop\2ndSemExam\yearoneproject\CheckInAppVS\CheckInAppVS\obj\Debug\CheckInAppVS.exe
+C:\Users\eby\Desktop\2ndSemExam\yearoneproject\CheckInAppVS\CheckInAppVS\obj\Debug\CheckInAppVS.pdb
+D:\Google Drev\Skole\2 Semester\1 Aarsprojekt\Year1Git\CheckInAppVS\CheckInAppVS\bin\Debug\CheckInAppVS.exe.config
+D:\Google Drev\Skole\2 Semester\1 Aarsprojekt\Year1Git\CheckInAppVS\CheckInAppVS\bin\Debug\CheckInAppVS.exe
+D:\Google Drev\Skole\2 Semester\1 Aarsprojekt\Year1Git\CheckInAppVS\CheckInAppVS\bin\Debug\CheckInAppVS.pdb
+D:\Google Drev\Skole\2 Semester\1 Aarsprojekt\Year1Git\CheckInAppVS\CheckInAppVS\bin\Debug\Newtonsoft.Json.dll
+D:\Google Drev\Skole\2 Semester\1 Aarsprojekt\Year1Git\CheckInAppVS\CheckInAppVS\bin\Debug\Renci.SshNet.dll
+D:\Google Drev\Skole\2 Semester\1 Aarsprojekt\Year1Git\CheckInAppVS\CheckInAppVS\bin\Debug\System.Configuration.ConfigurationManager.dll
+D:\Google Drev\Skole\2 Semester\1 Aarsprojekt\Year1Git\CheckInAppVS\CheckInAppVS\bin\Debug\System.Security.AccessControl.dll
+D:\Google Drev\Skole\2 Semester\1 Aarsprojekt\Year1Git\CheckInAppVS\CheckInAppVS\bin\Debug\System.Security.Permissions.dll
+D:\Google Drev\Skole\2 Semester\1 Aarsprojekt\Year1Git\CheckInAppVS\CheckInAppVS\bin\Debug\System.Security.Principal.Windows.dll
+D:\Google Drev\Skole\2 Semester\1 Aarsprojekt\Year1Git\CheckInAppVS\CheckInAppVS\bin\Debug\Newtonsoft.Json.xml
+D:\Google Drev\Skole\2 Semester\1 Aarsprojekt\Year1Git\CheckInAppVS\CheckInAppVS\bin\Debug\Renci.SshNet.xml
+D:\Google Drev\Skole\2 Semester\1 Aarsprojekt\Year1Git\CheckInAppVS\CheckInAppVS\obj\Debug\CheckInAppVS.csprojAssemblyReference.cache
+D:\Google Drev\Skole\2 Semester\1 Aarsprojekt\Year1Git\CheckInAppVS\CheckInAppVS\obj\Debug\MainWindow.g.cs
+D:\Google Drev\Skole\2 Semester\1 Aarsprojekt\Year1Git\CheckInAppVS\CheckInAppVS\obj\Debug\App.g.cs
+D:\Google Drev\Skole\2 Semester\1 Aarsprojekt\Year1Git\CheckInAppVS\CheckInAppVS\obj\Debug\CheckInAppVS_MarkupCompile.cache
+D:\Google Drev\Skole\2 Semester\1 Aarsprojekt\Year1Git\CheckInAppVS\CheckInAppVS\obj\Debug\CheckInAppVS_MarkupCompile.lref
+D:\Google Drev\Skole\2 Semester\1 Aarsprojekt\Year1Git\CheckInAppVS\CheckInAppVS\obj\Debug\MainWindow.baml
+D:\Google Drev\Skole\2 Semester\1 Aarsprojekt\Year1Git\CheckInAppVS\CheckInAppVS\obj\Debug\CheckInAppVS.g.resources
+D:\Google Drev\Skole\2 Semester\1 Aarsprojekt\Year1Git\CheckInAppVS\CheckInAppVS\obj\Debug\CheckInAppVS.Properties.Resources.resources
+D:\Google Drev\Skole\2 Semester\1 Aarsprojekt\Year1Git\CheckInAppVS\CheckInAppVS\obj\Debug\CheckInAppVS.csproj.GenerateResource.cache
+D:\Google Drev\Skole\2 Semester\1 Aarsprojekt\Year1Git\CheckInAppVS\CheckInAppVS\obj\Debug\CheckInAppVS.csproj.CoreCompileInputs.cache
+D:\Google Drev\Skole\2 Semester\1 Aarsprojekt\Year1Git\CheckInAppVS\CheckInAppVS\obj\Debug\CheckInAppVS.csproj.CopyComplete
+D:\Google Drev\Skole\2 Semester\1 Aarsprojekt\Year1Git\CheckInAppVS\CheckInAppVS\obj\Debug\CheckInAppVS.exe
+D:\Google Drev\Skole\2 Semester\1 Aarsprojekt\Year1Git\CheckInAppVS\CheckInAppVS\obj\Debug\CheckInAppVS.pdb
