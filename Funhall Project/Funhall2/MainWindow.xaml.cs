@@ -22,6 +22,7 @@ namespace Funhall2
     {
         public MainWindow()
         {
+            // Made by Anders and Niels
             InitializeComponent();
             CheckInPage CheckIn = new CheckInPage();
             NewPage.NavigationService.Navigate(CheckIn);
