@@ -29,29 +29,6 @@ namespace Funhall2
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {
-            //Made by Rasmus
-
-            RemoteServerConfig config = ConfigurationReader.Read();
-            RemoteServer server = new RemoteServer(config);
-            List<Booking> _bookings = new List<Booking>();
-            using (server)
-            {
-                _bookings = server.ReadAllBookings();
-            }
-
-            //Made by Eby
-
-            foreach (var booking in _bookings)
-            {
-                booking.InsertBookingToDb();
-                booking.InsertBookedActivitiesToDb();
-                booking.InsertActivityToDb();
-                booking.InsertBookedProductsToDb();
-            }
-            //this.Close(); virker ikke på en page.
-            List<Booking> bookings = DALBooking.getBookings();
-            //List<Activity> bookedActivities = Activity.getBookedActivities("fb2123");
-
             //Made by Anders & Niels
             AllBookingsPage AllBookings = new AllBookingsPage();
             this.NavigationService.Navigate(AllBookings);

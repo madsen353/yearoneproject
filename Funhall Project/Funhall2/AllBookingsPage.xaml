@@ -9,22 +9,20 @@
       Title="AllBookingsPage">
 
     <Grid>
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition/>
-            <ColumnDefinition/>
-        </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
             <RowDefinition Height="80*"/>
             <RowDefinition Height="360*"/>
         </Grid.RowDefinitions>
-        <Label Content="Alle dagens bookinger" Margin="230,15,230,4.6" VerticalAlignment="Center" Height="62" Grid.ColumnSpan="2" FontSize="32"/>
-        <ListView HorizontalAlignment="Left" Height="360" Margin="0,0.4,0,0" VerticalAlignment="Top" Width="800" Grid.Row="1" Grid.ColumnSpan="2">
-            <ListView.View>
-                <GridView>
-                    <GridViewColumn/>
-                </GridView>
-            </ListView.View>
-        </ListView>
+        <Label Content="Alle dagens bookinger"  Margin="230,15,230,4.6" VerticalAlignment="Center" Height="62" FontSize="32"/>
+        <!--ListBox and Datagrid solutions Made by Rasmus:-->
+        <!--ListBox Solution:-->
+        <ListBox Name="listBox"  Grid.Row="1" ItemsSource="{Binding bookings}"></ListBox>
+        <!--Datagrid Solution:-->
+        <!--<DataGrid Name="grid" ItemsSource="{Binding bookings}" FontSize="12" Grid.Row="1"  Margin="0,80,-0.4,0" AutoGenerateColumns="False">
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="Name" Binding="{Binding name}"/>
+            </DataGrid.Columns>
+        </DataGrid>-->
         <Button Content="Tilbage" HorizontalAlignment="Left" Height="23" Margin="10,15,0,0" VerticalAlignment="Top" Width="65" Click="Button_Click"/>
     </Grid>
 </Page>

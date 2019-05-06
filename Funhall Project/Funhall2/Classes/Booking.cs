@@ -24,6 +24,24 @@ namespace Funhall2
         public string totalPrice { get; set; }
         public string cusComment { get; set; }
         public string intComment { get; set; }
+        public class Time
+        {
+            public string start { get; set; }
+            public string timeDesc { get; set; }
+            public string end { get; set; }
+        }
+        public class Product
+        {
+            public string product { get; set; }
+            public string prodAmount { get; set; }
+            public string prodPrice { get; set; }
+            public string prodTotPrice { get; set; }
+        }
+
+        public override string ToString()
+        {
+            return string.Format($"{name}");
+        }
 
         //Made by Eby
         public void InsertBookingToDb()
@@ -214,21 +232,4 @@ namespace Funhall2
             cmd.Parameters.Add(parameter);
         }
     }
-
-    //Made by Rasmus
-
-    public class Time
-    {
-        public string start { get; set; }
-        public string timeDesc { get; set; }
-        public string end { get; set; }
-    }
-    public class Product
-    {
-        public string product { get; set; }
-        public string prodAmount { get; set; }
-        public string prodPrice { get; set; }
-        public string prodTotPrice { get; set; }
-    }
-
 }
