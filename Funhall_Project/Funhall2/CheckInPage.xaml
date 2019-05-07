@@ -20,6 +20,6 @@
             <ColumnDefinition Width="1*"/>
 
         </Grid.ColumnDefinitions>
-        <Button Content="Check-in" Grid.Column="1" Margin="10" Grid.Row="1" Click="Button_Click"/>
+        <Button Content="Check-in" Grid.Column="1" Margin="10" Grid.Row="1" Click="Button_Click" FontFamily="Gill Sans MT" FontSize="18"/>
     </Grid>
 </Page>
