@@ -62,5 +62,11 @@ namespace Funhall2
             CheckInPage checkIn = new CheckInPage();
             this.NavigationService.Navigate(checkIn);
         }
+
+        private void ListBox_MouseDoubleClick(object sender, MouseButtonEventArgs e)
+        {
+            MyBookingsPage MyBooking = new MyBookingsPage();
+            this.NavigationService.Navigate(MyBooking);
+        }
     }
 }

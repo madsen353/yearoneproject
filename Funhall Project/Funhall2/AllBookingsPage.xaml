@@ -16,7 +16,7 @@
         <Label Content="Alle dagens bookinger"  Margin="230,15,230,4.6" VerticalAlignment="Center" Height="62" FontSize="32" FontFamily="Gill Sans MT"/>
         <!--ListBox and Datagrid solutions Made by Rasmus:-->
         <!--ListBox Solution:-->
-        <ListBox Name="listBox"  Grid.Row="1" ItemsSource="{Binding bookings}" FontSize="16" FontFamily="Gill Sans MT">
+        <ListBox Name="listBox"  Grid.Row="1" ItemsSource="{Binding bookings}" FontSize="16" FontFamily="Gill Sans MT" MouseDoubleClick="ListBox_MouseDoubleClick">
             <ListBox.ItemContainerStyle>
                 <Style TargetType="{x:Type ListBoxItem}">
                     <Setter Property="Background" Value="Khaki"/>
