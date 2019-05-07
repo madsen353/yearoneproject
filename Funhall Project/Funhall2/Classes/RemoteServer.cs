@@ -31,7 +31,7 @@ namespace Funhall2
                     string remoteFileName = file.Name;
                     
                     // This code loads the data into RAM without persisting it.
-                    var json = client.ReadAllText(@"bookings/" + remoteFileName);
+                    var json = client.ReadAllText(config.FilePath + remoteFileName);
                     Booking rawBooking = JsonConvert.DeserializeObject<Booking>(json);
                     bookings.Add(rawBooking);
                 }
