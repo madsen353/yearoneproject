@@ -36,7 +36,7 @@
             </DataGrid.Columns>
         </DataGrid>-->
         <Button Content="Tilbage" HorizontalAlignment="Left" Height="23" Margin="10,15,0,0" VerticalAlignment="Top" Width="65" Click="Button_Click"/>
-        <Button Content="Vis Detjeler" HorizontalAlignment="Right" Margin="0,175,153,0" Grid.Row="1" VerticalAlignment="Top" Width="172" Click="ShowSelectedBooking"/>
-        <Button Content="Tilmeld din ankmost" HorizontalAlignment="Right" Margin="0,170,458,0" Grid.Row="1" VerticalAlignment="Top" Width="194" Click="Checkin_Click" />
+        <Button Content="Vis liste af gæster" HorizontalAlignment="Right" Margin="0,175,153,0" Grid.Row="1" VerticalAlignment="Top" Width="172" Click="ShowSelectedBooking"/>
+        <Button Content="Meld din ankmost" HorizontalAlignment="Right" Margin="0,170,458,0" Grid.Row="1" VerticalAlignment="Top" Width="194" Click="Checkin_Click" />
     </Grid>
 </Page>

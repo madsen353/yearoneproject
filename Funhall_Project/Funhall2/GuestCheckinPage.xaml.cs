@@ -48,5 +48,11 @@ namespace Funhall2
             CheckIn.CheckInCus(cus);
            
         }
+
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+            SegwayAnsvarsFragivelse window = new SegwayAnsvarsFragivelse();
+            window.ShowDialog();
+        }
     }
 }

@@ -8,6 +8,7 @@
       d:DesignHeight="450" d:DesignWidth="800"
       Title="GuestCheckinPage">
 
+
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="6*"/>
@@ -37,9 +38,12 @@
             <TextBox Name="Email" Grid.Row="1" Grid.Column="1" Margin="0,0,10,10" />
             <CheckBox Name="Subscription" Grid.Row="2" Grid.Column="1"  Margin="0,0,10,10">Tilmeld nyhedsbrev</CheckBox>
             <!--Her kommer info om Segway-->
-            <CheckBox Name="Segway" Grid.Row="3" Grid.Column="1"  Margin="0,0,10,10">Agree Segway</CheckBox>
+            <CheckBox Name="Segway" Grid.Row="3" Grid.Column="1"  Margin="0,0,10,10"></CheckBox>
+            <TextBlock xml:space="preserve" Grid.Row="3" Grid.Column="1" Margin="20,0,10,10">Bekræft venligst at du har læst vores <Button Content="Segway ansvarsfraskrivelse" Click="Button_Click">
+                <Button.Template><ControlTemplate TargetType="Button"><TextBlock TextDecorations="Underline"><ContentPresenter /></TextBlock></ControlTemplate></Button.Template><Button.Style><Style TargetType="Button"><Setter Property="Foreground" Value="Blue" /></Style></Button.Style></Button></TextBlock>
             <Button Content="Submit" HorizontalAlignment="Left" Margin="108,81.667,0,-6" VerticalAlignment="Top" Width="75" Height="27"  Grid.Column="1" Grid.Row="3" Click="AddGuestToDb" />
 
         </Grid>
     </Grid>
+
 </Page>
