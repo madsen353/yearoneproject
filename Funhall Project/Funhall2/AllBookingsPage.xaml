@@ -13,16 +13,32 @@
             <RowDefinition Height="80*"/>
             <RowDefinition Height="360*"/>
         </Grid.RowDefinitions>
-        <Label Content="Alle dagens bookinger"  Margin="230,15,230,4.6" VerticalAlignment="Center" Height="62" FontSize="32"/>
+        <Label Content="Alle dagens bookinger"  Margin="230,15,230,4.6" VerticalAlignment="Center" Height="62" FontSize="32" FontFamily="Gill Sans MT"/>
         <!--ListBox and Datagrid solutions Made by Rasmus:-->
         <!--ListBox Solution:-->
-        <ListBox Name="listBox"  Grid.Row="1" ItemsSource="{Binding bookings}"></ListBox>
+        <ListBox Name="listBox"  Grid.Row="1" ItemsSource="{Binding bookings}" FontSize="16" FontFamily="Gill Sans MT">
+            <ListBox.ItemContainerStyle>
+                <Style TargetType="{x:Type ListBoxItem}">
+                    <Setter Property="Background" Value="Khaki"/>
+                    <Setter Property="Margin" Value="9"/>
+                    <Setter Property="Padding" Value="9"/>
+                    <Style.Triggers>
+                        <Trigger Property="IsMouseOver" Value="True">
+                            <Setter Property="Background" Value="Beige"/>
+                            <Setter Property="Foreground" Value="Black"/>
+                            <Setter Property="BorderBrush" Value="Black"/>
+                            <Setter Property="BorderThickness" Value="5"/>
+                        </Trigger>
+                    </Style.Triggers>
+                </Style>
+            </ListBox.ItemContainerStyle>
+        </ListBox>
         <!--Datagrid Solution:-->
         <!--<DataGrid Name="grid" ItemsSource="{Binding bookings}" FontSize="12" Grid.Row="1"  Margin="0,80,-0.4,0" AutoGenerateColumns="False">
             <DataGrid.Columns>
                 <DataGridTextColumn Header="Name" Binding="{Binding name}"/>
             </DataGrid.Columns>
         </DataGrid>-->
-        <Button Content="Tilbage" HorizontalAlignment="Left" Height="23" Margin="10,15,0,0" VerticalAlignment="Top" Width="65" Click="Button_Click"/>
+        <Button Content="Tilbage" HorizontalAlignment="Left" Height="23" Margin="10,15,0,0" VerticalAlignment="Top" Width="65" Click="Button_Click" FontFamily="Gill Sans MT"/>
     </Grid>
 </Page>
