@@ -16,7 +16,19 @@
         <Label Content="Alle dagens bookinger"  Margin="230,15,230,4.6" VerticalAlignment="Center" Height="62" FontSize="32"/>
         <!--ListBox and Datagrid solutions Made by Rasmus:-->
         <!--ListBox Solution:-->
-        <ListBox Name="listBox"  Grid.Row="1" ItemsSource="{Binding bookings}"></ListBox>
+        <!--<ListBox Name="listBox"  Grid.Row="1" ItemsSource="{Binding bookings}"></ListBox>-->
+
+        <ListBox Name="listBox" Grid.Row="1" ItemsSource="{Binding booking}">
+            <ListBox.ItemTemplate>
+                <DataTemplate>
+                    <StackPanel>
+                        <TextBlock Text="{Binding Path=name}" />
+                    </StackPanel>
+                </DataTemplate>
+            </ListBox.ItemTemplate>
+        </ListBox>
+
+
         <!--Datagrid Solution:-->
         <!--<DataGrid Name="grid" ItemsSource="{Binding bookings}" FontSize="12" Grid.Row="1"  Margin="0,80,-0.4,0" AutoGenerateColumns="False">
             <DataGrid.Columns>
@@ -24,5 +36,7 @@
             </DataGrid.Columns>
         </DataGrid>-->
         <Button Content="Tilbage" HorizontalAlignment="Left" Height="23" Margin="10,15,0,0" VerticalAlignment="Top" Width="65" Click="Button_Click"/>
+        <Button Content="Vis Detjeler" HorizontalAlignment="Right" Margin="0,175,153,0" Grid.Row="1" VerticalAlignment="Top" Width="172" Click="ShowSelectedBooking"/>
+        <Button Content="Tilmeld din ankmost" HorizontalAlignment="Right" Margin="0,170,458,0" Grid.Row="1" VerticalAlignment="Top" Width="194" Click="Checkin_Click" />
     </Grid>
 </Page>

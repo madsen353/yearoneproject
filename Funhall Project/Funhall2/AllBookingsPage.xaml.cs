@@ -23,8 +23,7 @@ namespace Funhall2
     {
         public AllBookingsPage()
         {
-            InitializeComponent();
-            DataContext = this;
+            
             //Made by Rasmus
 
             RemoteServerConfig config = ConfigurationReader.Read();
@@ -44,10 +43,12 @@ namespace Funhall2
                 booking.InsertActivityToDb();
                 booking.InsertBookedProductsToDb();
             }
-            //this.Close(); virker ikke på en page.
-            //List<Activity> bookedActivities = Activity.getBookedActivities("fb2123");
+
 
             //Made by Rasmus
+
+            InitializeComponent();
+            DataContext = this;
 
             //ListBox Solution:
             ObservableCollection<Booking> bookings = DALBooking.getBookings();
@@ -61,6 +62,24 @@ namespace Funhall2
         {
             CheckInPage checkIn = new CheckInPage();
             this.NavigationService.Navigate(checkIn);
+        }
+
+       
+
+        private void ShowSelectedBooking(object sender, RoutedEventArgs e)
+        {
+            Booking b = listBox.SelectedItem as Booking;
+            SelectedBookingPage page = new SelectedBookingPage(b);
+            this.NavigationService.Navigate(page);
+        }
+
+        private void Checkin_Click(object sender, RoutedEventArgs e)
+        {
+            Booking b = listBox.SelectedItem as Booking;
+            GuestCheckinPage page = new GuestCheckinPage(b);
+            this.NavigationService.Navigate(page);
+
+
         }
     }
 }

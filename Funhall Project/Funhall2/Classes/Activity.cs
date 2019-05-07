@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Data;
 using System.Data.SqlClient;
 using System.Linq;
@@ -16,7 +17,7 @@ namespace Funhall2
         public DateTime StartTime { get; set; }
         public DateTime EndTime { get; set; }
 
-        public static List<Activity> getBookedActivities(string id)
+        public static ObservableCollection<Activity> getBookedActivities(Booking booking)
         {
             SqlConnection con = new SqlConnection("Data Source=.;Initial Catalog=FunHall;"
                                  + "Integrated Security=true;");
@@ -24,10 +25,10 @@ namespace Funhall2
             SqlDataReader reader;
             cmd.Connection = con;
             cmd.CommandType = CommandType.Text;
-            cmd.Parameters.Add("@bookingId", SqlDbType.NVarChar).Value = id;
+            cmd.Parameters.Add("@bookingId", SqlDbType.NVarChar).Value = booking.flexyId;
 
             cmd.CommandText = "select * from BookedActivities where BookingId = @bookingId";
-            List<Activity> activities = new List<Activity>();
+            ObservableCollection<Activity> activities = new ObservableCollection<Activity>();
             con.Open();
             reader = cmd.ExecuteReader();
 

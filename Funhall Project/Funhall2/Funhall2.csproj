@@ -83,8 +83,14 @@
     <Compile Include="Classes\Booking.cs" />
     <Compile Include="Classes\DALBooking.cs" />
     <Compile Include="Classes\RemoteServer.cs" />
+    <Compile Include="GuestCheckinPage.xaml.cs">
+      <DependentUpon>GuestCheckinPage.xaml</DependentUpon>
+    </Compile>
     <Compile Include="SegwayAnsvarsFragivelse.xaml.cs">
       <DependentUpon>SegwayAnsvarsFragivelse.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="SelectedBookingPage.xaml.cs">
+      <DependentUpon>SelectedBookingPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="ServerConfiguration\ConfigurationReader.cs" />
     <Compile Include="ServerConfiguration\RemoteServerConfig.cs" />
@@ -93,6 +99,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="CheckInPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="GuestCheckinPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -119,6 +129,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="SegwayAnsvarsFragivelse.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="SelectedBookingPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

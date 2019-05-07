@@ -38,10 +38,10 @@ namespace Funhall2
             public string prodTotPrice { get; set; }
         }
 
-        public override string ToString()
-        {
-            return string.Format($"{name}");
-        }
+        //public override string ToString()
+        //{
+        //    return string.Format($"{name}");
+        //}
 
         //Made by Eby
         public void InsertBookingToDb()
