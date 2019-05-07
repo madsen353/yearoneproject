@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Funhall2.Classes;
+using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
@@ -29,6 +30,17 @@ namespace Funhall2
 
             ObservableCollection<Activity> activities = Activity.getBookedActivities(Booking);
             Activities.ItemsSource = activities;
+
+            ObservableCollection<Customer> guests = Customer.GetCustomers(Booking);
+            Guests.ItemsSource = guests;
+        }
+
+        private void ViewGuestInfo(object sender, MouseButtonEventArgs e)
+        {
+            Customer cus = Guests.SelectedItem as Customer;
+            Profile page = new Profile(cus);
+            this.NavigationService.Navigate(page);
+
         }
     }
 }

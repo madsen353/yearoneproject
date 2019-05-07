@@ -16,9 +16,7 @@ using System.Windows.Shapes;
 
 namespace Funhall2
 {
-    /// <summary>
-    /// Interaction logic for AllBookingsPage.xaml
-    /// </summary>
+    
     public partial class AllBookingsPage : Page
     {
         public AllBookingsPage()

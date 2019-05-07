@@ -16,37 +16,48 @@ using System.Windows.Shapes;
 
 namespace Funhall2
 {
-    public partial class GuestCheckinPage : Page
+    public partial class Profile : Page
     {
-        public Booking Booking { get; set; }
-
-        public GuestCheckinPage(Booking booking)
+        public Customer Customer { get; set; }
+        public Profile(Customer cus)
         {
-            Booking = booking;
+            Customer = cus;
             InitializeComponent();
-            n.Text = Booking.name;
-
+            Name.Text = cus.Name;
+            Email.Text = cus.Email;
+            Subscription.IsChecked = cus.Subscription;
+            Segway.IsChecked = cus.Segway;
         }
 
-        private void AddGuestToDb(object sender, RoutedEventArgs e)
+        private void UpdateGuestData(object sender, RoutedEventArgs e)
         {
-            
             Customer cus = new Customer();
-            cus.BookingId = Booking.flexyId;
             cus.Name = Name.Text;
             cus.Email = Email.Text;
             if (Subscription.IsChecked == true)
                 cus.Subscription = true;
             else
                 cus.Subscription = false;
-            
+
             if (Segway.IsChecked == true)
-                  cus.Segway = true;
+                cus.Segway = true;
             else
                 cus.Segway = false;
 
-            CheckIn.CheckInCus(cus);
-           
+            try
+            {
+                CheckIn.UpdateCus(cus);
+                MessageBox.Show("Data er redegeret");
+            }
+            catch (Exception)
+            {
+                MessageBox.Show("Der sker noget fejl. Prøv igen");                
+            }
+            finally
+            {
+                CheckInPage page = new CheckInPage();
+                this.NavigationService.Navigate(page);
+            }     
         }
     }
 }

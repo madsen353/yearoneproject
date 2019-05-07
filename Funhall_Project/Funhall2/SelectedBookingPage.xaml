@@ -10,46 +10,49 @@
 
     <Grid>
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="122*"/>
-            <ColumnDefinition Width="264*"/>
-            <ColumnDefinition Width="195*"/>
-            <ColumnDefinition Width="218.667"/>
+            <ColumnDefinition/>
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
-            <RowDefinition Height="67*"/>
-            <RowDefinition Height="83*"/>
-            <RowDefinition Height="300*"/>
+            <RowDefinition Height="41*"/>
+            <RowDefinition Height="74*"/>
+            <RowDefinition Height="158*"/>
+            <RowDefinition Height="177*"/>
         </Grid.RowDefinitions>
-        <Button Content="Tilbage" HorizontalAlignment="Left" Margin="74,21,0,0" VerticalAlignment="Top" Width="75" Height="21" Grid.ColumnSpan="2"/>
+        <Button Content="Tilbage" Grid.Row="0" HorizontalAlignment="Left" Margin="74,9,0,0" VerticalAlignment="Top" Width="75" Height="21" RenderTransformOrigin="0.503,-0.604"/>
+        <Grid Grid.Row="1" Margin="0,9.333,0,1.667">
+            <Label Content="Navn:" HorizontalAlignment="Center" Margin="20,11,734,0" VerticalAlignment="Top"  Height="26" Width="60" Grid.Column="0" FontWeight="Bold" FontSize="14"/>
+            <Label Content="Dato:" HorizontalAlignment="Center" Margin="411,11,329,0" VerticalAlignment="Top"  Height="26" Width="60" FontWeight="Bold" FontSize="14"/>
 
-        <!--<Label Content="Name" Margin="59,22.667,0,0" VerticalAlignment="Top" Grid.Row="1" Grid.Column="0" Height="26" HorizontalAlignment="Left" Width="1"/>-->
-        <Label Content="Name:" HorizontalAlignment="Center" Margin="6,22.667,56,0" VerticalAlignment="Top" Grid.Row="1"  Height="26" Width="60" Grid.Column="0" FontWeight="Bold" FontSize="14"/>
-        <Label Content="Dato:" HorizontalAlignment="Center" Margin="6,22.667,91.333,0" VerticalAlignment="Top" Grid.Row="1"  Height="26" Width="60" Grid.Column="2" FontWeight="Bold" FontSize="14"/>
+            <TextBlock Name="n" Margin="132,16,0,0" HorizontalAlignment="Left" TextWrapping="Wrap"  VerticalAlignment="Top" Width="200" Height="27" FontSize="14"/>
+            <TextBlock Name="d"  HorizontalAlignment="Left" Margin="591,19,0,0" Width="166" Height="18" VerticalAlignment="Top" FontSize="14"/>
+        </Grid>
 
-        <TextBlock Name="n" Margin="10,21.667,0,0" HorizontalAlignment="Left" TextWrapping="Wrap"  VerticalAlignment="Top" Grid.Row="1" Grid.Column="1" Width="200" Height="27" FontSize="14"/>
-        <TextBlock Name="d"  HorizontalAlignment="Left" Margin="19.667,24.667,-51,0"  Grid.Row="1" Grid.Column="3" Width="250" Height="20" VerticalAlignment="Top" FontSize="14"/>
-        <Label Content="Aktiviteter" Margin="22,0,10,0" Grid.Row="2" VerticalAlignment="Top" Height="33" FontWeight="Bold" FontSize="14" Grid.ColumnSpan="4"/>
-        <!--<ListBox HorizontalAlignment="Left" Height="100" Margin="22,42.333,0,0" Grid.Row="2" VerticalAlignment="Top" Width="100" ItemsSource="{Binding activities}" Name="listBox">
-            <ListBox.ItemTemplate>
-                <DataTemplate>
-                    <StackPanel>
-                        <TextBlock Text="{Binding Path=TimeDesc}" />
-                        <TextBlock Text="{Binding Path=StartTime}" />
-                        <TextBlock Text="{Binding Path=EndTime}" />
-                    </StackPanel>
-                </DataTemplate>
-            </ListBox.ItemTemplate>
-        </ListBox>-->
-
-        <ListView  Name="Activities" RenderTransformOrigin="0.506,4.68" Margin="0,33,0,10" Grid.Row="2" Grid.ColumnSpan="4"    >
-            <ListView.View>
-                <GridView >
-                    <GridViewColumn Header="TimeDescription" Width="120" DisplayMemberBinding="{Binding TimeDesc}"  />
-                    <GridViewColumn Header="Start Time" Width="200" DisplayMemberBinding="{Binding StartTime}" />
-                    <GridViewColumn Header="End Time" Width="150" DisplayMemberBinding="{Binding EndTime}" />
-                </GridView>
-            </ListView.View>
-        </ListView>
+        <Grid Grid.Row="2" Margin="0,1.333,0,133" Grid.RowSpan="2">
+            <Label Content="Aktiviteter" Margin="22,0,10,0" Grid.Row="0" VerticalAlignment="Top" Height="33" FontWeight="Bold" FontSize="14"/>
+            <ListView  Name="Activities" RenderTransformOrigin="0.506,4.68" Margin="20,33,10,56"    >
+                <ListView.View>
+                    <GridView >
+                        <GridViewColumn Header="TimeDescription" Width="120" DisplayMemberBinding="{Binding TimeDesc}"  />
+                        <GridViewColumn Header="Start Time" Width="200" DisplayMemberBinding="{Binding StartTime}" />
+                        <GridViewColumn Header="End Time" Width="150" DisplayMemberBinding="{Binding EndTime}" />
+                    </GridView>
+                </ListView.View>
+            </ListView>
+        </Grid>
+        <Grid Grid.Row="3" Margin="0,1.333,0,0">
+            <Label Content="Checked-in Guester" Margin="22,5,10,0" Grid.Row="0" VerticalAlignment="Top" Height="33" FontWeight="Bold" FontSize="14"/>
+           
+            <ScrollViewer ScrollViewer.VerticalScrollBarVisibility="Auto" Margin="20,38,0,-8">
+                <ListView  Name="Guests" RenderTransformOrigin="0.506,4.68" Grid.Row="2" Height="122" MouseDoubleClick="ViewGuestInfo" >
+                    <ListView.View>
+                        <GridView >
+                            <GridViewColumn Header="Name" Width="120" DisplayMemberBinding="{Binding Name}"  />
+                            <GridViewColumn Header="Email" Width="150" DisplayMemberBinding="{Binding Email}" />
+                        </GridView>
+                    </ListView.View>
+                </ListView>
+            </ScrollViewer>
+        </Grid>
 
     </Grid>
 </Page>

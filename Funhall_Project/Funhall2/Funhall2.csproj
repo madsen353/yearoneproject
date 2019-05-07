@@ -81,10 +81,15 @@
     </ApplicationDefinition>
     <Compile Include="Classes\Activity.cs" />
     <Compile Include="Classes\Booking.cs" />
+    <Compile Include="Classes\CheckIn.cs" />
+    <Compile Include="Classes\Customer.cs" />
     <Compile Include="Classes\DALBooking.cs" />
     <Compile Include="Classes\RemoteServer.cs" />
     <Compile Include="GuestCheckinPage.xaml.cs">
       <DependentUpon>GuestCheckinPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Profile.xaml.cs">
+      <DependentUpon>Profile.xaml</DependentUpon>
     </Compile>
     <Compile Include="SegwayAnsvarsFragivelse.xaml.cs">
       <DependentUpon>SegwayAnsvarsFragivelse.xaml</DependentUpon>
@@ -125,6 +130,10 @@
       <SubType>Code</SubType>
     </Compile>
     <Page Include="MyBookingsPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Profile.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

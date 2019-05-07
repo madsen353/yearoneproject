@@ -158,7 +158,7 @@ namespace Funhall2
                     try
                     {
                         cmd.ExecuteNonQuery();
-                        MessageBox.Show("Record added Successfully!");
+                       // MessageBox.Show("Record added Successfully!");
                     }
                     catch (Exception ex)
                     {
