@@ -24,9 +24,8 @@ namespace Funhall2
         public SelectedBookingPage(Booking booking)
         {
             Booking = booking;
-            InitializeComponent();
-            n.Text = Booking.name;
-            d.Text = Booking.date;
+            InitializeComponent();            
+            this.DataContext = Booking;
 
             ObservableCollection<Activity> activities = Activity.getBookedActivities(Booking);
             Activities.ItemsSource = activities;
@@ -37,8 +36,9 @@ namespace Funhall2
 
         private void ViewGuestInfo(object sender, MouseButtonEventArgs e)
         {
+            Booking b =  Booking;
             Customer cus = Guests.SelectedItem as Customer;
-            Profile page = new Profile(cus);
+            Profile page = new Profile(cus,b);
             this.NavigationService.Navigate(page);
 
         }

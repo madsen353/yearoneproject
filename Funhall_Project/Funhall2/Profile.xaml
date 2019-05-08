@@ -9,37 +9,48 @@
       Title="Profile">
 
     <Grid>
-        <Grid.RowDefinitions>
-            <RowDefinition/>
-        </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
             <ColumnDefinition/>
         </Grid.ColumnDefinitions>
-        <Label Content="Rediger info" HorizontalAlignment="Left" Margin="58,79,0,342" Width="300" FontWeight="Bold" FontSize="14"/>
-        <Label Content="Group:" HorizontalAlignment="Left" Margin="58,105,0,342" Width="100" FontWeight="Bold" FontSize="14" Height="25"/>
-        <TextBlock Name="n" HorizontalAlignment="Left" Margin="116,105,0,395" TextWrapping="Wrap" Width="100"/>
-        
-        <Grid Margin="10,139,0,24">
+        <Label Content="Group" HorizontalAlignment="Left" Margin="62,10,0,0" VerticalAlignment="Top" FontWeight="Bold" FontSize="14"/>
+        <TextBlock HorizontalAlignment="Left" Margin="160,20,0,0" TextWrapping="Wrap" Name="n" VerticalAlignment="Top"/>
+
+        <Grid Margin="10,60,10,100">
             <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="Auto" />
-                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="3*"/>
+                <ColumnDefinition Width="13*"/>
             </Grid.ColumnDefinitions>
             <Grid.RowDefinitions>
-                <RowDefinition Height="Auto" />
-                <RowDefinition Height="Auto" />
-                <RowDefinition Height="Auto" />
-                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
             </Grid.RowDefinitions>
-            <Label Grid.Row="0">Name:</Label>
-            <TextBox Name="Name" Grid.Column="1" Margin="0,0,10,10" />
+            <Label Content="Rediger info" Grid.Row="0" HorizontalAlignment="Left"  FontWeight="Bold" FontSize="14" Grid.ColumnSpan="2"/>
 
-            <Label Grid.Row="1">Email:</Label>
-            <TextBox Name="Email" Grid.Row="1" Grid.Column="1" Margin="0,0,10,10" />
-            <CheckBox Name="Subscription" Grid.Row="2" Grid.Column="1"  Margin="0,0,10,10">Tilmeld nyhedsbrev</CheckBox>
-            <!--Her kommer info om Segway-->
-            <CheckBox Name="Segway" Grid.Row="3" Grid.Column="1"  Margin="0,0,10,10">Agree Segway</CheckBox>
-            <Button Content="Rediger" HorizontalAlignment="Left" Margin="108,81.667,0,-6" VerticalAlignment="Top" Width="75" Height="27"  Grid.Column="1" Grid.Row="3" Click="UpdateGuestData"  />
-
+            <Label  Grid.Row="1" Grid.Column="0">Name:</Label>
+            <TextBox Name="Name" Text="{Binding Name}" Grid.Row="1" Grid.Column="1" Margin="0,0,0,10"/>
+            <Label  Grid.Row="2" Grid.Column="0">Email:</Label>
+            <TextBox Name="Email" Text="{Binding Email}" Grid.Row="2" Grid.Column="1" Margin="0,0,0,10"/>
+            <CheckBox Name="Subscription" IsChecked="{Binding Subscription}" Grid.Row="3" Grid.Column="1" Margin="0,0,0,10">Tilmeld nyhedsbrev</CheckBox>
+            <CheckBox Name="Segway" IsChecked="{Binding Segway}" Grid.Row="4" Grid.Column="1" Margin="0,0,0,10">Agree Segway</CheckBox>
+            <Button Content="Rediger" Grid.Row="5"  Grid.Column="1" Width="200" Margin="0,0,300,0" Click="UpdateGuestData" />
         </Grid>
+
+        <Grid Margin="10,200,10,0">
+            <Label Content="Aktiviteter" Margin="0,0,10,0" Grid.Row="0" VerticalAlignment="Top" Height="33" FontWeight="Bold" FontSize="14"/>
+            <ListView  Name="Activities"  Margin="0,33,0,10"   >
+                <ListView.View>
+                    <GridView >
+                        <GridViewColumn Header="TimeDescription" Width="120" DisplayMemberBinding="{Binding Activity.TimeDesc}"  />
+                        <GridViewColumn Header="Pointer" DisplayMemberBinding="{Binding Points}"  Width="150" />
+                    </GridView>
+                </ListView.View>
+            </ListView>
+            
+        </Grid>     
+
     </Grid>
 </Page>
