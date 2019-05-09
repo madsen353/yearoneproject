@@ -76,8 +76,6 @@ namespace Funhall2
             Booking b = listBox.SelectedItem as Booking;
             GuestCheckinPage page = new GuestCheckinPage(b);
             this.NavigationService.Navigate(page);
-
-
         }
     }
 }

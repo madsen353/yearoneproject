@@ -46,6 +46,7 @@ namespace Funhall2
                 cus.Segway = false;
 
             CheckIn.CheckInCus(cus);
+            CustomerActivity.AddActivities(cus);
            
         }
 
