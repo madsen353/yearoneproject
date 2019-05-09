@@ -1,7 +1,6 @@
 ﻿using Funhall2.Classes;
 using System;
 using System.Collections.Generic;
-using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -20,33 +19,30 @@ namespace Funhall2
     public partial class Profile : Page
     {
         public Customer Customer { get; set; }
-        public Booking Booking { get; set; }
-        public Profile(Customer cus, Booking b)
+        public Profile(Customer cus)
         {
             Customer = cus;
-            Booking = b;
             InitializeComponent();
-            n.Text = Booking.name;
-            this.DataContext = Customer;            
-            //ObservableCollection<Activity> activities = Activity.getBookedActivities(b);
-            ObservableCollection<CustomerActivity> CusActivities = CustomerActivity.getCusActivities(cus);
-            Activities.ItemsSource = CusActivities;
+            Name.Text = cus.Name;
+            Email.Text = cus.Email;
+            Subscription.IsChecked = cus.Subscription;
+            Segway.IsChecked = cus.Segway;
         }
 
         private void UpdateGuestData(object sender, RoutedEventArgs e)
         {
             Customer cus = new Customer();
-            //cus.Name = Name.Text;
-            //cus.Email = Email.Text;
-            //if (Subscription.IsChecked == true)
-            //    cus.Subscription = true;
-            //else
-            //    cus.Subscription = false;
+            cus.Name = Name.Text;
+            cus.Email = Email.Text;
+            if (Subscription.IsChecked == true)
+                cus.Subscription = true;
+            else
+                cus.Subscription = false;
 
-            //if (Segway.IsChecked == true)
-            //    cus.Segway = true;
-            //else
-            //    cus.Segway = false;
+            if (Segway.IsChecked == true)
+                cus.Segway = true;
+            else
+                cus.Segway = false;
 
             try
             {

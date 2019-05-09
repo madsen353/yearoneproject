@@ -13,7 +13,9 @@ create table Bookings
 	CusComment text,
 	IntComment text	
 );
-SELECT * from Bookings
+insert INTO Bookings (BookingId, Name, CusTel) VALUES ('fb1234', 'Eby', 123456)
+SELECT * from Guests
+
 
 create table Activities
 (
@@ -34,6 +36,8 @@ create table BookedActivities
 );
 
 SELECT * from BookedActivities
+
+
 
 create table BookedProducts
 (
@@ -60,14 +64,8 @@ create table Guests
 	ChekedInTime datetime,
 	PRIMARY KEY (BookingId,Email)
 )
- 
-create table GuestActivities
-(
-	GuestId INT Identity(1,1),
-	TimeDesc nvarchar(200) ,
-	Points nvarchar(200),
-	PRIMARY KEY (GuestId,TimeDesc)
-)
+SELECT * FROM Guests
 
-select * from Guests
-SELECT * FROM GuestActivities
+
+DELETE FROM Bookings
+SELECT * FROM Bookings

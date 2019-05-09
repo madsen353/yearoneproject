@@ -18,6 +18,7 @@ namespace Funhall2.Classes
             SqlConnection con = new SqlConnection("Data Source=.;Initial Catalog=FunHall;"
                                  + "Integrated Security=true;");
             SqlCommand cmd = new SqlCommand();
+            SqlDataReader reader;
             cmd.Connection = con;
             cmd.CommandType = System.Data.CommandType.Text;
             cmd.CommandText = "insert into Guests (BookingId, Name, Email, AgreeTerms, Subscription) values " +

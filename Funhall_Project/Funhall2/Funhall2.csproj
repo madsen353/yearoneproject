@@ -83,7 +83,6 @@
     <Compile Include="Classes\Booking.cs" />
     <Compile Include="Classes\CheckIn.cs" />
     <Compile Include="Classes\Customer.cs" />
-    <Compile Include="Classes\CustomerActivity.cs" />
     <Compile Include="Classes\DALBooking.cs" />
     <Compile Include="Classes\RemoteServer.cs" />
     <Compile Include="GuestCheckinPage.xaml.cs">

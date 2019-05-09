@@ -11,7 +11,6 @@ namespace Funhall2.Classes
 {
     public class Customer
     {
-        public int CusId { get; set; }
         public string BookingId { get; set; }
         public string Name { get; set; }
         public string Email { get; set; }
@@ -26,9 +25,7 @@ namespace Funhall2.Classes
             SqlDataReader reader;
             cmd.Connection = con;
             cmd.CommandType = CommandType.Text;
-            cmd.Parameters.Add("@bookingId", SqlDbType.NVarChar).Value = booking.flexyId;
-
-            cmd.CommandText = "select * from Guests where BookingId = @bookingId";
+            cmd.CommandText = "select * from Guests";
             ObservableCollection<Customer> customers = new ObservableCollection<Customer>();
             con.Open();
             reader = cmd.ExecuteReader();
@@ -36,12 +33,10 @@ namespace Funhall2.Classes
             while (reader.Read())
             {
                 Customer c = new Customer();
-                c.CusId = (int)reader[0];
-                c.BookingId = reader[1].ToString();
                 c.Name = reader[2].ToString(); ;
                 c.Email = reader[3].ToString();
                 c.Segway = reader.GetBoolean(4);
-                //c.Subscription = reader.GetBoolean(5);
+               // c.Subscription = reader.GetBoolean(5);
                 customers.Add(c);
             }
             con.Close();
