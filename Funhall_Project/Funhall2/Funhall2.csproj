@@ -106,6 +106,9 @@
     <Compile Include="XAML\PointSystem\ChooseYourBooking.xaml.cs">
       <DependentUpon>ChooseYourBooking.xaml</DependentUpon>
     </Compile>
+    <Compile Include="XAML\PointSystem\CurrentActivity.xaml.cs">
+      <DependentUpon>CurrentActivity.xaml</DependentUpon>
+    </Compile>
     <Page Include="XAML\CheckIn\AllBookingsPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -157,6 +160,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="XAML\PointSystem\ChooseYourBooking.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="XAML\PointSystem\CurrentActivity.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
