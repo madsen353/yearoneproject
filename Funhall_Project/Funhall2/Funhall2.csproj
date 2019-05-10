@@ -86,69 +86,83 @@
     <Compile Include="Classes\CustomerActivity.cs" />
     <Compile Include="Classes\DALBooking.cs" />
     <Compile Include="Classes\RemoteServer.cs" />
-    <Compile Include="GuestCheckinPage.xaml.cs">
+    <Compile Include="XAML\CheckIn\GuestCheckinPage.xaml.cs">
       <DependentUpon>GuestCheckinPage.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Profile.xaml.cs">
+    <Compile Include="XAML\CheckIn\Profile.xaml.cs">
       <DependentUpon>Profile.xaml</DependentUpon>
     </Compile>
-    <Compile Include="SegwayAnsvarsFragivelse.xaml.cs">
+    <Compile Include="XAML\CheckIn\SegwayAnsvarsFragivelse.xaml.cs">
       <DependentUpon>SegwayAnsvarsFragivelse.xaml</DependentUpon>
     </Compile>
-    <Compile Include="SelectedBookingPage.xaml.cs">
+    <Compile Include="XAML\CheckIn\SelectedBookingPage.xaml.cs">
       <DependentUpon>SelectedBookingPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="ServerConfiguration\ConfigurationReader.cs" />
     <Compile Include="ServerConfiguration\RemoteServerConfig.cs" />
-    <Page Include="AllBookingsPage.xaml">
+    <Compile Include="XAML\PointSystem\AllActivities.xaml.cs">
+      <DependentUpon>AllActivities.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="XAML\PointSystem\ChooseYourBooking.xaml.cs">
+      <DependentUpon>ChooseYourBooking.xaml</DependentUpon>
+    </Compile>
+    <Page Include="XAML\CheckIn\AllBookingsPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="CheckInPage.xaml">
+    <Page Include="XAML\CheckInPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="GuestCheckinPage.xaml">
+    <Page Include="XAML\CheckIn\GuestCheckinPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="MainWindow.xaml">
+    <Page Include="XAML\MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Compile Include="AllBookingsPage.xaml.cs">
+    <Compile Include="XAML\CheckIn\AllBookingsPage.xaml.cs">
       <DependentUpon>AllBookingsPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="CheckInPage.xaml.cs">
+    <Compile Include="XAML\CheckInPage.xaml.cs">
       <DependentUpon>CheckInPage.xaml</DependentUpon>
     </Compile>
-    <Compile Include="MainWindow.xaml.cs">
+    <Compile Include="XAML\MainWindow.xaml.cs">
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Page Include="MyBookingsPage.xaml">
+    <Page Include="XAML\CheckIn\MyBookingsPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Profile.xaml">
+    <Page Include="XAML\CheckIn\Profile.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="SegwayAnsvarsFragivelse.xaml">
+    <Page Include="XAML\CheckIn\SegwayAnsvarsFragivelse.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="SelectedBookingPage.xaml">
+    <Page Include="XAML\CheckIn\SelectedBookingPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="XAML\PointSystem\AllActivities.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="XAML\PointSystem\ChooseYourBooking.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="MyBookingsPage.xaml.cs">
+    <Compile Include="XAML\CheckIn\MyBookingsPage.xaml.cs">
       <DependentUpon>MyBookingsPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs">
@@ -180,5 +194,6 @@
   <ItemGroup>
     <Resource Include="Image1.png" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

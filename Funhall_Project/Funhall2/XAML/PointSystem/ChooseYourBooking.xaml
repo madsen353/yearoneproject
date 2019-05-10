@@ -1,0 +1,36 @@
+﻿<Page x:Class="Funhall2.XAML.PointSystem.ChooseYourBooking"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:Funhall2.XAML.PointSystem"
+      mc:Ignorable="d" 
+      d:DesignHeight="450" d:DesignWidth="800"
+      Title="ChooseYourBooking">
+
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="80*"/>
+            <RowDefinition Height="360*"/>
+        </Grid.RowDefinitions>
+        <Label Content="Vælg din booking"  Margin="230,15,230,4.6" VerticalAlignment="Center" Height="62" FontSize="32"/>
+        <ListBox Name="listBox" Grid.Row="1" ItemsSource="{Binding booking}">
+            <ListBox.ItemTemplate>
+                <DataTemplate>
+                    <StackPanel>
+                        <TextBlock Text="{Binding Path=name}" />
+                    </StackPanel>
+                </DataTemplate>
+            </ListBox.ItemTemplate>
+        </ListBox>
+
+
+        <!--Datagrid Solution:-->
+        <!--<DataGrid Name="grid" ItemsSource="{Binding bookings}" FontSize="12" Grid.Row="1"  Margin="0,80,-0.4,0" AutoGenerateColumns="False">
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="Name" Binding="{Binding name}"/>
+            </DataGrid.Columns>
+        </DataGrid>-->
+        <Button Content="Start point tælling" HorizontalAlignment="Right" Margin="0,175,153,0" Grid.Row="1" VerticalAlignment="Top" Width="172" Click="ShowSelectedBooking"/>
+    </Grid>
+</Page>

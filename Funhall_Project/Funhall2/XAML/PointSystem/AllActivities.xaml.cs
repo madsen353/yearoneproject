@@ -13,25 +13,16 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace Funhall2
+namespace Funhall2.XAML.PointSystem
 {
     /// <summary>
-    /// Interaction logic for CheckInPage.xaml
+    /// Interaction logic for AllActivities.xaml
     /// </summary>
-    public partial class CheckInPage : Page
+    public partial class AllActivities : Page
     {
-        public CheckInPage()
+        public AllActivities(Booking booking)
         {
             InitializeComponent();
-        }
-       
-
-
-        private void Button_Click(object sender, RoutedEventArgs e)
-        {
-            //Made by Anders & Niels
-            AllBookingsPage AllBookings = new AllBookingsPage();
-            this.NavigationService.Navigate(AllBookings);
         }
     }
 }
