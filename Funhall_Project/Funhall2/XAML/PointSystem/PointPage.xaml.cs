@@ -21,7 +21,7 @@ namespace Funhall2.XAML.PointSystem
     /// </summary>
     public partial class PointPage : Page
     {
-        public PointPage(CustomerActivity)
+        public PointPage(CustomerActivity c)
         {
             InitializeComponent();
         }

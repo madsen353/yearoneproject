@@ -19,7 +19,17 @@ namespace Funhall2.Classes
             Customer = new Customer();
             Activity = new Activity();
         }
-
+        public string Name
+        {
+            get
+            {
+                return Customer.Name;
+            }
+        }
+        public override string ToString()
+        {
+            return Customer.Name;
+        }
         public CustomerActivity(Customer c, Activity a)
         {
             this.Activity = a;
