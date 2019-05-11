@@ -37,8 +37,8 @@ namespace Funhall2.XAML.PointSystem
         private void ShowSelectedActivity(object sender, RoutedEventArgs e)
         {
             Activity a = Activities.SelectedItem as Activity;
-            CurrentActivity allActivities = new CurrentActivity(a, Booking);
-            this.NavigationService.Navigate(allActivities);
+            CurrentActivity currentActivity = new CurrentActivity(a, Booking);
+            this.NavigationService.Navigate(currentActivity);
         }
     }
 }

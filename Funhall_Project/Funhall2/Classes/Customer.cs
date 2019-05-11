@@ -41,7 +41,7 @@ namespace Funhall2.Classes
                 c.Name = reader[2].ToString(); ;
                 c.Email = reader[3].ToString();
                 c.Segway = reader.GetBoolean(4);
-                //c.Subscription = reader.GetBoolean(5);
+                c.Subscription = reader.GetBoolean(5);
                 customers.Add(c);
             }
             con.Close();

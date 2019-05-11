@@ -26,12 +26,21 @@ namespace Funhall2.XAML.PointSystem
         {
             InitializeComponent();
             ObservableCollection<Customer> guests = Customer.GetCustomers(b);
-            Guests.ItemsSource = guests;
+            int i = 0;
+            ObservableCollection<CustomerActivity> guestsWithActivity = new ObservableCollection<CustomerActivity>();
+            foreach (Customer guest in guests)
+            {
+                CustomerActivity g = new CustomerActivity(guests[i], a);
+                guestsWithActivity.Add(g);
+            }
+            Guests.ItemsSource = guestsWithActivity;
         }
 
         private void UpdateScore(object sender, RoutedEventArgs e)
         {
-
+            CustomerActivity c = Guests.SelectedItem as CustomerActivity;
+            PointPage pointPage = new PointPage(c);
+            this.NavigationService.Navigate(pointPage);
         }
     }
 }

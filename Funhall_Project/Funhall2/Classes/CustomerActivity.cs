@@ -20,6 +20,12 @@ namespace Funhall2.Classes
             Activity = new Activity();
         }
 
+        public CustomerActivity(Customer c, Activity a)
+        {
+            this.Activity = a;
+            this.Customer = c;
+        }
+
         public static void AddActivities(Customer cus)
         {
             SqlConnection con = new SqlConnection("Data Source=.;Initial Catalog=FunHall;"

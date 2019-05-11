@@ -14,11 +14,11 @@
             <RowDefinition Height="360*"/>
         </Grid.RowDefinitions>
         <Label Content="Vælg Gæst"  Margin="230,15,230,4.6" VerticalAlignment="Center" Height="62" FontSize="32"/>
-        <ListBox Name="Guests" ItemsSource="{Binding guests}">
+        <ListBox Name="Guests" ItemsSource="{Binding guestsWithActivity}">
             <ListBox.ItemTemplate>
                 <DataTemplate>
                     <StackPanel>
-                        <TextBlock Text="{Binding Name}" />
+                        <TextBlock Text="{Binding Customer}" />
                     </StackPanel>
                 </DataTemplate>
             </ListBox.ItemTemplate>
