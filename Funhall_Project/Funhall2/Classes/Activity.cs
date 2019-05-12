@@ -16,6 +16,7 @@ namespace Funhall2
         public string TimeDesc { get; set; }
         public DateTime StartTime { get; set; }
         public DateTime EndTime { get; set; }
+        public int IsFinished { get; set; }
 
         public static ObservableCollection<Activity> getBookedActivities(Booking booking)
         {
@@ -39,6 +40,7 @@ namespace Funhall2
                 a.TimeDesc = reader[1].ToString();
                 a.StartTime = DateTime.Parse(reader[2].ToString());
                 a.EndTime = DateTime.Parse(reader[3].ToString());
+                a.IsFinished = (int)reader[4];
                 activities.Add(a);
             }
             con.Close();

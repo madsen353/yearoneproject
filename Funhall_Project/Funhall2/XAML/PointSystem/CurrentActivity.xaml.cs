@@ -22,8 +22,11 @@ namespace Funhall2.XAML.PointSystem
     /// </summary>
     public partial class CurrentActivity : Page
     {
+
+        public Activity activity;
         public CurrentActivity(Activity a, Booking b)
         {
+            activity = a;
             InitializeComponent();
             ObservableCollection<Customer> guests = Customer.GetCustomers(b);
             int i = 0;
@@ -32,6 +35,7 @@ namespace Funhall2.XAML.PointSystem
             {
                 CustomerActivity g = new CustomerActivity(guests[i], a);
                 guestsWithActivity.Add(g);
+                i++;
             }
             Guests.ItemsSource = guestsWithActivity;
         }
@@ -42,5 +46,14 @@ namespace Funhall2.XAML.PointSystem
             PointPage pointPage = new PointPage(c);
             this.NavigationService.Navigate(pointPage);
         }
+
+        private void EndActivity(object sender, RoutedEventArgs e)
+        {
+            DAL dal = new DAL();
+            activity.IsFinished = 1;
+            dal.EndActivity(activity.BookingId, activity.IsFinished, activity.TimeDesc);          
+            this.NavigationService.GoBack();
+        }
     }
+
 }

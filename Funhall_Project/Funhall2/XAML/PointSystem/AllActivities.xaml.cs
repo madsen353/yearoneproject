@@ -20,6 +20,7 @@ namespace Funhall2.XAML.PointSystem
     /// <summary>
     /// Interaction logic for AllActivities.xaml
     /// </summary>
+    /// 
     public partial class AllActivities : Page
     {
         public Booking Booking { get; set; }
@@ -30,7 +31,18 @@ namespace Funhall2.XAML.PointSystem
             this.DataContext = Booking;
 
             ObservableCollection<Activity> activities = Activity.getBookedActivities(Booking);
-            Activities.ItemsSource = activities;
+            ObservableCollection<Activity> activitiesToShow = new ObservableCollection<Activity>();
+            int i = 0;
+            foreach (Activity activity in activities)
+            {
+                if (activities[i].IsFinished == 0)
+                {
+                    activitiesToShow.Add(activities[i]);
+                }
+
+                i++;
+            }
+            Activities.ItemsSource = activitiesToShow;
 
         }
 
@@ -39,6 +51,14 @@ namespace Funhall2.XAML.PointSystem
             Activity a = Activities.SelectedItem as Activity;
             CurrentActivity currentActivity = new CurrentActivity(a, Booking);
             this.NavigationService.Navigate(currentActivity);
+        }
+
+
+        //NEED UPDATE LOGIC!!!
+
+        private void AllActivitiesHaveEnded(object sender, RoutedEventArgs e)
+        {
+            //Generate email logic
         }
     }
 }

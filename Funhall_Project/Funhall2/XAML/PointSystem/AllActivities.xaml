@@ -32,5 +32,6 @@
             </DataGrid.Columns>
         </DataGrid>-->
         <Button Content="Gå til aktivitet" HorizontalAlignment="Right" Margin="0,175,153,0" Grid.Row="1" VerticalAlignment="Top" Width="172" Click="ShowSelectedActivity"/>
+        <Button Content="Alle aktiviter er slut" HorizontalAlignment="Right" Margin="0,175,543,0" Grid.Row="1" VerticalAlignment="Top" Width="172" Click="AllActivitiesHaveEnded"/>
     </Grid>
 </Page>

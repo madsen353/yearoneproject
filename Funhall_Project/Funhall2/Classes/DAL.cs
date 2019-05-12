@@ -28,6 +28,16 @@ namespace Funhall2.Classes
             command.ExecuteNonQuery();
             con.Close();
         }
+        public void EndActivity(string id, int isFinished, string activityName)
+        {
+            con.Open();
+            SqlCommand command = new SqlCommand("UPDATE BookedActivities SET IsFinished = @IsFinished WHERE BookingId = @ID AND TimeDesc = @ActivityName", con);
+            command.Parameters.Add(CreateParam("@ID", id, SqlDbType.NVarChar));
+            command.Parameters.Add(CreateParam("@IsFinished", isFinished, SqlDbType.Int));
+            command.Parameters.Add(CreateParam("@ActivityName", activityName, SqlDbType.NVarChar));
+            command.ExecuteNonQuery();
+            con.Close();
+        }
 
     }
 }

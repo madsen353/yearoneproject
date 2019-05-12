@@ -38,5 +38,6 @@
             </DataGrid.Columns>
         </DataGrid>-->
         <Button Content="Opdater score" HorizontalAlignment="Right" Margin="0,175,153,0" Grid.Row="1" VerticalAlignment="Top" Width="172" Click="UpdateScore"/>
+        <Button Content="Aktivitet er slut" HorizontalAlignment="Right" Margin="0,175,567,0" Grid.Row="1" VerticalAlignment="Top" Width="172" Click="EndActivity"/>
     </Grid>
 </Page>

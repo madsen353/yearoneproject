@@ -136,7 +136,7 @@ namespace Funhall2
 
             foreach (var time in times)
             {
-                if (!time.timeDesc.Equals("#"))
+                if (!time.timeDesc.Equals("#")) 
                 {
 
                     cmd.Parameters.Clear();
@@ -145,20 +145,22 @@ namespace Funhall2
                     string Desc = time.timeDesc;
                     string StartTime = time.start;
                     string Endtime = time.end;
+                    int IsFinished = 0;
 
                     AddParam(cmd, FlexyId, "BookingId", SqlDbType.NVarChar);
                     AddParam(cmd, Desc, "Desc", SqlDbType.NVarChar);
                     AddParam(cmd, StartTime, "StartTime", SqlDbType.NVarChar);
                     AddParam(cmd, Endtime, "Endtime", SqlDbType.NVarChar);
+                    AddParam(cmd, IsFinished, "IsFinished", SqlDbType.Int);
 
                     cmd.CommandType = CommandType.Text;
-                    cmd.CommandText = "insert into BookedActivities(BookingId, TimeDesc, StartTime, Endtime)" +
-                    " values (@BookingId, @Desc, @StartTime, @Endtime)";
+                    cmd.CommandText = "insert into BookedActivities(BookingId, TimeDesc, StartTime, Endtime, IsFinished)" +
+                    "values (@BookingId, @Desc, @StartTime, @Endtime, @IsFinished)";
 
                     try
                     {
                         cmd.ExecuteNonQuery();
-                       // MessageBox.Show("Record added Successfully!");
+                        // MessageBox.Show("Record added Successfully!");
                     }
                     catch (Exception ex)
                     {
