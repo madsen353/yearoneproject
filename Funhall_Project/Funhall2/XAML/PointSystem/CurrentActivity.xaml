@@ -9,6 +9,12 @@
       Title="CurrentActivity">
 
     <Grid>
+        <!--<DataGrid Name="Guests" ItemsSource="{Binding guestsWithActivity}" Grid.Row="1" Margin="0,80,-0.4,0" AutoGenerateColumns="False">
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="Name" Binding="{Binding Name}"/>
+                <DataGridTextColumn Header="Points" Binding="{Binding Points}" MaxWidth="400"/>
+            </DataGrid.Columns>
+        </DataGrid>-->
         <Grid.RowDefinitions>
             <RowDefinition Height="80*"/>
             <RowDefinition Height="360*"/>

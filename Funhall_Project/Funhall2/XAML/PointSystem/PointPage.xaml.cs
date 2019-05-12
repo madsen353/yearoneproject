@@ -21,9 +21,27 @@ namespace Funhall2.XAML.PointSystem
     /// </summary>
     public partial class PointPage : Page
     {
+        public int guestID;
+        public string activity;
         public PointPage(CustomerActivity c)
         {
             InitializeComponent();
+            Name.Text = c.Name;
+            Points.Text = c.Points;
+            guestID = c.Customer.CusId;
+            activity = c.Activity.TimeDesc;
+
+        }
+
+        private void button_Click(object sender, RoutedEventArgs e)
+        {
+
+            
+            DAL dal = new DAL();
+            dal.UpdateCusActivity(guestID, Points.Text,activity);
+            this.NavigationService.GoBack();
+
         }
     }
+
 }
