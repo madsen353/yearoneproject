@@ -47,5 +47,11 @@ namespace Funhall2.XAML.PointSystem
             Guests.ItemsSource = elementsToShow;
 
         }
+
+        private void GoBackToOverview(object sender, RoutedEventArgs e)
+        {
+            AllActivities allActivities = new AllActivities(booking);
+            this.NavigationService.Navigate(allActivities);
+        }
     }
 }

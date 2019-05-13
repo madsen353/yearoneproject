@@ -10,8 +10,8 @@
 
     <Grid>
         <Grid.RowDefinitions>
-            <RowDefinition Height="80*"/>
-            <RowDefinition Height="360*"/>
+            <RowDefinition Height="50*"/>
+            <RowDefinition Height="50*"/>
         </Grid.RowDefinitions>
         <Label Content="Vælg Gæst"  Margin="230,15,230,4.6" VerticalAlignment="Center" Height="62" FontSize="32"/>
         <ListBox Name="Guests" ItemsSource="{Binding elementsToShow}">
@@ -25,5 +25,6 @@
                 </DataTemplate>
             </ListBox.ItemTemplate>
         </ListBox>
+        <Button Content="Gå tilbage til Aktivitets oversigt" HorizontalAlignment="Left" Margin="100,150,0,0" Grid.Row="1" VerticalAlignment="Top" Width="172" Click="GoBackToOverview"/>
     </Grid>
 </Page>

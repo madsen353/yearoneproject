@@ -10,8 +10,8 @@
 
     <Grid>
         <Grid.RowDefinitions>
-            <RowDefinition Height="80*"/>
-            <RowDefinition Height="360*"/>
+            <RowDefinition Height="50*"/>
+            <RowDefinition Height="50*"/>
         </Grid.RowDefinitions>
         <Label Content="Vælg aktivitet"  Margin="230,15,230,4.6" VerticalAlignment="Center" Height="62" FontSize="32"/>
         <ListBox Name="Activities" ItemsSource="{Binding booking}">
@@ -31,9 +31,9 @@
                 <DataGridTextColumn Header="Name" Binding="{Binding name}"/>
             </DataGrid.Columns>
         </DataGrid>-->
-        <Button Content="Gå til aktivitet" HorizontalAlignment="Right" Margin="0,175,153,0" Grid.Row="1" VerticalAlignment="Top" Width="172" Click="ShowSelectedActivity"/>
-        <Button Content="Alle aktiviter er slut" HorizontalAlignment="Right" Margin="0,175,543,0" Grid.Row="1" VerticalAlignment="Top" Width="172" Click="AllActivitiesHaveEnded"/>
-        <Button Content="Se total score" HorizontalAlignment="Right" Margin="0,245,153,0" Grid.Row="1" VerticalAlignment="Top" Width="172" Click="DisplayScoreTotal"/>
-        <Button Content="Gå tilbage til oversigten" HorizontalAlignment="Right" Margin="0,245,543,0" Grid.Row="1" VerticalAlignment="Top" Width="172" Click="GoBackToOverview"/>
+        <Button Content="Gå til aktivitet" HorizontalAlignment="Right" Margin="0,50,100,0" Grid.Row="1" VerticalAlignment="Top" Width="172" Click="ShowSelectedActivity"/>
+        <Button Content="Alle aktiviter er slut" HorizontalAlignment="Left" Margin="100,50,0,0" Grid.Row="1" VerticalAlignment="Top" Width="172" Click="AllActivitiesHaveEnded"/>
+        <Button Content="Se total score" HorizontalAlignment="Right" Margin="0,150,100,0" Grid.Row="1" VerticalAlignment="Top" Width="172" Click="DisplayScoreTotal"/>
+        <Button Content="Gå tilbage til oversigten" HorizontalAlignment="Left" Margin="100,150,0,0" Grid.Row="1" VerticalAlignment="Top" Width="172" Click="GoBackToOverview"/>
     </Grid>
 </Page>
