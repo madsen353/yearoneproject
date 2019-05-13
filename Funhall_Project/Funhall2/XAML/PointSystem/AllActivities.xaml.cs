@@ -60,5 +60,11 @@ namespace Funhall2.XAML.PointSystem
         {
             //Generate email logic
         }
+
+        private void DisplayScoreTotal(object sender, RoutedEventArgs e)
+        {
+            ScoreTotal scorePage  = new ScoreTotal(Booking);
+            this.NavigationService.Navigate(scorePage);
+        }
     }
 }

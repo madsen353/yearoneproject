@@ -86,9 +86,33 @@ namespace Funhall2.Classes
                 //a.EndTime = DateTime.Parse(reader[3].ToString());
                 con.Close();
                 return ca;
-                
-            
+        }
 
+        public List<int> GetTotalAmountOfPoints(int guestID)
+        {
+            SqlConnection con = new SqlConnection("Data Source=.;Initial Catalog=FunHall;"
+                                                  + "Integrated Security=true;");
+            SqlCommand cmd = new SqlCommand();
+            SqlDataReader reader;
+            cmd.Connection = con;
+            cmd.CommandType = CommandType.Text;
+            cmd.Parameters.Add("@Id", SqlDbType.Int).Value = guestID;
+
+            cmd.CommandText = "select Points from GuestActivities where GuestId=@Id";
+            List<int> allPoints = new List<int>();
+            con.Open();
+            reader = cmd.ExecuteReader();
+
+            while (reader.Read())
+            {
+                string pointInString = reader[0].ToString();
+                int point = int.Parse(pointInString);
+
+                    allPoints.Add(point);
+                
+                }
+            con.Close();
+            return allPoints;
         }
 
     }

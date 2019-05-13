@@ -17,6 +17,7 @@ namespace Funhall2.Classes
         public string Email { get; set; }
         public bool Subscription { get; set; }
         public bool Segway { get; set; }
+        public int TotalAmountOfPoints { get; set; }
 
         public static ObservableCollection<Customer> GetCustomers(Booking booking)
         {
@@ -46,6 +47,21 @@ namespace Funhall2.Classes
             }
             con.Close();
             return customers;
+        }
+        public int GetTotalAmountOfPoints()
+        {
+            int guestId = CusId;
+            int totalAmountOfPoints = 0;
+            List<int> pointsFromEvents = new List<int>();
+            DAL dal = new DAL();
+            pointsFromEvents = dal.GetTotalAmountOfPoints(guestId);
+            int i = 0;
+            foreach (int point in pointsFromEvents)
+            {
+                totalAmountOfPoints += pointsFromEvents[i];
+                i++;
+            }
+            return totalAmountOfPoints;
         }
     }
 }
