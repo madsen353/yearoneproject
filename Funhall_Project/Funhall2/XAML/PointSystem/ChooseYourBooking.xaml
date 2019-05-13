@@ -31,6 +31,7 @@
                 <DataGridTextColumn Header="Name" Binding="{Binding name}"/>
             </DataGrid.Columns>
         </DataGrid>-->
+        <Button Content="Gå tilbage til forsiden" HorizontalAlignment="Right" Margin="0,175,563,0" Grid.Row="1" VerticalAlignment="Top" Width="172" Click="GoToFrontPage"/>
         <Button Content="Start point tælling" HorizontalAlignment="Right" Margin="0,175,153,0" Grid.Row="1" VerticalAlignment="Top" Width="172" Click="ShowSelectedBooking"/>
     </Grid>
 </Page>

@@ -104,9 +104,6 @@
     <Compile Include="XAML\PointSystem\AllActivities.xaml.cs">
       <DependentUpon>AllActivities.xaml</DependentUpon>
     </Compile>
-    <Compile Include="XAML\PointSystem\AllUsersFromOneActivityWindowWithPoints.xaml.cs">
-      <DependentUpon>AllUsersFromOneActivityWindowWithPoints.xaml</DependentUpon>
-    </Compile>
     <Compile Include="XAML\PointSystem\ChooseYourBooking.xaml.cs">
       <DependentUpon>ChooseYourBooking.xaml</DependentUpon>
     </Compile>
@@ -166,10 +163,6 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="XAML\PointSystem\AllActivities.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="XAML\PointSystem\AllUsersFromOneActivityWindowWithPoints.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

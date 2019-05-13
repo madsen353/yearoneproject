@@ -66,5 +66,11 @@ namespace Funhall2.XAML.PointSystem
             ScoreTotal scorePage  = new ScoreTotal(Booking);
             this.NavigationService.Navigate(scorePage);
         }
+
+        private void GoBackToOverview(object sender, RoutedEventArgs e)
+        {
+            ChooseYourBooking chooseYourBooking = new ChooseYourBooking();
+            this.NavigationService.Navigate(chooseYourBooking);
+        }
     }
 }

@@ -68,6 +68,12 @@ namespace Funhall2.XAML.PointSystem
             AllActivities allActivities = new AllActivities(booking);
             this.NavigationService.Navigate(allActivities);
         }
+
+        private void GoBackToOverview(object sender, RoutedEventArgs e)
+        {
+            AllActivities allActivities = new AllActivities(booking);
+            this.NavigationService.Navigate(allActivities);
+        }
     }
 
 }

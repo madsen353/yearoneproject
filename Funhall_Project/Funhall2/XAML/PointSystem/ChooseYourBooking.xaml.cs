@@ -34,5 +34,11 @@ namespace Funhall2.XAML.PointSystem
             AllActivities allActivities = new AllActivities(b);
             this.NavigationService.Navigate(allActivities);
         }
+
+        private void GoToFrontPage(object sender, RoutedEventArgs e)
+        {
+            CheckInPage CheckIn = new CheckInPage();
+            this.NavigationService.Navigate(CheckIn);
+        }
     }
 }
