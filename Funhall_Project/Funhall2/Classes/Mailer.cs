@@ -10,10 +10,10 @@ namespace Funhall2.Classes
 {
     public class Mailer
     {
-        public string SenderEmail = "";
-        public string Username = "";
-        public string Password = "";
-        public string Host = "";
+        public string SenderEmail = "mail@gamlenas.synology.me";
+        public string Username = "Mail";
+        public string Password = "ICanHazBurger1234!";
+        public string Host = "gamlenas.synology.me";
         public SmtpClient MakeClient()
         {
             SmtpClient client = new SmtpClient();
