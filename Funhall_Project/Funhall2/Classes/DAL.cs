@@ -39,5 +39,57 @@ namespace Funhall2.Classes
             con.Close();
         }
 
+        public string GetBookingIDFromGuestID(string id)
+        {
+        string bookingId = "";
+        SqlCommand command = new SqlCommand("select BookingId FROM Guests WHERE GuestId='@ID', con");
+        command.CommandType = CommandType.Text;
+        SqlDataReader reader;
+        command.Connection = con;
+        command.Parameters.Add(CreateParam("@ID", id, SqlDbType.NVarChar));
+        con.Open();
+        reader = command.ExecuteReader();
+        while (reader.Read())
+        {
+            bookingId = reader[0].ToString();
+        }
+        con.Close();
+        return bookingId;
+        }
+
+        public CustomerActivity getCusActivitySpecifiedByActivity(Customer cus, Activity act)
+        {
+            SqlConnection con = new SqlConnection("Data Source=.;Initial Catalog=FunHall;"
+                                                  + "Integrated Security=true;");
+            SqlCommand cmd = new SqlCommand();
+            SqlDataReader reader;
+            cmd.Connection = con;
+            cmd.CommandType = CommandType.Text;
+            cmd.Parameters.Add("@Id", SqlDbType.NVarChar).Value = cus.CusId;
+            cmd.Parameters.Add("@Act", SqlDbType.NVarChar).Value = act.TimeDesc;
+
+            cmd.CommandText = "select ga.GuestId, ga.TimeDesc, ga.Points from GuestActivities ga " +
+                              "where ga.GuestId=@Id AND ga.TimeDesc=@Act";
+            ObservableCollection<CustomerActivity> cusActivities = new ObservableCollection<CustomerActivity>();
+            con.Open();
+            reader = cmd.ExecuteReader();
+
+            reader.Read();
+
+            CustomerActivity ca = new CustomerActivity(cus,act);
+
+
+                ca.Customer.CusId = (int)reader[0];
+                ca.Activity.TimeDesc = reader[1].ToString();
+                ca.Points = reader[2].ToString();
+                //a.StartTime = DateTime.Parse(reader[2].ToString());
+                //a.EndTime = DateTime.Parse(reader[3].ToString());
+                con.Close();
+                return ca;
+                
+            
+
+        }
+
     }
 }

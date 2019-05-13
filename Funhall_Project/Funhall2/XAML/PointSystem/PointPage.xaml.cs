@@ -23,8 +23,12 @@ namespace Funhall2.XAML.PointSystem
     {
         public int guestID;
         public string activity;
-        public PointPage(CustomerActivity c)
+        public Activity pageActivity;
+        public Booking pageBooking;
+        public PointPage(CustomerActivity c, Booking b, Activity a)
         {
+            pageBooking = b;
+            pageActivity = a;
             InitializeComponent();
             Name.Text = c.Name;
             Points.Text = c.Points;
@@ -34,12 +38,12 @@ namespace Funhall2.XAML.PointSystem
         }
 
         private void button_Click(object sender, RoutedEventArgs e)
-        {
-
-            
+        {          
             DAL dal = new DAL();
             dal.UpdateCusActivity(guestID, Points.Text,activity);
-            this.NavigationService.GoBack();
+            //this.NavigationService.GoBack();
+            CurrentActivity currentActivity = new CurrentActivity(pageActivity, pageBooking);
+            this.NavigationService.Navigate(currentActivity);
 
         }
     }
