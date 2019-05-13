@@ -33,6 +33,7 @@ namespace Funhall2.XAML.PointSystem
             foreach (Customer guest in elementsToShow)
             {
                 elementsToShow[i].TotalAmountOfPoints = elementsToShow[i].GetTotalAmountOfPoints();
+                i++;
             }
 
             //int i = 0;

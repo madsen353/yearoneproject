@@ -86,6 +86,7 @@
     <Compile Include="Classes\CustomerActivity.cs" />
     <Compile Include="Classes\DAL.cs" />
     <Compile Include="Classes\DALBooking.cs" />
+    <Compile Include="Classes\Mailer.cs" />
     <Compile Include="Classes\RemoteServer.cs" />
     <Compile Include="XAML\CheckIn\GuestCheckinPage.xaml.cs">
       <DependentUpon>GuestCheckinPage.xaml</DependentUpon>

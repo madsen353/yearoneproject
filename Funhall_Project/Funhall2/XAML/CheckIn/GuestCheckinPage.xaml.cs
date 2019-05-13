@@ -47,7 +47,9 @@ namespace Funhall2
 
             CheckIn.CheckInCus(cus);
             CustomerActivity.AddActivities(cus);
-           
+            AllBookingsPage AllBookings = new AllBookingsPage();
+            this.NavigationService.Navigate(AllBookings);
+
         }
 
         private void Button_Click(object sender, RoutedEventArgs e)

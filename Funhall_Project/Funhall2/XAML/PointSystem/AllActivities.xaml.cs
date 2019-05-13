@@ -58,7 +58,10 @@ namespace Funhall2.XAML.PointSystem
 
         private void AllActivitiesHaveEnded(object sender, RoutedEventArgs e)
         {
-            //Generate email logic
+            Mailer mailer = new Mailer();
+            mailer.SendDiplomaEmails(Booking);
+            ChooseYourBooking chooseYourBooking = new ChooseYourBooking();
+            this.NavigationService.Navigate(chooseYourBooking);
         }
 
         private void DisplayScoreTotal(object sender, RoutedEventArgs e)

@@ -77,5 +77,11 @@ namespace Funhall2
             GuestCheckinPage page = new GuestCheckinPage(b);
             this.NavigationService.Navigate(page);
         }
+
+        private void GoToMainMenu(object sender, RoutedEventArgs e)
+        {
+            CheckInPage CheckIn = new CheckInPage();
+            this.NavigationService.Navigate(CheckIn);
+        }
     }
 }
