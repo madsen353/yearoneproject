@@ -11,15 +11,18 @@ namespace Funhall2.Classes
 {
     public class DAL
     {
+        //Made by Rasmus
         SqlConnection con = new SqlConnection("Data Source=.;Initial Catalog=FunHall;" + "Integrated Security=true;");
         private SqlParameter CreateParam(string name, object value, SqlDbType type)
         {
+            //Made by Rasmus
             SqlParameter param = new SqlParameter(name, type);
             param.Value = value;
             return param;
         }
         public void UpdateCusActivity(int id, string points, string activityName)
         {
+            //Made by Rasmus
             con.Open();
             SqlCommand command = new SqlCommand("UPDATE GuestActivities SET Points = @Points WHERE GuestID = @ID AND TimeDesc = @ActivityName", con);
             command.Parameters.Add(CreateParam("@ID", id, SqlDbType.NVarChar));
@@ -30,6 +33,7 @@ namespace Funhall2.Classes
         }
         public void EndActivity(string id, int isFinished, string activityName)
         {
+            //Made by Rasmus
             con.Open();
             SqlCommand command = new SqlCommand("UPDATE BookedActivities SET IsFinished = @IsFinished WHERE BookingId = @ID AND TimeDesc = @ActivityName", con);
             command.Parameters.Add(CreateParam("@ID", id, SqlDbType.NVarChar));
@@ -41,7 +45,8 @@ namespace Funhall2.Classes
 
         public string GetBookingIDFromGuestID(string id)
         {
-        string bookingId = "";
+            //Made by Rasmus
+            string bookingId = "";
         SqlCommand command = new SqlCommand("select BookingId FROM Guests WHERE GuestId='@ID', con");
         command.CommandType = CommandType.Text;
         SqlDataReader reader;
@@ -59,6 +64,7 @@ namespace Funhall2.Classes
 
         public CustomerActivity getCusActivitySpecifiedByActivity(Customer cus, Activity act)
         {
+            //Made by Rasmus
             SqlConnection con = new SqlConnection("Data Source=.;Initial Catalog=FunHall;"
                                                   + "Integrated Security=true;");
             SqlCommand cmd = new SqlCommand();
@@ -90,6 +96,7 @@ namespace Funhall2.Classes
 
         public List<int> GetTotalAmountOfPoints(int guestID)
         {
+            //Made by Rasmus
             SqlConnection con = new SqlConnection("Data Source=.;Initial Catalog=FunHall;"
                                                   + "Integrated Security=true;");
             SqlCommand cmd = new SqlCommand();

@@ -23,6 +23,7 @@ namespace Funhall2.XAML.PointSystem
     {
         public ChooseYourBooking()
         {
+            //Made by Rasmus
             InitializeComponent();
             ObservableCollection<Booking> bookings = DALBooking.getBookings();
             listBox.ItemsSource = bookings;
@@ -30,6 +31,7 @@ namespace Funhall2.XAML.PointSystem
 
         private void ShowSelectedBooking(object sender, RoutedEventArgs e)
         {
+            //Made by Rasmus
             Booking b = listBox.SelectedItem as Booking;
             AllActivities allActivities = new AllActivities(b);
             this.NavigationService.Navigate(allActivities);
@@ -37,6 +39,7 @@ namespace Funhall2.XAML.PointSystem
 
         private void GoToFrontPage(object sender, RoutedEventArgs e)
         {
+            //Made by Rasmus
             CheckInPage CheckIn = new CheckInPage();
             this.NavigationService.Navigate(CheckIn);
         }

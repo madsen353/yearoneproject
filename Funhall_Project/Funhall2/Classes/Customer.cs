@@ -21,6 +21,7 @@ namespace Funhall2.Classes
 
         public static ObservableCollection<Customer> GetCustomers(Booking booking)
         {
+            //Made by Eby
             SqlConnection con = new SqlConnection("Data Source=.;Initial Catalog=FunHall;"
                                  + "Integrated Security=true;");
             SqlCommand cmd = new SqlCommand();
@@ -50,6 +51,7 @@ namespace Funhall2.Classes
         }
         public int GetTotalAmountOfPoints()
         {
+            //Made by Rasmus
             int guestId = CusId;
             int totalAmountOfPoints = 0;
             List<int> pointsFromEvents = new List<int>();

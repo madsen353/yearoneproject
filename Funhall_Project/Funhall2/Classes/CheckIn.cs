@@ -15,6 +15,7 @@ namespace Funhall2.Classes
 
         public static void CheckInCus(Customer cus)
         {
+            //Made by Eby
             SqlConnection con = new SqlConnection("Data Source=.;Initial Catalog=FunHall;"
                                  + "Integrated Security=true;");
             SqlCommand cmd = new SqlCommand();
@@ -36,6 +37,7 @@ namespace Funhall2.Classes
 
         public static void UpdateCus(Customer cus)
         {
+            //Made by Eby
             SqlConnection con = new SqlConnection("Data Source=.;Initial Catalog=FunHall;"
                                  + "Integrated Security=true;");
             SqlCommand cmd = new SqlCommand();
@@ -56,6 +58,7 @@ namespace Funhall2.Classes
 
         public static void AddParam(SqlCommand cmd, object value, string name, SqlDbType sqlDbType)
         {
+            //Made by Eby
             SqlParameter parameter = new SqlParameter();
             parameter.ParameterName = "@" + name;
             parameter.Value = value;

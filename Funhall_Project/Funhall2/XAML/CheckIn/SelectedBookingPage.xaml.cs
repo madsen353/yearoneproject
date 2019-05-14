@@ -23,6 +23,7 @@ namespace Funhall2
         public  Booking Booking { get; set; }
         public SelectedBookingPage(Booking booking)
         {
+            //Made by Eby
             Booking = booking;
             InitializeComponent();            
             this.DataContext = Booking;
@@ -36,6 +37,7 @@ namespace Funhall2
 
         private void ViewGuestInfo(object sender, MouseButtonEventArgs e)
         {
+            //Made by Eby
             Booking b =  Booking;
             Customer cus = Guests.SelectedItem as Customer;
             Profile page = new Profile(cus,b);

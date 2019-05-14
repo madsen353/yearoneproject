@@ -20,11 +20,14 @@ namespace Funhall2.XAML.PointSystem
     /// <summary>
     /// Interaction logic for ScoreTotal.xaml
     /// </summary>
+    /// //Made by Rasmus
     public partial class ScoreTotal : Page
     {
+        //Made by Rasmus
         public Booking booking;
         public ScoreTotal(Booking b)
         {
+            //Made by Rasmus
             DAL dal = new DAL();
             booking = b;
             InitializeComponent();
@@ -51,6 +54,7 @@ namespace Funhall2.XAML.PointSystem
 
         private void GoBackToOverview(object sender, RoutedEventArgs e)
         {
+            //Made by Rasmus
             AllActivities allActivities = new AllActivities(booking);
             this.NavigationService.Navigate(allActivities);
         }

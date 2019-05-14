@@ -43,9 +43,9 @@ namespace Funhall2
         //    return string.Format($"{name}");
         //}
 
-        //Made by Eby
+        
         public void InsertBookingToDb()
-        {
+        {//Made by Eby
             SqlConnection con = new SqlConnection("Data Source=.;Initial Catalog=FunHall;"
                                 + "Integrated Security=true;");
             SqlCommand cmd = new SqlCommand();
@@ -93,7 +93,7 @@ namespace Funhall2
         }
 
         public void InsertActivityToDb()
-        {
+        {//Made by Eby
             SqlConnection con = new SqlConnection("Data Source=.;Initial Catalog=FunHall;"
                                 + "Integrated Security=true;");
             SqlCommand cmd = new SqlCommand();
@@ -128,6 +128,7 @@ namespace Funhall2
 
         public void InsertBookedActivitiesToDb()
         {
+            //Made by Eby
             SqlConnection con = new SqlConnection("Data Source=.;Initial Catalog=FunHall;"
                                 + "Integrated Security=true;");
             SqlCommand cmd = new SqlCommand();
@@ -175,6 +176,7 @@ namespace Funhall2
 
         public void InsertBookedProductsToDb()
         {
+            //Made by Eby
             SqlConnection con = new SqlConnection("Data Source=.;Initial Catalog=FunHall;"
                                 + "Integrated Security=true;");
             SqlCommand cmd = new SqlCommand();
@@ -219,6 +221,7 @@ namespace Funhall2
 
         public static void AddParam(SqlCommand cmd, object value, string name, SqlDbType sqlDbType)
         {
+            //Made by Eby
             SqlParameter parameter = new SqlParameter();
             parameter.ParameterName = "@" + name;
             if (value != null)

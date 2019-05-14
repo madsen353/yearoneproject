@@ -22,6 +22,7 @@ namespace Funhall2
 
         public GuestCheckinPage(Booking booking)
         {
+            //Made by Eby
             Booking = booking;
             InitializeComponent();
             n.Text = Booking.name;
@@ -30,7 +31,7 @@ namespace Funhall2
 
         private void AddGuestToDb(object sender, RoutedEventArgs e)
         {
-            
+            //Made by Eby
             Customer cus = new Customer();
             cus.BookingId = Booking.flexyId;
             cus.Name = Name.Text;
@@ -54,6 +55,7 @@ namespace Funhall2
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {
+            //Made by Anders & Niels
             SegwayAnsvarsFragivelse window = new SegwayAnsvarsFragivelse();
             window.ShowDialog();
         }

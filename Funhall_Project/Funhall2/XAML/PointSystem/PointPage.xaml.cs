@@ -19,6 +19,7 @@ namespace Funhall2.XAML.PointSystem
     /// <summary>
     /// Interaction logic for PointPage.xaml
     /// </summary>
+    /// //Made by Rasmus
     public partial class PointPage : Page
     {
         public int guestID;
@@ -27,6 +28,7 @@ namespace Funhall2.XAML.PointSystem
         public Booking pageBooking;
         public PointPage(CustomerActivity c, Booking b, Activity a)
         {
+            //Made by Rasmus
             pageBooking = b;
             pageActivity = a;
             InitializeComponent();
@@ -38,7 +40,8 @@ namespace Funhall2.XAML.PointSystem
         }
 
         private void button_Click(object sender, RoutedEventArgs e)
-        {          
+        {
+            //Made by Rasmus
             DAL dal = new DAL();
             dal.UpdateCusActivity(guestID, Points.Text,activity);
             //this.NavigationService.GoBack();

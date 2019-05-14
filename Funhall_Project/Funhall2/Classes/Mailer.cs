@@ -8,6 +8,7 @@ using System.Net.Mail;
 
 namespace Funhall2.Classes
 {
+    //Made by Rasmus
     public class Mailer
     {
         public string SenderEmail = "mail@gamlenas.synology.me";
@@ -16,6 +17,7 @@ namespace Funhall2.Classes
         public string Host = "gamlenas.synology.me";
         public SmtpClient MakeClient()
         {
+            //Made by Rasmus
             SmtpClient client = new SmtpClient();
             client.Port = 25;
             client.DeliveryMethod = SmtpDeliveryMethod.Network;
@@ -27,7 +29,7 @@ namespace Funhall2.Classes
         
         public MailMessage GenerateEmail(Customer guest)
         {
-            
+            //Made by Rasmus
             MailMessage mail = new MailMessage(SenderEmail, guest.Email);
             
             mail.Subject = "Tak fordi du besøgte Funhall Viborg";
@@ -37,6 +39,7 @@ namespace Funhall2.Classes
 
         public void SendDiplomaEmails(Booking booking)
         {
+            //Made by Rasmus
             SmtpClient client = MakeClient();
             ObservableCollection<Customer> recipients = Customer.GetCustomers(booking);
             int i = 0;

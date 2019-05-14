@@ -20,12 +20,14 @@ namespace Funhall2.XAML.PointSystem
     /// <summary>
     /// Interaction logic for AllActivities.xaml
     /// </summary>
-    /// 
+    ///
+    /// //Made by Rasmus
     public partial class AllActivities : Page
     {
         public Booking Booking { get; set; }
         public AllActivities(Booking booking)
         {
+            //Made by Rasmus
             Booking = booking;
             InitializeComponent();
             this.DataContext = Booking;
@@ -48,6 +50,7 @@ namespace Funhall2.XAML.PointSystem
 
         private void ShowSelectedActivity(object sender, RoutedEventArgs e)
         {
+            //Made by Rasmus
             Activity a = Activities.SelectedItem as Activity;
             CurrentActivity currentActivity = new CurrentActivity(a, Booking);
             this.NavigationService.Navigate(currentActivity);
@@ -58,6 +61,7 @@ namespace Funhall2.XAML.PointSystem
 
         private void AllActivitiesHaveEnded(object sender, RoutedEventArgs e)
         {
+            //Made by Rasmus
             Mailer mailer = new Mailer();
             mailer.SendDiplomaEmails(Booking);
             ChooseYourBooking chooseYourBooking = new ChooseYourBooking();
@@ -66,12 +70,14 @@ namespace Funhall2.XAML.PointSystem
 
         private void DisplayScoreTotal(object sender, RoutedEventArgs e)
         {
+            //Made by Rasmus
             ScoreTotal scorePage  = new ScoreTotal(Booking);
             this.NavigationService.Navigate(scorePage);
         }
 
         private void GoBackToOverview(object sender, RoutedEventArgs e)
         {
+            //Made by Rasmus
             ChooseYourBooking chooseYourBooking = new ChooseYourBooking();
             this.NavigationService.Navigate(chooseYourBooking);
         }

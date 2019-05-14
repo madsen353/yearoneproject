@@ -16,6 +16,7 @@ namespace Funhall2
         
         public static ObservableCollection<Booking> getBookings()
         {
+            //Made by Eby
             SqlConnection con = new SqlConnection("Data Source=.;Initial Catalog=FunHall;"
                                  + "Integrated Security=true;");
             SqlCommand cmd = new SqlCommand();
@@ -41,6 +42,7 @@ namespace Funhall2
 
         public static Booking getSelectedBookingData(Booking booking)
         {
+            //Made by Eby
             SqlConnection con = new SqlConnection("Data Source=.;Initial Catalog=FunHall;"
                                  + "Integrated Security=true;");
             SqlCommand cmd = new SqlCommand();
@@ -66,6 +68,7 @@ namespace Funhall2
 
         public static Booking getBookingData(string id)
         {
+            //Made by Eby
             SqlConnection con = new SqlConnection("Data Source=.;Initial Catalog=FunHall;"
                                  + "Integrated Security=true;");
             SqlCommand cmd = new SqlCommand();

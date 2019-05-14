@@ -51,13 +51,11 @@ namespace Funhall2
             //ListBox Solution:
             ObservableCollection<Booking> bookings = DALBooking.getBookings();
             listBox.ItemsSource = bookings;
-            //DataGrid solution:
-            //ObservableCollection<Booking> bookings = DALBooking.getBookings();
-            //grid.ItemsSource = bookings;
-        }
+            }
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {
+            //Made by Anders & Niels
             CheckInPage checkIn = new CheckInPage();
             this.NavigationService.Navigate(checkIn);
         }
@@ -66,6 +64,7 @@ namespace Funhall2
 
         private void ShowSelectedBooking(object sender, RoutedEventArgs e)
         {
+            //Made by Eby
             Booking b = listBox.SelectedItem as Booking;
             SelectedBookingPage page = new SelectedBookingPage(b);
             this.NavigationService.Navigate(page);
@@ -73,6 +72,7 @@ namespace Funhall2
 
         private void Checkin_Click(object sender, RoutedEventArgs e)
         {
+            //Made by Eby
             Booking b = listBox.SelectedItem as Booking;
             GuestCheckinPage page = new GuestCheckinPage(b);
             this.NavigationService.Navigate(page);
@@ -80,6 +80,7 @@ namespace Funhall2
 
         private void GoToMainMenu(object sender, RoutedEventArgs e)
         {
+            //Made by Rasmus
             CheckInPage CheckIn = new CheckInPage();
             this.NavigationService.Navigate(CheckIn);
         }

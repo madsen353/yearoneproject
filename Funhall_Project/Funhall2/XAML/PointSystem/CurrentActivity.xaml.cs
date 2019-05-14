@@ -20,13 +20,15 @@ namespace Funhall2.XAML.PointSystem
     /// <summary>
     /// Interaction logic for CurrentActivity.xaml
     /// </summary>
+    /// //Made by Rasmus
     public partial class CurrentActivity : Page
     {
-        
+        //Made by Rasmus
         public Activity activity;
         public Booking booking;
         public CurrentActivity(Activity a, Booking b)
         {
+            //Made by Rasmus
             DAL dal = new DAL();
             activity = a;
             booking = b;
@@ -55,6 +57,7 @@ namespace Funhall2.XAML.PointSystem
 
         private void UpdateScore(object sender, RoutedEventArgs e)
         {
+            //Made by Rasmus
             CustomerActivity c = Guests.SelectedItem as CustomerActivity;
             PointPage pointPage = new PointPage(c,booking,activity);
             this.NavigationService.Navigate(pointPage);
@@ -62,6 +65,7 @@ namespace Funhall2.XAML.PointSystem
 
         private void EndActivity(object sender, RoutedEventArgs e)
         {
+            //Made by Rasmus
             DAL dal = new DAL();
             activity.IsFinished = 1;
             dal.EndActivity(activity.BookingId, activity.IsFinished, activity.TimeDesc);
@@ -71,6 +75,7 @@ namespace Funhall2.XAML.PointSystem
 
         private void GoBackToOverview(object sender, RoutedEventArgs e)
         {
+            //Made by Rasmus
             AllActivities allActivities = new AllActivities(booking);
             this.NavigationService.Navigate(allActivities);
         }

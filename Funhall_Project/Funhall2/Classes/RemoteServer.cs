@@ -14,12 +14,14 @@ namespace Funhall2
 
         public RemoteServer(RemoteServerConfig config)
         {
+            //Made by Rasmus
             this.config = config;
             client = new SftpClient(config.RemoteAddress, config.Username, config.Password);
         }
 
         public List<Booking> ReadAllBookings()
         {
+            //Made by Rasmus
             client.Connect();
             Console.WriteLine("Is Connected");
             var files = client.ListDirectory(config.FilePath);//SFTP folder from where the file is to be download

@@ -20,6 +20,7 @@ namespace Funhall2
 
         public static ObservableCollection<Activity> getBookedActivities(Booking booking)
         {
+            //Made by Eby
             SqlConnection con = new SqlConnection("Data Source=.;Initial Catalog=FunHall;"
                                  + "Integrated Security=true;");
             SqlCommand cmd = new SqlCommand();

@@ -11,6 +11,7 @@ namespace Funhall2.Classes
 {
     public class CustomerActivity
     {
+        //Made by Eby
         public Customer Customer { get; set; }
         public Activity  Activity { get; set; }
         public string  Points { get; set; }
@@ -38,6 +39,7 @@ namespace Funhall2.Classes
 
         public static void AddActivities(Customer cus)
         {
+            //Made by Eby
             SqlConnection con = new SqlConnection("Data Source=.;Initial Catalog=FunHall;"
                                  + "Integrated Security=true;");
             SqlCommand cmd = new SqlCommand();
@@ -62,6 +64,7 @@ namespace Funhall2.Classes
 
         public static ObservableCollection<CustomerActivity> getCusActivities(Customer cus)
         {
+            //Made by Eby
             SqlConnection con = new SqlConnection("Data Source=.;Initial Catalog=FunHall;"
                                  + "Integrated Security=true;");
             SqlCommand cmd = new SqlCommand();
