@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Funhall2.Classes;
+using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Data;
@@ -18,34 +19,43 @@ namespace Funhall2
         public DateTime EndTime { get; set; }
         public int IsFinished { get; set; }
 
-        public static ObservableCollection<Activity> getBookedActivities(Booking booking)
+        DBConnection dBConnection = new DBConnection();
+        SqlCommand cmd = new SqlCommand();
+
+        public  ObservableCollection<Activity> getBookedActivities(Booking booking)  //Made by Eby
+
         {
-            //Made by Eby
-            SqlConnection con = new SqlConnection("Data Source=.;Initial Catalog=FunHall;"
-                                 + "Integrated Security=true;");
-            SqlCommand cmd = new SqlCommand();
-            SqlDataReader reader;
-            cmd.Connection = con;
+            cmd.Connection = dBConnection.con;
             cmd.CommandType = CommandType.Text;
-            cmd.Parameters.Add("@bookingId", SqlDbType.NVarChar).Value = booking.flexyId;
-
-            cmd.CommandText = "select * from BookedActivities where BookingId = @bookingId";
             ObservableCollection<Activity> activities = new ObservableCollection<Activity>();
-            con.Open();
-            reader = cmd.ExecuteReader();
-
-            while (reader.Read())
+            try
             {
-                Activity a = new Activity();
-                a.BookingId = reader[0].ToString();
-                a.TimeDesc = reader[1].ToString();
-                a.StartTime = DateTime.Parse(reader[2].ToString());
-                a.EndTime = DateTime.Parse(reader[3].ToString());
-                a.IsFinished = (int)reader[4];
-                activities.Add(a);
+                cmd.Parameters.Add("@bookingId", SqlDbType.NVarChar).Value = booking.flexyId;
+
+                cmd.CommandText = "select * from BookedActivities where BookingId = @bookingId";
+                SqlDataReader reader;
+                reader = cmd.ExecuteReader();
+
+                while (reader.Read())
+                {
+                    Activity a = new Activity();
+                    a.BookingId = reader[0].ToString();
+                    a.TimeDesc = reader[1].ToString();
+                    a.StartTime = DateTime.Parse(reader[2].ToString());
+                    a.EndTime = DateTime.Parse(reader[3].ToString());
+                    //a.IsFinished = (int)reader[4];
+                    activities.Add(a);
+                }
+             return activities;
+            }catch(Exception)
+            {
+                return null;
             }
-            con.Close();
-            return activities;
+            finally
+            {
+
+                 dBConnection.ConnectionClose();
+            }
         }
     }
 }
