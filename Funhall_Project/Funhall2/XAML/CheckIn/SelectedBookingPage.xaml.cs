@@ -21,6 +21,7 @@ namespace Funhall2
     public partial class SelectedBookingPage : Page
     {
         public  Booking Booking { get; set; }
+
         public SelectedBookingPage(Booking booking) //Made by Eby
         {
             
@@ -50,6 +51,8 @@ namespace Funhall2
 
         private void previousPage_Click(object sender, RoutedEventArgs e)
         {
+            //Made by Eby
+
             AllBookingsPage page = new AllBookingsPage();
             this.NavigationService.Navigate(page);
 

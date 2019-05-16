@@ -110,32 +110,36 @@ namespace Funhall2.Classes
         public CustomerActivity getCusActivitySpecifiedByActivity(Customer cus, Activity act)
         {
             //Made by Rasmus
-            //SqlConnection con = new SqlConnection("Data Source=.;Initial Catalog=FunHall;"
-            //                                      + "Integrated Security=true;");
-            //SqlCommand cmd = new SqlCommand();
-            command.Connection = dBConnection.con;
-            command.CommandType = CommandType.Text;
-            command.Parameters.Add("@Id", SqlDbType.NVarChar).Value = cus.CusId;
-            command.Parameters.Add("@Act", SqlDbType.NVarChar).Value = act.TimeDesc;
+            SqlConnection con = new SqlConnection("Data Source=.;Initial Catalog=FunHall;"
+                                                  + "Integrated Security=true;");
+            SqlCommand cmd = new SqlCommand();
+            cmd.Connection = con;
+            con.Open();
+           // command.Connection = dBConnection.con;
+            cmd.CommandType = CommandType.Text;
+            cmd.Parameters.Add("@Id", SqlDbType.NVarChar).Value = cus.CusId;
+            cmd.Parameters.Add("@Act", SqlDbType.NVarChar).Value = act.TimeDesc;
 
-            command.CommandText = "select ga.GuestId, ga.TimeDesc, ga.Points from GuestActivities ga " +
+            cmd.CommandText = "select ga.GuestId, ga.TimeDesc, ga.Points from GuestActivities ga " +
                               "where ga.GuestId=@Id AND ga.TimeDesc=@Act";
             ObservableCollection<CustomerActivity> cusActivities = new ObservableCollection<CustomerActivity>();
             SqlDataReader reader;
-            reader = command.ExecuteReader();
+            reader = cmd.ExecuteReader();
 
-            reader.Read();
-
+           // reader.Read();
             CustomerActivity ca = new CustomerActivity(cus,act);
-
-
+            while (reader.Read())
+            {
                 ca.Customer.CusId = (int)reader[0];
                 ca.Activity.TimeDesc = reader[1].ToString();
                 ca.Points = reader[2].ToString();
+            }
+                con.Close();
+                 return ca;
+
             //a.StartTime = DateTime.Parse(reader[2].ToString());
             //a.EndTime = DateTime.Parse(reader[3].ToString());
-            dBConnection.ConnectionClose();
-            return ca;
+            //dBConnection.ConnectionClose();
         }
 
         public List<int> GetTotalAmountOfPoints(int guestID)
