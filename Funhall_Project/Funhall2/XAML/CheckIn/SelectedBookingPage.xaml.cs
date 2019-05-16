@@ -21,14 +21,19 @@ namespace Funhall2
     public partial class SelectedBookingPage : Page
     {
         public  Booking Booking { get; set; }
-        public SelectedBookingPage(Booking booking)
+        public SelectedBookingPage(Booking booking) //Made by Eby
         {
-            //Made by Eby
+            if (booking == null)
+            {
+                AllBookingsPage page = new AllBookingsPage();
+                this.NavigationService.Navigate(page);
+            }
             Booking = booking;
             InitializeComponent();            
             this.DataContext = Booking;
 
-            ObservableCollection<Activity> activities = Activity.getBookedActivities(Booking);
+            Activity a = new Activity();
+            ObservableCollection<Activity> activities = a.getBookedActivities(Booking);
             Activities.ItemsSource = activities;
 
             ObservableCollection<Customer> guests = Customer.GetCustomers(Booking);

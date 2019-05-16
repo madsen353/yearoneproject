@@ -27,9 +27,10 @@ namespace Funhall2
             Booking = b;
             InitializeComponent();
             n.Text = Booking.name;
-            this.DataContext = Customer;            
+            this.DataContext = Customer;
+            CustomerActivity ca = new CustomerActivity();
             //ObservableCollection<Activity> activities = Activity.getBookedActivities(b);
-            ObservableCollection<CustomerActivity> CusActivities = CustomerActivity.getCusActivities(cus);
+            ObservableCollection<CustomerActivity> CusActivities = ca.getCusActivities(cus);
             Activities.ItemsSource = CusActivities;
         }
 
@@ -48,9 +49,11 @@ namespace Funhall2
             //else
             //    cus.Segway = false;
 
+            CheckIn checkIn = new CheckIn();
+
             try
             {
-                CheckIn.UpdateCus(cus);
+                checkIn.UpdateCus(cus);
                 MessageBox.Show("Data er redegeret");
             }
             catch (Exception)

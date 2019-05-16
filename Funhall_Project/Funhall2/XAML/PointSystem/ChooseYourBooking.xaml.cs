@@ -25,7 +25,8 @@ namespace Funhall2.XAML.PointSystem
         {
             //Made by Rasmus
             InitializeComponent();
-            ObservableCollection<Booking> bookings = DALBooking.getBookings();
+            DALBooking dalB = new DALBooking();
+            ObservableCollection<Booking> bookings = dalB.getBookings();
             listBox.ItemsSource = bookings;
         }
 

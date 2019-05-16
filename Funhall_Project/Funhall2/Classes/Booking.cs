@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Funhall2.Classes;
+using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Data.SqlClient;
@@ -24,6 +25,7 @@ namespace Funhall2
         public string totalPrice { get; set; }
         public string cusComment { get; set; }
         public string intComment { get; set; }
+
         public class Time
         {
             public string start { get; set; }
@@ -44,13 +46,12 @@ namespace Funhall2
         //}
 
         
-        public void InsertBookingToDb()
-        {//Made by Eby
-            SqlConnection con = new SqlConnection("Data Source=.;Initial Catalog=FunHall;"
-                                + "Integrated Security=true;");
-            SqlCommand cmd = new SqlCommand();
-            cmd.Connection = con;
-            con.Open();
+        DBConnection dBConnection = new DBConnection();
+        SqlCommand cmd = new SqlCommand();
+
+        public void InsertBookingToDb() //Made by Eby
+        {
+            cmd.Connection = dBConnection.con;
 
             cmd.Parameters.Clear();
             if (flexyId != null && name != null && cusTel != null)
@@ -81,24 +82,20 @@ namespace Funhall2
                 try
                 {
                     cmd.ExecuteNonQuery();
-                    MessageBox.Show("Record added Successfully!");
+                   // MessageBox.Show("Record added Successfully!");
                 }
                 catch (Exception ex)
                 {
-                   // MessageBox.Show(ex.Message);
+                    // MessageBox.Show(ex.Message);                    
 
                 }
             }
-            con.Close();
+            dBConnection.ConnectionClose();
         }
 
-        public void InsertActivityToDb()
-        {//Made by Eby
-            SqlConnection con = new SqlConnection("Data Source=.;Initial Catalog=FunHall;"
-                                + "Integrated Security=true;");
-            SqlCommand cmd = new SqlCommand();
-            cmd.Connection = con;
-            con.Open();
+        public void InsertActivityToDb()   //Made by Eby
+        {            
+            cmd.Connection = dBConnection.con;
 
             foreach (var time in times)
             {
@@ -123,17 +120,12 @@ namespace Funhall2
                     }
                 }
             }
-            con.Close();
+            dBConnection.ConnectionClose();
         }
 
-        public void InsertBookedActivitiesToDb()
-        {
-            //Made by Eby
-            SqlConnection con = new SqlConnection("Data Source=.;Initial Catalog=FunHall;"
-                                + "Integrated Security=true;");
-            SqlCommand cmd = new SqlCommand();
-            cmd.Connection = con;
-            con.Open();
+        public void InsertBookedActivitiesToDb()    //Made by Eby
+        {           
+            cmd.Connection = dBConnection.con;
 
             foreach (var time in times)
             {
@@ -169,19 +161,15 @@ namespace Funhall2
                     }
                 }
             }
-            con.Close();
+            dBConnection.ConnectionClose();
         }
 
 
 
-        public void InsertBookedProductsToDb()
-        {
-            //Made by Eby
-            SqlConnection con = new SqlConnection("Data Source=.;Initial Catalog=FunHall;"
-                                + "Integrated Security=true;");
+        public void InsertBookedProductsToDb()      //Made by Eby
+        {           
             SqlCommand cmd = new SqlCommand();
-            cmd.Connection = con;
-            con.Open();
+            cmd.Connection = dBConnection.con;
 
             foreach (var product in products)
             {
@@ -216,12 +204,11 @@ namespace Funhall2
                 }
             }
 
-            con.Close();
+            dBConnection.ConnectionClose();
         }
 
-        public static void AddParam(SqlCommand cmd, object value, string name, SqlDbType sqlDbType)
+        public static void AddParam(SqlCommand cmd, object value, string name, SqlDbType sqlDbType) //Made by Eby
         {
-            //Made by Eby
             SqlParameter parameter = new SqlParameter();
             parameter.ParameterName = "@" + name;
             if (value != null)

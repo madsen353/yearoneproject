@@ -49,7 +49,8 @@ namespace Funhall2
             DataContext = this;
 
             //ListBox Solution:
-            ObservableCollection<Booking> bookings = DALBooking.getBookings();
+            DALBooking dalB = new DALBooking();
+            ObservableCollection<Booking> bookings = dalB.getBookings();
             listBox.ItemsSource = bookings;
             }
 

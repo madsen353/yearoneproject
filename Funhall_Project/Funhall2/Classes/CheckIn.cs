@@ -3,24 +3,21 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Data;
 using System.Data.SqlClient;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Funhall2.Classes
 {
-    public class CheckIn
+    public class CheckIn //Made by Eby
     {
         public Customer Cus { get; set; }
 
-        public static void CheckInCus(Customer cus)
+        DBConnection dBConnection = new DBConnection();
+        SqlCommand cmd = new SqlCommand();
+
+        public  void CheckInCus(Customer cus) //Made by Eby
         {
-            //Made by Eby
-            SqlConnection con = new SqlConnection("Data Source=.;Initial Catalog=FunHall;"
-                                 + "Integrated Security=true;");
-            SqlCommand cmd = new SqlCommand();
-            cmd.Connection = con;
-            cmd.CommandType = System.Data.CommandType.Text;
+            cmd.Connection = dBConnection.con;
+            cmd.CommandType = CommandType.Text;
+
             cmd.CommandText = "insert into Guests (BookingId, Name, Email, AgreeTerms, Subscription) values " +
                                      "(@BookingId, @Name, @Email, @AgreeTerms, @Subscription)";
 
@@ -30,18 +27,13 @@ namespace Funhall2.Classes
             cmd.Parameters.Add("@AgreeTerms", SqlDbType.Bit).Value = cus.Segway;
             cmd.Parameters.Add("@Subscription", SqlDbType.Bit).Value = cus.Subscription;
 
-            con.Open();
             cmd.ExecuteNonQuery();
-            con.Close();
+            dBConnection.ConnectionClose();
         }
 
-        public static void UpdateCus(Customer cus)
-        {
-            //Made by Eby
-            SqlConnection con = new SqlConnection("Data Source=.;Initial Catalog=FunHall;"
-                                 + "Integrated Security=true;");
-            SqlCommand cmd = new SqlCommand();
-            cmd.Connection = con;
+        public  void UpdateCus(Customer cus) //Made by Eby
+        {           
+            cmd.Connection = dBConnection.con;
             cmd.CommandType = System.Data.CommandType.Text;
             cmd.CommandText = "Update Guests set  Name=@Name, Email=@Email, AgreeTerms=@AgreeTerms," +
                 "Subscription=@Subscription";
@@ -51,9 +43,8 @@ namespace Funhall2.Classes
             cmd.Parameters.Add("@AgreeTerms", SqlDbType.Bit).Value = cus.Segway;
             cmd.Parameters.Add("@Subscription", SqlDbType.Bit).Value = cus.Subscription;
 
-            con.Open();
             cmd.ExecuteNonQuery();
-            con.Close();
+            dBConnection.ConnectionClose();
         }
 
         public static void AddParam(SqlCommand cmd, object value, string name, SqlDbType sqlDbType)

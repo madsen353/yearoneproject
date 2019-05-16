@@ -32,7 +32,8 @@ namespace Funhall2.XAML.PointSystem
             InitializeComponent();
             this.DataContext = Booking;
 
-            ObservableCollection<Activity> activities = Activity.getBookedActivities(Booking);
+            Activity a = new Activity();
+            ObservableCollection<Activity> activities = a.getBookedActivities(Booking);
             ObservableCollection<Activity> activitiesToShow = new ObservableCollection<Activity>();
             int i = 0;
             foreach (Activity activity in activities)
