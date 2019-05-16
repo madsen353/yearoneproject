@@ -23,13 +23,11 @@ namespace Funhall2
         public  Booking Booking { get; set; }
         public SelectedBookingPage(Booking booking) //Made by Eby
         {
-            if (booking == null)
-            {
-                AllBookingsPage page = new AllBookingsPage();
-                this.NavigationService.Navigate(page);
-            }
-            Booking = booking;
+            
             InitializeComponent();            
+                    
+            
+            Booking = booking;
             this.DataContext = Booking;
 
             Activity a = new Activity();
@@ -38,6 +36,7 @@ namespace Funhall2
 
             ObservableCollection<Customer> guests = Customer.GetCustomers(Booking);
             Guests.ItemsSource = guests;
+            
         }
 
         private void ViewGuestInfo(object sender, MouseButtonEventArgs e)

@@ -67,8 +67,16 @@ namespace Funhall2
         {
             //Made by Eby
             Booking b = listBox.SelectedItem as Booking;
+            if (b!=null)
+            {
             SelectedBookingPage page = new SelectedBookingPage(b);
             this.NavigationService.Navigate(page);
+
+            }
+            else
+            {
+                MessageBox.Show("Vælg en Booking fra listen");
+            }
         }
 
         private void Checkin_Click(object sender, RoutedEventArgs e)
