@@ -47,13 +47,13 @@ namespace Funhall2
                     activities.Add(a);
                 }
              return activities;
-            }catch(Exception)
+            }
+            catch (Exception ex)
             {
                 return null;
             }
             finally
             {
-
                  dBConnection.ConnectionClose();
             }
         }

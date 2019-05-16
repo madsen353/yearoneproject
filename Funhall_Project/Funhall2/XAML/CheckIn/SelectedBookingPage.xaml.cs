@@ -24,9 +24,8 @@ namespace Funhall2
         public SelectedBookingPage(Booking booking) //Made by Eby
         {
             
-            InitializeComponent();            
-                    
-            
+            InitializeComponent();        
+                             
             Booking = booking;
             this.DataContext = Booking;
 
@@ -45,6 +44,13 @@ namespace Funhall2
             Booking b =  Booking;
             Customer cus = Guests.SelectedItem as Customer;
             Profile page = new Profile(cus,b);
+            this.NavigationService.Navigate(page);
+
+        }
+
+        private void previousPage_Click(object sender, RoutedEventArgs e)
+        {
+            AllBookingsPage page = new AllBookingsPage();
             this.NavigationService.Navigate(page);
 
         }

@@ -61,5 +61,11 @@ namespace Funhall2
             SegwayAnsvarsFragivelse window = new SegwayAnsvarsFragivelse();
             window.ShowDialog();
         }
+
+        private void PreviousPage_Click(object sender, RoutedEventArgs e)
+        {
+            AllBookingsPage page = new AllBookingsPage();
+            this.NavigationService.Navigate(page);
+        }
     }
 }

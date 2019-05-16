@@ -39,21 +39,15 @@ namespace Funhall2.Classes
                     customers.Add(c);
                 }
                     return customers;
-
             }
-            catch (NullReferenceException)
+            catch (Exception ex)
             {
-                MessageBox.Show("Vælg en Booking fra listen");
-                
                 return null;
-
             }
             finally
             {
                 dBConnection.ConnectionClose();
-            }
-            
-            
+            }                 
            
         }
         //Made by Rasmus

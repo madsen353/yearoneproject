@@ -18,7 +18,7 @@
             <RowDefinition Height="158*"/>
             <RowDefinition Height="177*"/>
         </Grid.RowDefinitions>
-        <Button Content="Tilbage" Grid.Row="0" HorizontalAlignment="Left" Margin="74,9,0,0" VerticalAlignment="Top" Width="75" Height="21" RenderTransformOrigin="0.503,-0.604"/>
+        <Button Content="Tilbage" Grid.Row="0" HorizontalAlignment="Left" Margin="74,9,0,0" VerticalAlignment="Top" Width="75" Height="21" RenderTransformOrigin="0.503,-0.604" Click="previousPage_Click" />
         <Grid Grid.Row="1" Margin="0,9.333,0,1.667">
             <Label Content="Navn:" HorizontalAlignment="Center" Margin="20,11,734,0" VerticalAlignment="Top"  Height="26" Width="60" Grid.Column="0" FontWeight="Bold" FontSize="14"/>
             <Label Content="Dato:" HorizontalAlignment="Center" Margin="411,11,329,0" VerticalAlignment="Top"  Height="26" Width="60" FontWeight="Bold" FontSize="14"/>

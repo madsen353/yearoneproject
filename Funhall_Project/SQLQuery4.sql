@@ -71,3 +71,9 @@ create table GuestActivities
 
 select * from Guests
 SELECT * FROM GuestActivities
+
+ALTER TABLE GuestActivities
+ALTER COLUMN Points INT ;
+
+SELECT sum(Points) as totalpoints from GuestActivities where GuestId = 22;
+
