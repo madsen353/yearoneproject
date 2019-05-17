@@ -26,6 +26,7 @@ namespace Funhall2.XAML.PointSystem
         public string activity;
         public Activity pageActivity;
         public Booking pageBooking;
+        DAL dal = new DAL();
         public PointPage(CustomerActivity c, Booking b, Activity a)
         {
             //Made by Rasmus
@@ -36,15 +37,12 @@ namespace Funhall2.XAML.PointSystem
             Points.Text = c.Points;
             guestID = c.Customer.CusId;
             activity = c.Activity.TimeDesc;
-
-        }
+            }
 
         private void button_Click(object sender, RoutedEventArgs e)
         {
             //Made by Rasmus
-            DAL dal = new DAL();
             dal.UpdateCusActivity(guestID, Points.Text,activity);
-            //this.NavigationService.GoBack();
             CurrentActivity currentActivity = new CurrentActivity(pageActivity, pageBooking);
             this.NavigationService.Navigate(currentActivity);
 

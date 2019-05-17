@@ -32,7 +32,6 @@ namespace Funhall2.XAML.PointSystem
             Booking = booking;
             InitializeComponent();
             this.DataContext = Booking;
-
             ObservableCollection<Activity> activities = dal.GetBookedActivities(Booking);
             ObservableCollection<Activity> activitiesToShow = new ObservableCollection<Activity>();
             int i = 0;
@@ -42,12 +41,10 @@ namespace Funhall2.XAML.PointSystem
                 {
                     activitiesToShow.Add(activities[i]);
                 }
-
                 i++;
             }
             Activities.ItemsSource = activitiesToShow;
-
-        }
+            }
 
         private void ShowSelectedActivity(object sender, RoutedEventArgs e)
         {
@@ -56,9 +53,6 @@ namespace Funhall2.XAML.PointSystem
             CurrentActivity currentActivity = new CurrentActivity(a, Booking);
             this.NavigationService.Navigate(currentActivity);
         }
-
-
-        //NEED UPDATE LOGIC!!!
 
         private void AllActivitiesHaveEnded(object sender, RoutedEventArgs e)
         {

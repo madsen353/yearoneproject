@@ -26,32 +26,21 @@ namespace Funhall2.XAML.PointSystem
         //Made by Rasmus
         public Activity activity;
         public Booking booking;
+        DAL dal = new DAL();
         public CurrentActivity(Activity a, Booking b)
         {
             //Made by Rasmus
-            DAL dal = new DAL();
             activity = a;
             booking = b;
             InitializeComponent();
-            ObservableCollection<Customer> guests = Customer.GetCustomers(b);
+            ObservableCollection<Customer> guests = dal.GetCustomers(b);
             ObservableCollection<CustomerActivity> elementsToShow = new ObservableCollection<CustomerActivity>();
             int cI = 0;
             foreach (Customer guest in guests)
             {
-
                 elementsToShow.Add(dal.GetCusActivitySpecifiedByActivity(guests[cI], activity));
                 cI++;
             }
-
-            //int i = 0;
-            //ObservableCollection<CustomerActivity> guestsWithActivity = new ObservableCollection<CustomerActivity>();
-            //foreach (Customer guest in guests)
-            //{
-            //    CustomerActivity g = new CustomerActivity(guests[i], a);
-            //    guestsWithActivity.Add(g);
-            //    i++;
-            //}
-            //Guests.ItemsSource = guestsWithActivity;
             Guests.ItemsSource = elementsToShow;
         }
 
@@ -66,7 +55,6 @@ namespace Funhall2.XAML.PointSystem
         private void EndActivity(object sender, RoutedEventArgs e)
         {
             //Made by Rasmus
-            DAL dal = new DAL();
             activity.IsFinished = 1;
             dal.EndActivity(activity.BookingId, activity.IsFinished, activity.TimeDesc);
             AllActivities allActivities = new AllActivities(booking);
