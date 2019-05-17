@@ -19,36 +19,7 @@ namespace Funhall2.Classes
         public bool Segway { get; set; }
         public int TotalAmountOfPoints { get; set; }
 
-        public static ObservableCollection<Customer> GetCustomers(Booking booking)
-        {
-            //Made by Eby
-            SqlConnection con = new SqlConnection("Data Source=.;Initial Catalog=FunHall;"
-                                 + "Integrated Security=true;");
-            SqlCommand cmd = new SqlCommand();
-            SqlDataReader reader;
-            cmd.Connection = con;
-            cmd.CommandType = CommandType.Text;
-            cmd.Parameters.Add("@bookingId", SqlDbType.NVarChar).Value = booking.flexyId;
-
-            cmd.CommandText = "select * from Guests where BookingId = @bookingId";
-            ObservableCollection<Customer> customers = new ObservableCollection<Customer>();
-            con.Open();
-            reader = cmd.ExecuteReader();
-
-            while (reader.Read())
-            {
-                Customer c = new Customer();
-                c.CusId = (int)reader[0];
-                c.BookingId = reader[1].ToString();
-                c.Name = reader[2].ToString(); ;
-                c.Email = reader[3].ToString();
-                c.Segway = reader.GetBoolean(4);
-                c.Subscription = reader.GetBoolean(5);
-                customers.Add(c);
-            }
-            con.Close();
-            return customers;
-        }
+        
         public int GetTotalAmountOfPoints()
         {
             //Made by Rasmus

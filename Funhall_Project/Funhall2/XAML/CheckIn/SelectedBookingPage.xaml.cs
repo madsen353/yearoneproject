@@ -28,10 +28,10 @@ namespace Funhall2
             InitializeComponent();            
             this.DataContext = Booking;
 
-            ObservableCollection<Activity> activities = Activity.getBookedActivities(Booking);
+            ObservableCollection<Activity> activities = DAL.getBookedActivities(Booking);
             Activities.ItemsSource = activities;
 
-            ObservableCollection<Customer> guests = Customer.GetCustomers(Booking);
+            ObservableCollection<Customer> guests = DAL.GetCustomers(Booking);
             Guests.ItemsSource = guests;
         }
 

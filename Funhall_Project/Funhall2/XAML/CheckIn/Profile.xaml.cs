@@ -29,7 +29,7 @@ namespace Funhall2
             n.Text = Booking.name;
             this.DataContext = Customer;            
             //ObservableCollection<Activity> activities = Activity.getBookedActivities(b);
-            ObservableCollection<CustomerActivity> CusActivities = CustomerActivity.getCusActivities(cus);
+            ObservableCollection<CustomerActivity> CusActivities = DAL.getCusActivities(cus);
             Activities.ItemsSource = CusActivities;
         }
 
@@ -50,7 +50,7 @@ namespace Funhall2
 
             try
             {
-                CheckIn.UpdateCus(cus);
+                DAL.UpdateCus(cus);
                 MessageBox.Show("Data er redegeret");
             }
             catch (Exception)

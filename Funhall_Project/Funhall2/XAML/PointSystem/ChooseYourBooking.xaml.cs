@@ -13,6 +13,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using Funhall2.Classes;
 
 namespace Funhall2.XAML.PointSystem
 {
@@ -25,7 +26,7 @@ namespace Funhall2.XAML.PointSystem
         {
             //Made by Rasmus
             InitializeComponent();
-            ObservableCollection<Booking> bookings = DALBooking.getBookings();
+            ObservableCollection<Booking> bookings = DAL.getBookings();
             listBox.ItemsSource = bookings;
         }
 

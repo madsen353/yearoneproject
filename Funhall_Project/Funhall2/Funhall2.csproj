@@ -81,7 +81,6 @@
     </ApplicationDefinition>
     <Compile Include="Classes\Activity.cs" />
     <Compile Include="Classes\Booking.cs" />
-    <Compile Include="Classes\CheckIn.cs" />
     <Compile Include="Classes\Customer.cs" />
     <Compile Include="Classes\CustomerActivity.cs" />
     <Compile Include="Classes\DAL.cs" />

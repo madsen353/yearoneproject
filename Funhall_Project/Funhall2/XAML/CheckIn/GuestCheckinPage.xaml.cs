@@ -46,8 +46,8 @@ namespace Funhall2
             else
                 cus.Segway = false;
 
-            CheckIn.CheckInCus(cus);
-            CustomerActivity.AddActivities(cus);
+            DAL.CheckInCus(cus);
+            DAL.AddActivities(cus);
             AllBookingsPage AllBookings = new AllBookingsPage();
             this.NavigationService.Navigate(AllBookings);
 
