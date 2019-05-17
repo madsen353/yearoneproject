@@ -6,6 +6,7 @@ using System.Data.SqlClient;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Funhall2.Classes;
 
 namespace Funhall2
 {
@@ -20,31 +21,8 @@ namespace Funhall2
 
         public static ObservableCollection<Activity> getBookedActivities(Booking booking)
         {
-            //Made by Eby
-            SqlConnection con = new SqlConnection("Data Source=.;Initial Catalog=FunHall;"
-                                 + "Integrated Security=true;");
-            SqlCommand cmd = new SqlCommand();
-            SqlDataReader reader;
-            cmd.Connection = con;
-            cmd.CommandType = CommandType.Text;
-            cmd.Parameters.Add("@bookingId", SqlDbType.NVarChar).Value = booking.flexyId;
-
-            cmd.CommandText = "select * from BookedActivities where BookingId = @bookingId";
-            ObservableCollection<Activity> activities = new ObservableCollection<Activity>();
-            con.Open();
-            reader = cmd.ExecuteReader();
-
-            while (reader.Read())
-            {
-                Activity a = new Activity();
-                a.BookingId = reader[0].ToString();
-                a.TimeDesc = reader[1].ToString();
-                a.StartTime = DateTime.Parse(reader[2].ToString());
-                a.EndTime = DateTime.Parse(reader[3].ToString());
-                a.IsFinished = (int)reader[4];
-                activities.Add(a);
-            }
-            con.Close();
+            //Made by Rasmus
+            ObservableCollection<Activity> activities = DAL.getBookedActivities(booking);
             return activities;
         }
     }

@@ -13,6 +13,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using Funhall2.Classes;
 
 namespace Funhall2
 {
@@ -33,13 +34,15 @@ namespace Funhall2
             }
 
             //Made by Eby
-
+            //Refactored by Rasmus(methods moved from Booking class to DAL class.
+            
             foreach (var booking in _bookings)
             {
-                booking.InsertBookingToDb();
-                booking.InsertBookedActivitiesToDb();
-                booking.InsertActivityToDb();
-                booking.InsertBookedProductsToDb();
+                DAL.InsertBookingToDb(booking);
+                DAL.InsertBookedActivitiesToDb(booking);
+                DAL.InsertActivityToDb(booking);
+                DAL.InsertBookedProductsToDb(booking);
+                
             }
 
 
