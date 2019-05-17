@@ -14,7 +14,21 @@ namespace Funhall2.Classes
     {
         //Made by Rasmus
         private SqlConnection con = new SqlConnection("Data Source=.;Initial Catalog=FunHall;" + "Integrated Security=true;");
-        private SqlCommand cmd;
+        private SqlCommand cmd = new SqlCommand();
+
+        public DAL()
+        {
+            cmd.Connection = con;
+            cmd.CommandType = CommandType.Text;
+        }
+        public void ResetDAL()
+        {
+            con.Close();
+            con = new SqlConnection("Data Source=.;Initial Catalog=FunHall;" + "Integrated Security=true;");
+            cmd = new SqlCommand {Connection = con, CommandType = CommandType.Text};
+        }
+            
+
         private SqlParameter CreateParam(string name, object value, SqlDbType type)
         {
             //Made by Rasmus
@@ -28,32 +42,27 @@ namespace Funhall2.Classes
         {
             //Made by Rasmus
             con.Open();
-            cmd.Connection = con;
             cmd.CommandText = "UPDATE GuestActivities SET Points = @Points WHERE GuestID = @ID AND TimeDesc = @ActivityName";
             cmd.Parameters.Add(CreateParam("@ID", id, SqlDbType.NVarChar));
             cmd.Parameters.Add(CreateParam("@Points", points, SqlDbType.NVarChar));
             cmd.Parameters.Add(CreateParam("@ActivityName", activityName, SqlDbType.NVarChar));
             cmd.ExecuteNonQuery();
-            con.Close();
+            ResetDAL();
         }
         public void EndActivity(string id, int isFinished, string activityName)
         {
             //Made by Rasmus
             con.Open();
-            cmd.Connection = con;
             cmd.CommandText = "UPDATE BookedActivities SET IsFinished = @IsFinished WHERE BookingId = @ID AND TimeDesc = @ActivityName";
             cmd.Parameters.Add(CreateParam("@ID", id, SqlDbType.NVarChar));
             cmd.Parameters.Add(CreateParam("@IsFinished", isFinished, SqlDbType.Int));
             cmd.Parameters.Add(CreateParam("@ActivityName", activityName, SqlDbType.NVarChar));
             cmd.ExecuteNonQuery();
-            con.Close();
+            ResetDAL();
         }
         public CustomerActivity GetCusActivitySpecifiedByActivity(Customer cus, Activity act)
         {
             //Made by Rasmus
-            SqlDataReader reader;
-            cmd.Connection = con;
-            cmd.CommandType = CommandType.Text;
             cmd.Parameters.Add("@Id", SqlDbType.NVarChar).Value = cus.CusId;
             cmd.Parameters.Add("@Act", SqlDbType.NVarChar).Value = act.TimeDesc;
 
@@ -61,117 +70,96 @@ namespace Funhall2.Classes
                               "where ga.GuestId=@Id AND ga.TimeDesc=@Act";
             ObservableCollection<CustomerActivity> cusActivities = new ObservableCollection<CustomerActivity>();
             con.Open();
-            reader = cmd.ExecuteReader();
-
-            reader.Read();
-
-            CustomerActivity ca = new CustomerActivity(cus,act);
-
-
-                ca.Customer.CusId = (int)reader[0];
+            using (SqlDataReader reader = cmd.ExecuteReader())
+            {
+                reader.Read();
+                CustomerActivity ca = new CustomerActivity(cus, act);
+                ca.Customer.CusId = (int) reader[0];
                 ca.Activity.TimeDesc = reader[1].ToString();
                 ca.Points = reader[2].ToString();
                 //a.StartTime = DateTime.Parse(reader[2].ToString());
                 //a.EndTime = DateTime.Parse(reader[3].ToString());
-                con.Close();
+                ResetDAL();
                 return ca;
+            }
         }
 
         public List<int> GetTotalAmountOfPoints(int guestID)
         {
             //Made by Rasmus
-            SqlDataReader reader;
-            cmd.Connection = con;
-            cmd.CommandType = CommandType.Text;
             cmd.Parameters.Add("@Id", SqlDbType.Int).Value = guestID;
-
             cmd.CommandText = "select Points from GuestActivities where GuestId=@Id";
             List<int> allPoints = new List<int>();
             con.Open();
-            reader = cmd.ExecuteReader();
-
+            using (SqlDataReader reader = cmd.ExecuteReader())
+            {    
             while (reader.Read())
             {
                 string pointInString = reader[0].ToString();
                 int point = int.Parse(pointInString);
-
-                    allPoints.Add(point);
-                
-                }
-            con.Close();
+                allPoints.Add(point);
+            }
+            }
+            ResetDAL();
             return allPoints;
         }
 
         public ObservableCollection<Activity> GetBookedActivities(Booking booking)
         {
             //Made by Eby
-            SqlDataReader reader;
-            cmd.Connection = con;
-            cmd.CommandType = CommandType.Text;
             cmd.Parameters.Add("@bookingId", SqlDbType.NVarChar).Value = booking.flexyId;
-
             cmd.CommandText = "select * from BookedActivities where BookingId = @bookingId";
             ObservableCollection<Activity> activities = new ObservableCollection<Activity>();
             con.Open();
-            reader = cmd.ExecuteReader();
-
-            while (reader.Read())
+            using (SqlDataReader reader = cmd.ExecuteReader())
             {
-                Activity a = new Activity();
-                a.BookingId = reader[0].ToString();
-                a.TimeDesc = reader[1].ToString();
-                a.StartTime = DateTime.Parse(reader[2].ToString());
-                a.EndTime = DateTime.Parse(reader[3].ToString());
-                a.IsFinished = (int)reader[4];
-                activities.Add(a);
+                while (reader.Read())
+                {
+                    Activity a = new Activity();
+                    a.BookingId = reader[0].ToString();
+                    a.TimeDesc = reader[1].ToString();
+                    a.StartTime = DateTime.Parse(reader[2].ToString());
+                    a.EndTime = DateTime.Parse(reader[3].ToString());
+                    a.IsFinished = (int) reader[4];
+                    activities.Add(a);
+                }
             }
-            con.Close();
+            ResetDAL();
             return activities;
         }
         public void CheckInCus(Customer cus)
         {
             //Made by Eby
-            cmd.Connection = con;
-            cmd.CommandType = System.Data.CommandType.Text;
             cmd.CommandText = "insert into Guests (BookingId, Name, Email, AgreeTerms, Subscription) values " +
                               "(@BookingId, @Name, @Email, @AgreeTerms, @Subscription)";
-
             cmd.Parameters.Add("@BookingId", SqlDbType.NVarChar).Value = cus.BookingId;
             cmd.Parameters.Add("@Name", SqlDbType.NVarChar).Value = cus.Name;
             cmd.Parameters.Add("@Email", SqlDbType.NVarChar).Value = cus.Email;
             cmd.Parameters.Add("@AgreeTerms", SqlDbType.Bit).Value = cus.Segway;
             cmd.Parameters.Add("@Subscription", SqlDbType.Bit).Value = cus.Subscription;
-
             con.Open();
             cmd.ExecuteNonQuery();
-            con.Close();
+            ResetDAL();
         }
 
         public void UpdateCus(Customer cus)
         {
             //Made by Eby
-            cmd.Connection = con;
-            cmd.CommandType = System.Data.CommandType.Text;
             cmd.CommandText = "Update Guests set  Name=@Name, Email=@Email, AgreeTerms=@AgreeTerms," +
                               "Subscription=@Subscription";
-
             cmd.Parameters.Add("@Name", SqlDbType.NVarChar).Value = cus.Name;
             cmd.Parameters.Add("@Email", SqlDbType.NVarChar).Value = cus.Email;
             cmd.Parameters.Add("@AgreeTerms", SqlDbType.Bit).Value = cus.Segway;
             cmd.Parameters.Add("@Subscription", SqlDbType.Bit).Value = cus.Subscription;
-
             con.Open();
             cmd.ExecuteNonQuery();
-            con.Close();
+            ResetDAL();
         }
         public void AddActivities(Customer cus)
         {
             //Made by Eby
-            cmd.Connection = con;
-            cmd.CommandType = CommandType.Text;
             cmd.Parameters.Add("@Email", SqlDbType.NVarChar).Value = cus.Email;
             //cmd.Parameters.Add("@BookingId", SqlDbType.NVarChar).Value = cus.BookingId;       
-
             cmd.CommandText = "set IDENTITY_INSERT GuestActivities ON " +
                               "INSERT INTO GuestActivities (GuestId, TimeDesc, Points) " +
                               "SELECT  g.GuestId, b.TimeDesc, '0'" +
@@ -180,82 +168,77 @@ namespace Funhall2.Classes
                               "where g.Email=@Email";
             con.Open();
             cmd.ExecuteNonQuery();
-            con.Close();
-
+            ResetDAL();
         }
         public ObservableCollection<CustomerActivity> GetCusActivities(Customer cus)
         {
             //Made by Eby
-            SqlDataReader reader;
-            cmd.Connection = con;
-            cmd.CommandType = CommandType.Text;
             cmd.Parameters.Add("@Id", SqlDbType.NVarChar).Value = cus.CusId;
 
             cmd.CommandText = "select ga.GuestId, ga.TimeDesc, ga.Points from GuestActivities ga " +
                               "where ga.GuestId=@Id";
             ObservableCollection<CustomerActivity> cusActivities = new ObservableCollection<CustomerActivity>();
             con.Open();
-            reader = cmd.ExecuteReader();
-            while (reader.Read())
+            using (SqlDataReader reader = cmd.ExecuteReader())
             {
-                CustomerActivity ca = new CustomerActivity();
-                ca.Customer.CusId = (int)reader[0];
-                ca.Activity.TimeDesc = reader[1].ToString();
-                ca.Points = reader[2].ToString();
-                //a.StartTime = DateTime.Parse(reader[2].ToString());
-                //a.EndTime = DateTime.Parse(reader[3].ToString());
-                cusActivities.Add(ca);
+                while (reader.Read())
+                {
+                    CustomerActivity ca = new CustomerActivity();
+                    ca.Customer.CusId = (int) reader[0];
+                    ca.Activity.TimeDesc = reader[1].ToString();
+                    ca.Points = reader[2].ToString();
+                    //a.StartTime = DateTime.Parse(reader[2].ToString());
+                    //a.EndTime = DateTime.Parse(reader[3].ToString());
+                    cusActivities.Add(ca);
+                }
             }
-            con.Close();
+            ResetDAL();
             return cusActivities;
         }
         public ObservableCollection<Customer> GetCustomers(Booking booking)
         {
             //Made by Eby
-            SqlDataReader reader;
-            cmd.Connection = con;
-            cmd.CommandType = CommandType.Text;
             cmd.Parameters.Add("@bookingId", SqlDbType.NVarChar).Value = booking.flexyId;
-
             cmd.CommandText = "select * from Guests where BookingId = @bookingId";
             ObservableCollection<Customer> customers = new ObservableCollection<Customer>();
             con.Open();
-            reader = cmd.ExecuteReader();
-
-            while (reader.Read())
+            using (SqlDataReader reader = cmd.ExecuteReader())
             {
-                Customer c = new Customer();
-                c.CusId = (int)reader[0];
-                c.BookingId = reader[1].ToString();
-                c.Name = reader[2].ToString(); ;
-                c.Email = reader[3].ToString();
-                c.Segway = reader.GetBoolean(4);
-                c.Subscription = reader.GetBoolean(5);
-                customers.Add(c);
+                while (reader.Read())
+                {
+                    Customer c = new Customer();
+                    c.CusId = (int) reader[0];
+                    c.BookingId = reader[1].ToString();
+                    c.Name = reader[2].ToString();
+                    ;
+                    c.Email = reader[3].ToString();
+                    c.Segway = reader.GetBoolean(4);
+                    c.Subscription = reader.GetBoolean(5);
+                    customers.Add(c);
+                }
             }
-            con.Close();
+            ResetDAL();
             return customers;
         }
         public ObservableCollection<Booking> getBookings()
         {
             //Made by Eby
-            SqlDataReader reader;
-            cmd.Connection = con;
-            cmd.CommandType = CommandType.Text;
             cmd.CommandText = "select * from Bookings";
             ObservableCollection<Booking> bookings = new ObservableCollection<Booking>();
             con.Open();
-            reader = cmd.ExecuteReader();
-
-            while (reader.Read())
+            using (SqlDataReader reader = cmd.ExecuteReader())
             {
-                Booking b = new Booking();
-                b.flexyId = reader[0].ToString(); ;
-                b.name = reader[1].ToString();
-                b.date = reader[5].ToString();
-                bookings.Add(b);
+                while (reader.Read())
+                {
+                    Booking b = new Booking();
+                    b.flexyId = reader[0].ToString();
+                    ;
+                    b.name = reader[1].ToString();
+                    b.date = reader[5].ToString();
+                    bookings.Add(b);
+                }
             }
-            con.Close();
+            ResetDAL();
             return bookings;
         }
 
@@ -283,9 +266,7 @@ namespace Funhall2.Classes
         }
         public void InsertBookingToDb(Booking booking)
         {//Made by Eby
-            cmd.Connection = con;
             con.Open();
-
             cmd.Parameters.Clear();
             if (booking.flexyId != null && booking.name != null && booking.cusTel != null)
             {
@@ -309,7 +290,6 @@ namespace Funhall2.Classes
                 AddParam(cmd, CusComment, "CusComment", SqlDbType.NVarChar);
                 AddParam(cmd, IntComment, "intComment", SqlDbType.NVarChar);
 
-                cmd.CommandType = CommandType.Text;
                 cmd.CommandText = "insert into Bookings (BookingId, Name, CusTel, CusTelAlt, Cusmail, Date, TotalPrice, CusComment, IntComment)" +
                     " values (@BookingId, @Name, @CusTel, @CusTelAlt, @Cusmail, @Date, @TotalPrice, @CusComment, @IntComment)";
                 try
@@ -323,22 +303,19 @@ namespace Funhall2.Classes
 
                 }
             }
-            con.Close();
+            ResetDAL();
         }
         public void InsertBookedActivitiesToDb(Booking booking)
         {
             List<Booking.Time> times = booking.times;
             //Made by Eby
-            cmd.Connection = con;
             con.Open();
 
             foreach (var time in times)
             {
                 if (!time.timeDesc.Equals("#"))
                 {
-
                     cmd.Parameters.Clear();
-
                     string FlexyId = booking.flexyId;
                     string Desc = time.timeDesc;
                     string StartTime = time.start;
@@ -351,7 +328,6 @@ namespace Funhall2.Classes
                     AddParam(cmd, Endtime, "Endtime", SqlDbType.NVarChar);
                     AddParam(cmd, IsFinished, "IsFinished", SqlDbType.Int);
 
-                    cmd.CommandType = CommandType.Text;
                     cmd.CommandText = "insert into BookedActivities(BookingId, TimeDesc, StartTime, Endtime, IsFinished)" +
                                       "values (@BookingId, @Desc, @StartTime, @Endtime, @IsFinished)";
 
@@ -366,12 +342,11 @@ namespace Funhall2.Classes
                     }
                 }
             }
-            con.Close();
+            ResetDAL();
         }
         public void InsertActivityToDb(Booking booking)
         {//Made by Eby
             List<Booking.Time> times = booking.times;
-            cmd.Connection = con;
             con.Open();
 
             foreach (var time in times)
@@ -383,7 +358,6 @@ namespace Funhall2.Classes
                     string Desc = time.timeDesc;
                     AddParam(cmd, Desc, "Desc", SqlDbType.NVarChar);
 
-                    cmd.CommandType = CommandType.Text;
                     cmd.CommandText = "insert into Activities (Description)" +
                                       " values (@Desc)";
                     try
@@ -397,20 +371,18 @@ namespace Funhall2.Classes
                     }
                 }
             }
-            con.Close();
+            ResetDAL();
         }
         public void InsertBookedProductsToDb(Booking booking)
         {
             List<Booking.Product> products = booking.products;
             //Made by Eby
-            cmd.Connection = con;
             con.Open();
 
             foreach (var product in products)
             {
                 if (!product.product.Equals("#"))
                 {
-
                     cmd.Parameters.Clear();
                     string FlexyId = booking.flexyId;
                     string ProductDesc = product.product;
@@ -438,7 +410,7 @@ namespace Funhall2.Classes
                     }
                 }
             }
-            con.Close();
+            ResetDAL();
         }
     }
 }
