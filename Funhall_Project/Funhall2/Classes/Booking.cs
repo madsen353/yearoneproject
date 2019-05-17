@@ -37,10 +37,5 @@ namespace Funhall2
             public string prodPrice { get; set; }
             public string prodTotPrice { get; set; }
         }
-
-        //public override string ToString()
-        //{
-        //    return string.Format($"{name}");
-        //}
-        }
+    }
 }

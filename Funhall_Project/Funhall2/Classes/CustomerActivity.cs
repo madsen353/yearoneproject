@@ -20,6 +20,13 @@ namespace Funhall2.Classes
             Customer = new Customer();
             Activity = new Activity();
         }
+        public CustomerActivity(Customer c, Activity a)
+        {
+            this.Activity = a;
+            this.Customer = c;
+        }
+
+        //Made by Rasmus
         public string Name
         {
             get
@@ -31,10 +38,5 @@ namespace Funhall2.Classes
         {
             return Customer.Name;
         }
-        public CustomerActivity(Customer c, Activity a)
-        {
-            this.Activity = a;
-            this.Customer = c;
-        }
-        }
+    }
 }

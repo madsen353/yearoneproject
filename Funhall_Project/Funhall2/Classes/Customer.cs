@@ -19,7 +19,6 @@ namespace Funhall2.Classes
         public bool Segway { get; set; }
         public int TotalAmountOfPoints { get; set; }
 
-        
         public int GetTotalAmountOfPoints()
         {
             //Made by Rasmus

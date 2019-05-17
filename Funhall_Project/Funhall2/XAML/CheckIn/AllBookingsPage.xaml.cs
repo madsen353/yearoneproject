@@ -20,6 +20,7 @@ namespace Funhall2
     
     public partial class AllBookingsPage : Page
     {
+        DAL dal = new DAL();
         public AllBookingsPage()
         {
             
@@ -38,10 +39,10 @@ namespace Funhall2
             
             foreach (var booking in _bookings)
             {
-                DAL.InsertBookingToDb(booking);
-                DAL.InsertBookedActivitiesToDb(booking);
-                DAL.InsertActivityToDb(booking);
-                DAL.InsertBookedProductsToDb(booking);
+                dal.InsertBookingToDb(booking);
+                dal.InsertBookedActivitiesToDb(booking);
+                dal.InsertActivityToDb(booking);
+                dal.InsertBookedProductsToDb(booking);
                 
             }
 
@@ -52,7 +53,7 @@ namespace Funhall2
             DataContext = this;
 
             //ListBox Solution:
-            ObservableCollection<Booking> bookings = DAL.getBookings();
+            ObservableCollection<Booking> bookings = dal.getBookings();
             listBox.ItemsSource = bookings;
             }
 

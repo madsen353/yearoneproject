@@ -18,12 +18,5 @@ namespace Funhall2
         public DateTime StartTime { get; set; }
         public DateTime EndTime { get; set; }
         public int IsFinished { get; set; }
-
-        public static ObservableCollection<Activity> getBookedActivities(Booking booking)
-        {
-            //Made by Rasmus
-            ObservableCollection<Activity> activities = DAL.getBookedActivities(booking);
-            return activities;
-        }
     }
 }

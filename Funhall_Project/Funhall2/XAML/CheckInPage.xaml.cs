@@ -25,8 +25,6 @@ namespace Funhall2
         {
             InitializeComponent();
         }
-       
-
 
         private void checkIn_Click(object sender, RoutedEventArgs e)
         {

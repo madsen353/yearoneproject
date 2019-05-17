@@ -22,11 +22,12 @@ namespace Funhall2.XAML.PointSystem
     /// </summary>
     public partial class ChooseYourBooking : Page
     {
+        DAL dal = new DAL();
         public ChooseYourBooking()
         {
             //Made by Rasmus
             InitializeComponent();
-            ObservableCollection<Booking> bookings = DAL.getBookings();
+            ObservableCollection<Booking> bookings = dal.getBookings();
             listBox.ItemsSource = bookings;
         }
 

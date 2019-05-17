@@ -12,27 +12,9 @@ namespace Funhall2.Classes
 {
     public class DAL
     {
-        //REFACTOR THIS!!
-        public static void AddParam(SqlCommand cmd, object value, string name, SqlDbType sqlDbType)
-        {
-            //Made by Eby
-            SqlParameter parameter = new SqlParameter();
-            parameter.ParameterName = "@" + name;
-            if (value != null)
-            {
-                parameter.Value = value;
-            }
-            else
-            {
-                parameter.Value = DBNull.Value;
-            }
-            parameter.SqlDbType = sqlDbType;
-            parameter.Size = 255;
-            cmd.Parameters.Add(parameter);
-        }
-
         //Made by Rasmus
-        SqlConnection con = new SqlConnection("Data Source=.;Initial Catalog=FunHall;" + "Integrated Security=true;");
+        private SqlConnection con = new SqlConnection("Data Source=.;Initial Catalog=FunHall;" + "Integrated Security=true;");
+        private SqlCommand cmd;
         private SqlParameter CreateParam(string name, object value, SqlDbType type)
         {
             //Made by Rasmus
@@ -40,54 +22,35 @@ namespace Funhall2.Classes
             param.Value = value;
             return param;
         }
+
+        //Made by Rasmus
         public void UpdateCusActivity(int id, string points, string activityName)
         {
             //Made by Rasmus
             con.Open();
-            SqlCommand command = new SqlCommand("UPDATE GuestActivities SET Points = @Points WHERE GuestID = @ID AND TimeDesc = @ActivityName", con);
-            command.Parameters.Add(CreateParam("@ID", id, SqlDbType.NVarChar));
-            command.Parameters.Add(CreateParam("@Points", points, SqlDbType.NVarChar));
-            command.Parameters.Add(CreateParam("@ActivityName", activityName, SqlDbType.NVarChar));
-            command.ExecuteNonQuery();
+            cmd.Connection = con;
+            cmd.CommandText = "UPDATE GuestActivities SET Points = @Points WHERE GuestID = @ID AND TimeDesc = @ActivityName";
+            cmd.Parameters.Add(CreateParam("@ID", id, SqlDbType.NVarChar));
+            cmd.Parameters.Add(CreateParam("@Points", points, SqlDbType.NVarChar));
+            cmd.Parameters.Add(CreateParam("@ActivityName", activityName, SqlDbType.NVarChar));
+            cmd.ExecuteNonQuery();
             con.Close();
         }
         public void EndActivity(string id, int isFinished, string activityName)
         {
             //Made by Rasmus
             con.Open();
-            SqlCommand command = new SqlCommand("UPDATE BookedActivities SET IsFinished = @IsFinished WHERE BookingId = @ID AND TimeDesc = @ActivityName", con);
-            command.Parameters.Add(CreateParam("@ID", id, SqlDbType.NVarChar));
-            command.Parameters.Add(CreateParam("@IsFinished", isFinished, SqlDbType.Int));
-            command.Parameters.Add(CreateParam("@ActivityName", activityName, SqlDbType.NVarChar));
-            command.ExecuteNonQuery();
+            cmd.Connection = con;
+            cmd.CommandText = "UPDATE BookedActivities SET IsFinished = @IsFinished WHERE BookingId = @ID AND TimeDesc = @ActivityName";
+            cmd.Parameters.Add(CreateParam("@ID", id, SqlDbType.NVarChar));
+            cmd.Parameters.Add(CreateParam("@IsFinished", isFinished, SqlDbType.Int));
+            cmd.Parameters.Add(CreateParam("@ActivityName", activityName, SqlDbType.NVarChar));
+            cmd.ExecuteNonQuery();
             con.Close();
         }
-
-        public string GetBookingIDFromGuestID(string id)
+        public CustomerActivity GetCusActivitySpecifiedByActivity(Customer cus, Activity act)
         {
             //Made by Rasmus
-            string bookingId = "";
-        SqlCommand command = new SqlCommand("select BookingId FROM Guests WHERE GuestId='@ID', con");
-        command.CommandType = CommandType.Text;
-        SqlDataReader reader;
-        command.Connection = con;
-        command.Parameters.Add(CreateParam("@ID", id, SqlDbType.NVarChar));
-        con.Open();
-        reader = command.ExecuteReader();
-        while (reader.Read())
-        {
-            bookingId = reader[0].ToString();
-        }
-        con.Close();
-        return bookingId;
-        }
-
-        public CustomerActivity getCusActivitySpecifiedByActivity(Customer cus, Activity act)
-        {
-            //Made by Rasmus
-            SqlConnection con = new SqlConnection("Data Source=.;Initial Catalog=FunHall;"
-                                                  + "Integrated Security=true;");
-            SqlCommand cmd = new SqlCommand();
             SqlDataReader reader;
             cmd.Connection = con;
             cmd.CommandType = CommandType.Text;
@@ -117,9 +80,6 @@ namespace Funhall2.Classes
         public List<int> GetTotalAmountOfPoints(int guestID)
         {
             //Made by Rasmus
-            SqlConnection con = new SqlConnection("Data Source=.;Initial Catalog=FunHall;"
-                                                  + "Integrated Security=true;");
-            SqlCommand cmd = new SqlCommand();
             SqlDataReader reader;
             cmd.Connection = con;
             cmd.CommandType = CommandType.Text;
@@ -142,12 +102,9 @@ namespace Funhall2.Classes
             return allPoints;
         }
 
-        public static ObservableCollection<Activity> getBookedActivities(Booking booking)
+        public ObservableCollection<Activity> GetBookedActivities(Booking booking)
         {
             //Made by Eby
-            SqlConnection con = new SqlConnection("Data Source=.;Initial Catalog=FunHall;"
-                                                  + "Integrated Security=true;");
-            SqlCommand cmd = new SqlCommand();
             SqlDataReader reader;
             cmd.Connection = con;
             cmd.CommandType = CommandType.Text;
@@ -171,12 +128,161 @@ namespace Funhall2.Classes
             con.Close();
             return activities;
         }
+        public void CheckInCus(Customer cus)
+        {
+            //Made by Eby
+            cmd.Connection = con;
+            cmd.CommandType = System.Data.CommandType.Text;
+            cmd.CommandText = "insert into Guests (BookingId, Name, Email, AgreeTerms, Subscription) values " +
+                              "(@BookingId, @Name, @Email, @AgreeTerms, @Subscription)";
 
-        public static void InsertBookingToDb(Booking booking)
+            cmd.Parameters.Add("@BookingId", SqlDbType.NVarChar).Value = cus.BookingId;
+            cmd.Parameters.Add("@Name", SqlDbType.NVarChar).Value = cus.Name;
+            cmd.Parameters.Add("@Email", SqlDbType.NVarChar).Value = cus.Email;
+            cmd.Parameters.Add("@AgreeTerms", SqlDbType.Bit).Value = cus.Segway;
+            cmd.Parameters.Add("@Subscription", SqlDbType.Bit).Value = cus.Subscription;
+
+            con.Open();
+            cmd.ExecuteNonQuery();
+            con.Close();
+        }
+
+        public void UpdateCus(Customer cus)
+        {
+            //Made by Eby
+            cmd.Connection = con;
+            cmd.CommandType = System.Data.CommandType.Text;
+            cmd.CommandText = "Update Guests set  Name=@Name, Email=@Email, AgreeTerms=@AgreeTerms," +
+                              "Subscription=@Subscription";
+
+            cmd.Parameters.Add("@Name", SqlDbType.NVarChar).Value = cus.Name;
+            cmd.Parameters.Add("@Email", SqlDbType.NVarChar).Value = cus.Email;
+            cmd.Parameters.Add("@AgreeTerms", SqlDbType.Bit).Value = cus.Segway;
+            cmd.Parameters.Add("@Subscription", SqlDbType.Bit).Value = cus.Subscription;
+
+            con.Open();
+            cmd.ExecuteNonQuery();
+            con.Close();
+        }
+        public void AddActivities(Customer cus)
+        {
+            //Made by Eby
+            cmd.Connection = con;
+            cmd.CommandType = CommandType.Text;
+            cmd.Parameters.Add("@Email", SqlDbType.NVarChar).Value = cus.Email;
+            //cmd.Parameters.Add("@BookingId", SqlDbType.NVarChar).Value = cus.BookingId;       
+
+            cmd.CommandText = "set IDENTITY_INSERT GuestActivities ON " +
+                              "INSERT INTO GuestActivities (GuestId, TimeDesc, Points) " +
+                              "SELECT  g.GuestId, b.TimeDesc, '0'" +
+                              "FROM BookedActivities b  " +
+                              "inner JOIN Guests g on  g.BookingId = b.BookingId " +
+                              "where g.Email=@Email";
+            con.Open();
+            cmd.ExecuteNonQuery();
+            con.Close();
+
+        }
+        public ObservableCollection<CustomerActivity> GetCusActivities(Customer cus)
+        {
+            //Made by Eby
+            SqlDataReader reader;
+            cmd.Connection = con;
+            cmd.CommandType = CommandType.Text;
+            cmd.Parameters.Add("@Id", SqlDbType.NVarChar).Value = cus.CusId;
+
+            cmd.CommandText = "select ga.GuestId, ga.TimeDesc, ga.Points from GuestActivities ga " +
+                              "where ga.GuestId=@Id";
+            ObservableCollection<CustomerActivity> cusActivities = new ObservableCollection<CustomerActivity>();
+            con.Open();
+            reader = cmd.ExecuteReader();
+            while (reader.Read())
+            {
+                CustomerActivity ca = new CustomerActivity();
+                ca.Customer.CusId = (int)reader[0];
+                ca.Activity.TimeDesc = reader[1].ToString();
+                ca.Points = reader[2].ToString();
+                //a.StartTime = DateTime.Parse(reader[2].ToString());
+                //a.EndTime = DateTime.Parse(reader[3].ToString());
+                cusActivities.Add(ca);
+            }
+            con.Close();
+            return cusActivities;
+        }
+        public ObservableCollection<Customer> GetCustomers(Booking booking)
+        {
+            //Made by Eby
+            SqlDataReader reader;
+            cmd.Connection = con;
+            cmd.CommandType = CommandType.Text;
+            cmd.Parameters.Add("@bookingId", SqlDbType.NVarChar).Value = booking.flexyId;
+
+            cmd.CommandText = "select * from Guests where BookingId = @bookingId";
+            ObservableCollection<Customer> customers = new ObservableCollection<Customer>();
+            con.Open();
+            reader = cmd.ExecuteReader();
+
+            while (reader.Read())
+            {
+                Customer c = new Customer();
+                c.CusId = (int)reader[0];
+                c.BookingId = reader[1].ToString();
+                c.Name = reader[2].ToString(); ;
+                c.Email = reader[3].ToString();
+                c.Segway = reader.GetBoolean(4);
+                c.Subscription = reader.GetBoolean(5);
+                customers.Add(c);
+            }
+            con.Close();
+            return customers;
+        }
+        public ObservableCollection<Booking> getBookings()
+        {
+            //Made by Eby
+            SqlDataReader reader;
+            cmd.Connection = con;
+            cmd.CommandType = CommandType.Text;
+            cmd.CommandText = "select * from Bookings";
+            ObservableCollection<Booking> bookings = new ObservableCollection<Booking>();
+            con.Open();
+            reader = cmd.ExecuteReader();
+
+            while (reader.Read())
+            {
+                Booking b = new Booking();
+                b.flexyId = reader[0].ToString(); ;
+                b.name = reader[1].ToString();
+                b.date = reader[5].ToString();
+                bookings.Add(b);
+            }
+            con.Close();
+            return bookings;
+        }
+
+
+
+        //REFACTOR THOSE UNDERNEATH
+        // All uses the ADDPARAM method.
+
+        public static void AddParam(SqlCommand cmd, object value, string name, SqlDbType sqlDbType)
+        {
+            //Made by Eby
+            SqlParameter parameter = new SqlParameter();
+            parameter.ParameterName = "@" + name;
+            if (value != null)
+            {
+                parameter.Value = value;
+            }
+            else
+            {
+                parameter.Value = DBNull.Value;
+            }
+            parameter.SqlDbType = sqlDbType;
+            parameter.Size = 255;
+            cmd.Parameters.Add(parameter);
+        }
+        public void InsertBookingToDb(Booking booking)
         {//Made by Eby
-            SqlConnection con = new SqlConnection("Data Source=.;Initial Catalog=FunHall;"
-                                + "Integrated Security=true;");
-            SqlCommand cmd = new SqlCommand();
             cmd.Connection = con;
             con.Open();
 
@@ -219,14 +325,10 @@ namespace Funhall2.Classes
             }
             con.Close();
         }
-
-        public static void InsertBookedActivitiesToDb(Booking booking)
+        public void InsertBookedActivitiesToDb(Booking booking)
         {
             List<Booking.Time> times = booking.times;
             //Made by Eby
-            SqlConnection con = new SqlConnection("Data Source=.;Initial Catalog=FunHall;"
-                                                  + "Integrated Security=true;");
-            SqlCommand cmd = new SqlCommand();
             cmd.Connection = con;
             con.Open();
 
@@ -266,12 +368,9 @@ namespace Funhall2.Classes
             }
             con.Close();
         }
-        public static void InsertActivityToDb(Booking booking)
+        public void InsertActivityToDb(Booking booking)
         {//Made by Eby
             List<Booking.Time> times = booking.times;
-            SqlConnection con = new SqlConnection("Data Source=.;Initial Catalog=FunHall;"
-                                                  + "Integrated Security=true;");
-            SqlCommand cmd = new SqlCommand();
             cmd.Connection = con;
             con.Open();
 
@@ -300,13 +399,10 @@ namespace Funhall2.Classes
             }
             con.Close();
         }
-        public static void InsertBookedProductsToDb(Booking booking)
+        public void InsertBookedProductsToDb(Booking booking)
         {
             List<Booking.Product> products = booking.products;
             //Made by Eby
-            SqlConnection con = new SqlConnection("Data Source=.;Initial Catalog=FunHall;"
-                                                  + "Integrated Security=true;");
-            SqlCommand cmd = new SqlCommand();
             cmd.Connection = con;
             con.Open();
 
@@ -342,163 +438,7 @@ namespace Funhall2.Classes
                     }
                 }
             }
-
             con.Close();
         }
-
-        public static void CheckInCus(Customer cus)
-        {
-            //Made by Eby
-            SqlConnection con = new SqlConnection("Data Source=.;Initial Catalog=FunHall;"
-                                                  + "Integrated Security=true;");
-            SqlCommand cmd = new SqlCommand();
-            cmd.Connection = con;
-            cmd.CommandType = System.Data.CommandType.Text;
-            cmd.CommandText = "insert into Guests (BookingId, Name, Email, AgreeTerms, Subscription) values " +
-                              "(@BookingId, @Name, @Email, @AgreeTerms, @Subscription)";
-
-            cmd.Parameters.Add("@BookingId", SqlDbType.NVarChar).Value = cus.BookingId;
-            cmd.Parameters.Add("@Name", SqlDbType.NVarChar).Value = cus.Name;
-            cmd.Parameters.Add("@Email", SqlDbType.NVarChar).Value = cus.Email;
-            cmd.Parameters.Add("@AgreeTerms", SqlDbType.Bit).Value = cus.Segway;
-            cmd.Parameters.Add("@Subscription", SqlDbType.Bit).Value = cus.Subscription;
-
-            con.Open();
-            cmd.ExecuteNonQuery();
-            con.Close();
-        }
-
-        public static void UpdateCus(Customer cus)
-        {
-            //Made by Eby
-            SqlConnection con = new SqlConnection("Data Source=.;Initial Catalog=FunHall;"
-                                                  + "Integrated Security=true;");
-            SqlCommand cmd = new SqlCommand();
-            cmd.Connection = con;
-            cmd.CommandType = System.Data.CommandType.Text;
-            cmd.CommandText = "Update Guests set  Name=@Name, Email=@Email, AgreeTerms=@AgreeTerms," +
-                              "Subscription=@Subscription";
-
-            cmd.Parameters.Add("@Name", SqlDbType.NVarChar).Value = cus.Name;
-            cmd.Parameters.Add("@Email", SqlDbType.NVarChar).Value = cus.Email;
-            cmd.Parameters.Add("@AgreeTerms", SqlDbType.Bit).Value = cus.Segway;
-            cmd.Parameters.Add("@Subscription", SqlDbType.Bit).Value = cus.Subscription;
-
-            con.Open();
-            cmd.ExecuteNonQuery();
-            con.Close();
-        }
-        public static void AddActivities(Customer cus)
-        {
-            //Made by Eby
-            SqlConnection con = new SqlConnection("Data Source=.;Initial Catalog=FunHall;"
-                                                  + "Integrated Security=true;");
-            SqlCommand cmd = new SqlCommand();
-            cmd.Connection = con;
-            cmd.CommandType = CommandType.Text;
-
-            cmd.Parameters.Add("@Email", SqlDbType.NVarChar).Value = cus.Email;
-            //cmd.Parameters.Add("@BookingId", SqlDbType.NVarChar).Value = cus.BookingId;       
-
-            cmd.CommandText = "set IDENTITY_INSERT GuestActivities ON " +
-                              "INSERT INTO GuestActivities (GuestId, TimeDesc, Points) " +
-                              "SELECT  g.GuestId, b.TimeDesc, '0'" +
-                              "FROM BookedActivities b  " +
-                              "inner JOIN Guests g on  g.BookingId = b.BookingId " +
-                              "where g.Email=@Email";
-
-            con.Open();
-            cmd.ExecuteNonQuery();
-            con.Close();
-
-        }
-        public static ObservableCollection<CustomerActivity> getCusActivities(Customer cus)
-        {
-            //Made by Eby
-            SqlConnection con = new SqlConnection("Data Source=.;Initial Catalog=FunHall;"
-                                                  + "Integrated Security=true;");
-            SqlCommand cmd = new SqlCommand();
-            SqlDataReader reader;
-            cmd.Connection = con;
-            cmd.CommandType = CommandType.Text;
-            cmd.Parameters.Add("@Id", SqlDbType.NVarChar).Value = cus.CusId;
-
-            cmd.CommandText = "select ga.GuestId, ga.TimeDesc, ga.Points from GuestActivities ga " +
-                              "where ga.GuestId=@Id";
-            ObservableCollection<CustomerActivity> cusActivities = new ObservableCollection<CustomerActivity>();
-            con.Open();
-            reader = cmd.ExecuteReader();
-
-            while (reader.Read())
-            {
-                CustomerActivity ca = new CustomerActivity();
-
-
-                ca.Customer.CusId = (int)reader[0];
-                ca.Activity.TimeDesc = reader[1].ToString();
-                ca.Points = reader[2].ToString();
-                //a.StartTime = DateTime.Parse(reader[2].ToString());
-                //a.EndTime = DateTime.Parse(reader[3].ToString());
-                cusActivities.Add(ca);
-            }
-            con.Close();
-            return cusActivities;
-        }
-        public static ObservableCollection<Customer> GetCustomers(Booking booking)
-        {
-            //Made by Eby
-            SqlConnection con = new SqlConnection("Data Source=.;Initial Catalog=FunHall;"
-                                                  + "Integrated Security=true;");
-            SqlCommand cmd = new SqlCommand();
-            SqlDataReader reader;
-            cmd.Connection = con;
-            cmd.CommandType = CommandType.Text;
-            cmd.Parameters.Add("@bookingId", SqlDbType.NVarChar).Value = booking.flexyId;
-
-            cmd.CommandText = "select * from Guests where BookingId = @bookingId";
-            ObservableCollection<Customer> customers = new ObservableCollection<Customer>();
-            con.Open();
-            reader = cmd.ExecuteReader();
-
-            while (reader.Read())
-            {
-                Customer c = new Customer();
-                c.CusId = (int)reader[0];
-                c.BookingId = reader[1].ToString();
-                c.Name = reader[2].ToString(); ;
-                c.Email = reader[3].ToString();
-                c.Segway = reader.GetBoolean(4);
-                c.Subscription = reader.GetBoolean(5);
-                customers.Add(c);
-            }
-            con.Close();
-            return customers;
-        }
-        public static ObservableCollection<Booking> getBookings()
-        {
-            //Made by Eby
-            SqlConnection con = new SqlConnection("Data Source=.;Initial Catalog=FunHall;"
-                                                  + "Integrated Security=true;");
-            SqlCommand cmd = new SqlCommand();
-            SqlDataReader reader;
-            cmd.Connection = con;
-            cmd.CommandType = CommandType.Text;
-            cmd.CommandText = "select * from Bookings";
-            ObservableCollection<Booking> bookings = new ObservableCollection<Booking>();
-            con.Open();
-            reader = cmd.ExecuteReader();
-
-            while (reader.Read())
-            {
-                Booking b = new Booking();
-                b.flexyId = reader[0].ToString(); ;
-                b.name = reader[1].ToString();
-                b.date = reader[5].ToString();
-                bookings.Add(b);
-            }
-            con.Close();
-            return bookings;
-        }
-
     }
 }

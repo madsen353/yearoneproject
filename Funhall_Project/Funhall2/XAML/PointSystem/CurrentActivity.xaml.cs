@@ -39,7 +39,7 @@ namespace Funhall2.XAML.PointSystem
             foreach (Customer guest in guests)
             {
 
-                elementsToShow.Add(dal.getCusActivitySpecifiedByActivity(guests[cI], activity));
+                elementsToShow.Add(dal.GetCusActivitySpecifiedByActivity(guests[cI], activity));
                 cI++;
             }
 

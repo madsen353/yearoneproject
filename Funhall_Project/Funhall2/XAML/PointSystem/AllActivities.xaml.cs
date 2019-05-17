@@ -24,6 +24,7 @@ namespace Funhall2.XAML.PointSystem
     /// //Made by Rasmus
     public partial class AllActivities : Page
     {
+        DAL dal = new DAL();
         public Booking Booking { get; set; }
         public AllActivities(Booking booking)
         {
@@ -32,7 +33,7 @@ namespace Funhall2.XAML.PointSystem
             InitializeComponent();
             this.DataContext = Booking;
 
-            ObservableCollection<Activity> activities = Activity.getBookedActivities(Booking);
+            ObservableCollection<Activity> activities = dal.GetBookedActivities(Booking);
             ObservableCollection<Activity> activitiesToShow = new ObservableCollection<Activity>();
             int i = 0;
             foreach (Activity activity in activities)

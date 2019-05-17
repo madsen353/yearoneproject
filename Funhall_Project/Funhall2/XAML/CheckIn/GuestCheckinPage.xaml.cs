@@ -31,6 +31,7 @@ namespace Funhall2
 
         private void AddGuestToDb(object sender, RoutedEventArgs e)
         {
+            DAL dal = new DAL();
             //Made by Eby
             Customer cus = new Customer();
             cus.BookingId = Booking.flexyId;
@@ -46,8 +47,8 @@ namespace Funhall2
             else
                 cus.Segway = false;
 
-            DAL.CheckInCus(cus);
-            DAL.AddActivities(cus);
+            dal.CheckInCus(cus);
+            dal.AddActivities(cus);
             AllBookingsPage AllBookings = new AllBookingsPage();
             this.NavigationService.Navigate(AllBookings);
 

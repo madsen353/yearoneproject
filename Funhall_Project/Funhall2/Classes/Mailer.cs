@@ -40,8 +40,9 @@ namespace Funhall2.Classes
         public void SendDiplomaEmails(Booking booking)
         {
             //Made by Rasmus
+            DAL dal = new DAL();
             SmtpClient client = MakeClient();
-            ObservableCollection<Customer> recipients = Customer.GetCustomers(booking);
+            ObservableCollection<Customer> recipients = dal.GetCustomers(booking);
             int i = 0;
             foreach (Customer guest in recipients)
             {

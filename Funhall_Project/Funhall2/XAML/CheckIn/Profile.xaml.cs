@@ -19,6 +19,7 @@ namespace Funhall2
 {
     public partial class Profile : Page
     {
+        DAL dal = new DAL();
         public Customer Customer { get; set; }
         public Booking Booking { get; set; }
         public Profile(Customer cus, Booking b)
@@ -29,12 +30,13 @@ namespace Funhall2
             n.Text = Booking.name;
             this.DataContext = Customer;            
             //ObservableCollection<Activity> activities = Activity.getBookedActivities(b);
-            ObservableCollection<CustomerActivity> CusActivities = DAL.getCusActivities(cus);
+            ObservableCollection<CustomerActivity> CusActivities = dal.GetCusActivities(cus);
             Activities.ItemsSource = CusActivities;
         }
 
         private void UpdateGuestData(object sender, RoutedEventArgs e)
         {
+            
             Customer cus = new Customer();
             //cus.Name = Name.Text;
             //cus.Email = Email.Text;
@@ -50,7 +52,7 @@ namespace Funhall2
 
             try
             {
-                DAL.UpdateCus(cus);
+                dal.UpdateCus(cus);
                 MessageBox.Show("Data er redegeret");
             }
             catch (Exception)
