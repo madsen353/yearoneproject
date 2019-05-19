@@ -34,14 +34,12 @@ namespace Funhall2.XAML.PointSystem
             this.DataContext = Booking;
             ObservableCollection<Activity> activities = dal.GetBookedActivities(Booking);
             ObservableCollection<Activity> activitiesToShow = new ObservableCollection<Activity>();
-            int i = 0;
             foreach (Activity activity in activities)
             {
-                if (activities[i].IsFinished == 0)
+                if (activity.IsFinished == 0)
                 {
-                    activitiesToShow.Add(activities[i]);
+                    activitiesToShow.Add(activity);
                 }
-                i++;
             }
             Activities.ItemsSource = activitiesToShow;
             }

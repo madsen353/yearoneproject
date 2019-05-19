@@ -35,11 +35,9 @@ namespace Funhall2.XAML.PointSystem
             InitializeComponent();
             ObservableCollection<Customer> guests = dal.GetCustomers(b);
             ObservableCollection<CustomerActivity> elementsToShow = new ObservableCollection<CustomerActivity>();
-            int cI = 0;
             foreach (Customer guest in guests)
             {
-                elementsToShow.Add(dal.GetCusActivitySpecifiedByActivity(guests[cI], activity));
-                cI++;
+                elementsToShow.Add(dal.GetCusActivitySpecifiedByActivity(guest, activity));
             }
             Guests.ItemsSource = elementsToShow;
         }

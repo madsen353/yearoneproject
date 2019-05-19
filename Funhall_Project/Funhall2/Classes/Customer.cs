@@ -4,6 +4,7 @@ using System.Collections.ObjectModel;
 using System.Data;
 using System.Data.SqlClient;
 using System.Linq;
+using System.Security.Permissions;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -27,11 +28,9 @@ namespace Funhall2.Classes
             List<int> pointsFromEvents = new List<int>();
             DAL dal = new DAL();
             pointsFromEvents = dal.GetTotalAmountOfPoints(guestId);
-            int i = 0;
             foreach (int point in pointsFromEvents)
             {
-                totalAmountOfPoints += pointsFromEvents[i];
-                i++;
+                totalAmountOfPoints += point;
             }
             return totalAmountOfPoints;
         }

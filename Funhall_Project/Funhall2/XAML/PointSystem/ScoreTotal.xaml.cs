@@ -32,12 +32,6 @@ namespace Funhall2.XAML.PointSystem
             booking = b;
             InitializeComponent();
             ObservableCollection<Customer> elementsToShow = dal.GetCustomers(b);
-            int i = 0;
-            foreach (Customer guest in elementsToShow)
-            {
-                elementsToShow[i].TotalAmountOfPoints = elementsToShow[i].GetTotalAmountOfPoints();
-                i++;
-            }
             Guests.ItemsSource = elementsToShow;
             }
 

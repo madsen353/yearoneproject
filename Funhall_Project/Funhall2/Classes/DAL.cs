@@ -214,6 +214,7 @@ namespace Funhall2.Classes
                     c.Email = reader[3].ToString();
                     c.Segway = reader.GetBoolean(4);
                     c.Subscription = reader.GetBoolean(5);
+                    c.TotalAmountOfPoints = c.GetTotalAmountOfPoints();
                     customers.Add(c);
                 }
             }
