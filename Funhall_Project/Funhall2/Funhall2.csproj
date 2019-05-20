@@ -84,6 +84,7 @@
     <Compile Include="Classes\Customer.cs" />
     <Compile Include="Classes\CustomerActivity.cs" />
     <Compile Include="Classes\DAL.cs" />
+    <Compile Include="Classes\DiplomaMaker.cs" />
     <Compile Include="Classes\Mailer.cs" />
     <Compile Include="Classes\RemoteServer.cs" />
     <Compile Include="XAML\CheckIn\GuestCheckinPage.xaml.cs">
