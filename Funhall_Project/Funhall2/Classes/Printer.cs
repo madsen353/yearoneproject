@@ -10,8 +10,10 @@ namespace Funhall2.Classes
 {
     public class Printer
     {
+        //Made by Rasmus
         public static void Print(string fileLocation)
         {
+            //Made by Rasmus
             Process p = new Process();
             p.StartInfo = new ProcessStartInfo()
             {
