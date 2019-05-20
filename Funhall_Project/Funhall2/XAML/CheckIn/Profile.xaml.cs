@@ -38,17 +38,18 @@ namespace Funhall2
         {
             
             Customer cus = new Customer();
-            //cus.Name = Name.Text;
-            //cus.Email = Email.Text;
-            //if (Subscription.IsChecked == true)
-            //    cus.Subscription = true;
-            //else
-            //    cus.Subscription = false;
+            cus.CusId = Customer.CusId;
+            cus.Name = Name.Text;
+            cus.Email = Email.Text;
+            if (Subscription.IsChecked == true)
+                cus.Subscription = true;
+            else
+                cus.Subscription = false;
 
-            //if (Segway.IsChecked == true)
-            //    cus.Segway = true;
-            //else
-            //    cus.Segway = false;
+            if (Segway.IsChecked == true)
+                cus.Segway = true;
+            else
+                cus.Segway = false;
 
             try
             {
@@ -61,9 +62,16 @@ namespace Funhall2
             }
             finally
             {
-                CheckInPage page = new CheckInPage();
+                Profile page = new Profile(Customer,Booking);
                 this.NavigationService.Navigate(page);
             }     
+        }
+
+        private void Back_Button(object sender, RoutedEventArgs e)
+        {
+            SelectedBookingPage page = new SelectedBookingPage(Booking);
+            this.NavigationService.Navigate(page);
+
         }
     }
 }

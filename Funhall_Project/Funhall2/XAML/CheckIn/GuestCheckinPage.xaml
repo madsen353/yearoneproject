@@ -17,8 +17,8 @@
         <Grid.ColumnDefinitions>
             <ColumnDefinition/>
         </Grid.ColumnDefinitions>
-        <Label Content="Group:" HorizontalAlignment="Left" Margin="58,0,0,43" VerticalAlignment="Bottom" FontWeight="Bold" FontSize="14" Height="28" Width="55" Grid.Row="0"/>
-        <TextBlock Name="n" HorizontalAlignment="Left" Margin="188,0,0,43" TextWrapping="Wrap" Height="16" VerticalAlignment="Bottom" Width="100"/>
+        <Label Content="Group:" HorizontalAlignment="Left" Margin="58,0,0,25" VerticalAlignment="Bottom" FontWeight="Bold" FontSize="14" Height="28" Width="55" Grid.Row="0"/>
+        <TextBlock Name="n" HorizontalAlignment="Left" Margin="188,0,0,29" TextWrapping="Wrap" Height="16" VerticalAlignment="Bottom" Width="100"/>
         <Label Content="Check-in Form" HorizontalAlignment="Left" Margin="58,0,0,292" Grid.Row="1" VerticalAlignment="Bottom" Height="29" Width="300" FontWeight="Bold" FontSize="14"/>
         <Grid Grid.Row="1" Margin="10,55,0,0">
             <Grid.ColumnDefinitions>
@@ -44,6 +44,7 @@
             <Button Content="Submit" HorizontalAlignment="Left" Margin="108,81.667,0,-6" VerticalAlignment="Top" Width="75" Height="27"  Grid.Column="1" Grid.Row="3" Click="AddGuestToDb" />
 
         </Grid>
+        <Button Content="Tilbage" HorizontalAlignment="Left" Margin="64,16,0,0" VerticalAlignment="Top" Width="75" Click="Back_Button"/>
     </Grid>
 
 </Page>

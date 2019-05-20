@@ -5,8 +5,8 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Funhall2"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
+        Title="MainWindow"  Height="450" Width="800">
     <Grid>
-        <Frame x:Name="NewPage" Grid.ColumnSpan="3" Margin="0,0,-0.4,0" Grid.RowSpan="3" />
+        <Frame x:Name="NewPage" Grid.ColumnSpan="3" NavigationUIVisibility="Hidden" Margin="0,0,-0.4,0" Grid.RowSpan="3" />
     </Grid>
 </Window>

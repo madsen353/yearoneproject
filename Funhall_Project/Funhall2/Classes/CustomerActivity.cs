@@ -22,6 +22,8 @@ namespace Funhall2.Classes
         }
         public CustomerActivity(Customer c, Activity a)
         {
+            //Made by Rasmus
+
             this.Activity = a;
             this.Customer = c;
         }

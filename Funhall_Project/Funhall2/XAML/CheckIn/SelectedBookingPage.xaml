@@ -18,12 +18,12 @@
             <RowDefinition Height="158*"/>
             <RowDefinition Height="177*"/>
         </Grid.RowDefinitions>
-        <Button Content="Tilbage" Grid.Row="0" HorizontalAlignment="Left" Margin="74,9,0,0" VerticalAlignment="Top" Width="75" Height="21" RenderTransformOrigin="0.503,-0.604"/>
+        <Button Content="Tilbage" Grid.Row="0" HorizontalAlignment="Left" Margin="74,9,0,0" VerticalAlignment="Top" Width="75" Height="21" RenderTransformOrigin="0.503,-0.604" Click="Back_Button" />
         <Grid Grid.Row="1" Margin="0,9.333,0,1.667">
-            <Label Content="Navn:" HorizontalAlignment="Center" Margin="20,11,734,0" VerticalAlignment="Top"  Height="26" Width="60" Grid.Column="0" FontWeight="Bold" FontSize="14"/>
-            <Label Content="Dato:" HorizontalAlignment="Center" Margin="411,11,329,0" VerticalAlignment="Top"  Height="26" Width="60" FontWeight="Bold" FontSize="14"/>
+            <Label Content="Group:" HorizontalAlignment="Left" Margin="21,11,0,0" VerticalAlignment="Top"  Height="Auto" Width="Auto" Grid.Column="0" FontWeight="Bold" FontSize="14"/>
+            <Label Content="Dato:" HorizontalAlignment="Left" Margin="413,11,327,0" VerticalAlignment="Top"  Height="Auto" Width="Auto" FontWeight="Bold" FontSize="14"/>
 
-            <TextBlock Name="n" Text="{Binding name}"  Margin="132,16,0,0" HorizontalAlignment="Left" TextWrapping="Wrap"  VerticalAlignment="Top" Width="200" Height="27" FontSize="14"/>
+            <TextBlock Name="n" Text="{Binding name}"  Margin="152,16,0,0" HorizontalAlignment="Left" TextWrapping="Wrap"  VerticalAlignment="Top" Width="Auto" Height="Auto" FontSize="14"/>
             <TextBlock Name="d" Text="{Binding date}" HorizontalAlignment="Left" Margin="591,19,0,0" Width="166" Height="18" VerticalAlignment="Top" FontSize="14"/>
         </Grid>
 

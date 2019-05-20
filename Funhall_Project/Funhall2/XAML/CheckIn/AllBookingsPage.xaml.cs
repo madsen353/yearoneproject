@@ -64,22 +64,40 @@ namespace Funhall2
             this.NavigationService.Navigate(checkIn);
         }
 
-       
+
 
         private void ShowSelectedBooking(object sender, RoutedEventArgs e)
         {
             //Made by Eby
             Booking b = listBox.SelectedItem as Booking;
-            SelectedBookingPage page = new SelectedBookingPage(b);
-            this.NavigationService.Navigate(page);
+            if (b != null)
+            {
+                SelectedBookingPage page = new SelectedBookingPage(b);
+                this.NavigationService.Navigate(page); this.NavigationService.Navigate(page);
+
+            }
+            else
+            {
+                MessageBox.Show("Vælg en Booking fra listen");
+            }
         }
+            
 
         private void Checkin_Click(object sender, RoutedEventArgs e)
         {
             //Made by Eby
-            Booking b = listBox.SelectedItem as Booking;
-            GuestCheckinPage page = new GuestCheckinPage(b);
-            this.NavigationService.Navigate(page);
+                Booking b = listBox.SelectedItem as Booking;
+                if (b != null)
+                {
+                    GuestCheckinPage page = new GuestCheckinPage(b);
+                    this.NavigationService.Navigate(page);
+                }
+            else
+            {
+                    MessageBox.Show("Vælg en Booking fra listen");
+
+                }
+                
         }
 
         private void GoToMainMenu(object sender, RoutedEventArgs e)

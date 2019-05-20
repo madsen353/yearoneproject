@@ -12,8 +12,8 @@
         <Grid.ColumnDefinitions>
             <ColumnDefinition/>
         </Grid.ColumnDefinitions>
-        <Label Content="Group" HorizontalAlignment="Left" Margin="62,10,0,0" VerticalAlignment="Top" FontWeight="Bold" FontSize="14"/>
-        <TextBlock HorizontalAlignment="Left" Margin="160,20,0,0" TextWrapping="Wrap" Name="n" VerticalAlignment="Top"/>
+        <Label Content="Group" HorizontalAlignment="Left" Margin="218,22,0,0" VerticalAlignment="Top" FontWeight="Bold" FontSize="14" Height="Auto"/>
+        <TextBlock HorizontalAlignment="Left"  Width="Auto" Height="Auto" Margin="327,40,0,0" TextWrapping="Wrap" Name="n" VerticalAlignment="Top"/>
 
         <Grid Margin="10,60,10,100">
             <Grid.ColumnDefinitions>
@@ -36,11 +36,11 @@
             <TextBox Name="Email" Text="{Binding Email}" Grid.Row="2" Grid.Column="1" Margin="0,0,0,10"/>
             <CheckBox Name="Subscription" IsChecked="{Binding Subscription}" Grid.Row="3" Grid.Column="1" Margin="0,0,0,10">Tilmeld nyhedsbrev</CheckBox>
             <CheckBox Name="Segway" IsChecked="{Binding Segway}" Grid.Row="4" Grid.Column="1" Margin="0,0,0,10">Agree Segway</CheckBox>
-            <Button Content="Rediger" Grid.Row="5"  Grid.Column="1" Width="200" Margin="0,0,300,0" Click="UpdateGuestData" />
         </Grid>
+        <Button Content="Rediger" VerticalAlignment="Top" HorizontalAlignment="Left" Height="30" Width="200" Margin="220,204,0,0" Click="UpdateGuestData" />
 
-        <Grid Margin="10,200,10,0">
-            <Label Content="Aktiviteter" Margin="0,0,10,0" Grid.Row="0" VerticalAlignment="Top" Height="33" FontWeight="Bold" FontSize="14"/>
+        <Grid Margin="10,240,10,0">
+            <Label Content="Aktiviteter" Margin="0,9,10,0" Grid.Row="0" VerticalAlignment="Top" Height="33" FontWeight="Bold" FontSize="14"/>
             <ListView  Name="Activities"  Margin="0,33,0,10"   >
                 <ListView.View>
                     <GridView >
@@ -49,8 +49,9 @@
                     </GridView>
                 </ListView.View>
             </ListView>
-            
-        </Grid>     
+
+        </Grid>
+        <Button Content="Tilbage" HorizontalAlignment="Left" Margin="75,6,0,0" VerticalAlignment="Top" Width="75" Click="Back_Button"/>
 
     </Grid>
 </Page>

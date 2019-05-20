@@ -40,10 +40,23 @@ namespace Funhall2
         {
             //Made by Eby
             Booking b =  Booking;
-            Customer cus = Guests.SelectedItem as Customer;
-            Profile page = new Profile(cus,b);
-            this.NavigationService.Navigate(page);
+            if (b != null)
+            {
+                Customer cus = Guests.SelectedItem as Customer;
+                Profile page = new Profile(cus, b);
+                this.NavigationService.Navigate(page);
+            }
+            else
+            {
+                MessageBox.Show("Vælg en Guest fra listen");
 
+            }
+        }
+
+        private void Back_Button(object sender, RoutedEventArgs e)
+        {
+            AllBookingsPage page = new AllBookingsPage();
+            this.NavigationService.Navigate(page);
         }
     }
 }

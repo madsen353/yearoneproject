@@ -120,7 +120,7 @@ namespace Funhall2.Classes
                     a.TimeDesc = reader[1].ToString();
                     a.StartTime = DateTime.Parse(reader[2].ToString());
                     a.EndTime = DateTime.Parse(reader[3].ToString());
-                    a.IsFinished = (int) reader[4];
+                   // a.IsFinished = (int) reader[4];
                     activities.Add(a);
                 }
             }
@@ -146,7 +146,9 @@ namespace Funhall2.Classes
         {
             //Made by Eby
             cmd.CommandText = "Update Guests set  Name=@Name, Email=@Email, AgreeTerms=@AgreeTerms," +
-                              "Subscription=@Subscription";
+                              "Subscription=@Subscription where GuestId=@cusId";
+
+            cmd.Parameters.Add("@cusId", SqlDbType.Int).Value = cus.CusId;
             cmd.Parameters.Add("@Name", SqlDbType.NVarChar).Value = cus.Name;
             cmd.Parameters.Add("@Email", SqlDbType.NVarChar).Value = cus.Email;
             cmd.Parameters.Add("@AgreeTerms", SqlDbType.Bit).Value = cus.Segway;
