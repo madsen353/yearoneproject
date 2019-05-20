@@ -18,11 +18,13 @@ namespace Funhall2.Classes
 
         public DAL()
         {
+            //Made by Rasmus
             cmd.Connection = con;
             cmd.CommandType = CommandType.Text;
         }
         public void ResetDAL()
         {
+            //Made by Rasmus
             con.Close();
             con = new SqlConnection("Data Source=.;Initial Catalog=FunHall;" + "Integrated Security=true;");
             cmd = new SqlCommand {Connection = con, CommandType = CommandType.Text};
