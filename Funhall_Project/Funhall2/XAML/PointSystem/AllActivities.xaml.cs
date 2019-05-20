@@ -56,6 +56,8 @@ namespace Funhall2.XAML.PointSystem
         private void AllActivitiesHaveEnded(object sender, RoutedEventArgs e)
         {
             //Made by Rasmus
+            string fileToPrint = DiplomaMaker.GeneratePDF(booking);
+            Printer.Print(fileToPrint);
             Mailer mailer = new Mailer();
             mailer.SendDiplomaEmails(booking);
             ChooseYourBooking chooseYourBooking = new ChooseYourBooking();
@@ -65,7 +67,7 @@ namespace Funhall2.XAML.PointSystem
         private void DisplayScoreTotal(object sender, RoutedEventArgs e)
         {
             //Made by Rasmus
-            ScoreTotal scorePage  = new ScoreTotal(booking);
+            ScoreTotal scorePage = new ScoreTotal(booking);
             this.NavigationService.Navigate(scorePage);
         }
 

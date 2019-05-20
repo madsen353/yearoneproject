@@ -47,12 +47,10 @@ namespace Funhall2.Classes
             DAL dal = new DAL();
             SmtpClient client = MakeClient();
             ObservableCollection<Customer> recipients = dal.GetCustomers(booking);
-            int i = 0;
             foreach (Customer guest in recipients)
             {
-                MailMessage mail = GenerateEmail(recipients[i]);
+                MailMessage mail = GenerateEmail(guest);
                 client.Send(mail);
-                i++;
             }
             }
 

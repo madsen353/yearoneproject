@@ -1,9 +1,15 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Drawing;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using iTextSharp.text;
+using iTextSharp.text.pdf;
+using Font = System.Drawing.Font;
+using Image = System.Drawing.Image;
 
 namespace Funhall2.Classes
 {
@@ -51,6 +57,26 @@ namespace Funhall2.Classes
 
             bitmap.Save(imageSavePath);//save the image file
             return imageSavePath;
+        }
+
+        public static string GeneratePDF(Booking booking)
+        {
+                string savePath = "TotalScore.pdf";
+                DAL dal = new DAL();
+                ObservableCollection<Customer> allGuests = dal.GetCustomers(booking);
+                Document document = new Document(PageSize.A4, 10, 10, 10, 10);
+
+                PdfWriter writer = PdfWriter.GetInstance(document, new FileStream(savePath,FileMode.Create));
+                document.Open();
+                Chunk introChunk = new Chunk("Her får i jeres totale score: \n");
+                document.Add(introChunk);
+                foreach (Customer guest in allGuests)
+                {
+                    Paragraph paragraph = new Paragraph($"{guest.Name} scorede: {guest.TotalAmountOfPoints} point. \n");
+                    document.Add(paragraph);
+                }
+                document.Close();
+                return savePath;
         }
     }
 }
