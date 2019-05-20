@@ -25,32 +25,15 @@ namespace Funhall2.XAML.PointSystem
     {
         //Made by Rasmus
         public Booking booking;
+        DAL dal = new DAL();
         public ScoreTotal(Booking b)
         {
             //Made by Rasmus
-            DAL dal = new DAL();
             booking = b;
             InitializeComponent();
-            ObservableCollection<Customer> elementsToShow = Customer.GetCustomers(b);
-            int i = 0;
-            foreach (Customer guest in elementsToShow)
-            {
-                elementsToShow[i].TotalAmountOfPoints = elementsToShow[i].GetTotalAmountOfPoints();
-                i++;
-            }
-
-            //int i = 0;
-            //ObservableCollection<CustomerActivity> guestsWithActivity = new ObservableCollection<CustomerActivity>();
-            //foreach (Customer guest in guests)
-            //{
-            //    CustomerActivity g = new CustomerActivity(guests[i], a);
-            //    guestsWithActivity.Add(g);
-            //    i++;
-            //}
-            //Guests.ItemsSource = guestsWithActivity;
+            ObservableCollection<Customer> elementsToShow = dal.GetCustomers(b);
             Guests.ItemsSource = elementsToShow;
-
-        }
+            }
 
         private void GoBackToOverview(object sender, RoutedEventArgs e)
         {

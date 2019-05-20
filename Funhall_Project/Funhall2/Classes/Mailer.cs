@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -34,20 +35,22 @@ namespace Funhall2.Classes
             
             mail.Subject = "Tak fordi du besøgte Funhall Viborg";
             mail.Body = $"Hej {guest.Name} \n Vi vil gerne sige tak fordi du besøgte funhall Viborg \n Du scorede: {guest.GetTotalAmountOfPoints()} \n \n Godt klaret!";
+            string diplomaPath = DiplomaMaker.GenerateDiploma(guest);
+            Attachment attachment = new Attachment(diplomaPath);
+            mail.Attachments.Add(attachment);
             return mail;
         }
-
+        
         public void SendDiplomaEmails(Booking booking)
         {
             //Made by Rasmus
+            DAL dal = new DAL();
             SmtpClient client = MakeClient();
-            ObservableCollection<Customer> recipients = Customer.GetCustomers(booking);
-            int i = 0;
+            ObservableCollection<Customer> recipients = dal.GetCustomers(booking);
             foreach (Customer guest in recipients)
             {
-                MailMessage mail = GenerateEmail(recipients[i]);
+                MailMessage mail = GenerateEmail(guest);
                 client.Send(mail);
-                i++;
             }
             }
 

@@ -13,6 +13,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using Funhall2.Classes;
 
 namespace Funhall2.XAML.PointSystem
 {
@@ -21,11 +22,12 @@ namespace Funhall2.XAML.PointSystem
     /// </summary>
     public partial class ChooseYourBooking : Page
     {
+        DAL dal = new DAL();
         public ChooseYourBooking()
         {
             //Made by Rasmus
             InitializeComponent();
-            ObservableCollection<Booking> bookings = DALBooking.getBookings();
+            ObservableCollection<Booking> bookings = dal.getBookings();
             listBox.ItemsSource = bookings;
         }
 

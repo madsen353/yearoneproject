@@ -13,12 +13,14 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using Funhall2.Classes;
 
 namespace Funhall2
 {
     
     public partial class AllBookingsPage : Page
     {
+        DAL dal = new DAL();
         public AllBookingsPage()
         {
             
@@ -33,13 +35,15 @@ namespace Funhall2
             }
 
             //Made by Eby
-
+            //Refactored by Rasmus(methods moved from Booking class to DAL class.
+            
             foreach (var booking in _bookings)
             {
-                booking.InsertBookingToDb();
-                booking.InsertBookedActivitiesToDb();
-                booking.InsertActivityToDb();
-                booking.InsertBookedProductsToDb();
+                dal.InsertBookingToDb(booking);
+                dal.InsertBookedActivitiesToDb(booking);
+                dal.InsertActivityToDb(booking);
+                dal.InsertBookedProductsToDb(booking);
+                
             }
 
 
@@ -49,7 +53,7 @@ namespace Funhall2
             DataContext = this;
 
             //ListBox Solution:
-            ObservableCollection<Booking> bookings = DALBooking.getBookings();
+            ObservableCollection<Booking> bookings = dal.getBookings();
             listBox.ItemsSource = bookings;
             }
 

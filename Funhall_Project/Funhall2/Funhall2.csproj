@@ -35,6 +35,9 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="itextsharp, Version=5.5.13.0, Culture=neutral, PublicKeyToken=8354ae6d2174ddca, processorArchitecture=MSIL">
+      <HintPath>..\packages\iTextSharp.5.5.13\lib\itextsharp.dll</HintPath>
+    </Reference>
     <Reference Include="Newtonsoft.Json, Version=12.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
       <HintPath>..\packages\Newtonsoft.Json.12.0.2\lib\net45\Newtonsoft.Json.dll</HintPath>
     </Reference>
@@ -81,12 +84,12 @@
     </ApplicationDefinition>
     <Compile Include="Classes\Activity.cs" />
     <Compile Include="Classes\Booking.cs" />
-    <Compile Include="Classes\CheckIn.cs" />
     <Compile Include="Classes\Customer.cs" />
     <Compile Include="Classes\CustomerActivity.cs" />
     <Compile Include="Classes\DAL.cs" />
-    <Compile Include="Classes\DALBooking.cs" />
+    <Compile Include="Classes\DiplomaMaker.cs" />
     <Compile Include="Classes\Mailer.cs" />
+    <Compile Include="Classes\Printer.cs" />
     <Compile Include="Classes\RemoteServer.cs" />
     <Compile Include="XAML\CheckIn\GuestCheckinPage.xaml.cs">
       <DependentUpon>GuestCheckinPage.xaml</DependentUpon>
@@ -210,6 +213,8 @@
   <ItemGroup>
     <Resource Include="Image1.png" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Resource Include="DiplomaTemplate.bmp" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

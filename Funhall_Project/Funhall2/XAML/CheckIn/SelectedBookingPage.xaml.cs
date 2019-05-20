@@ -20,6 +20,7 @@ namespace Funhall2
     
     public partial class SelectedBookingPage : Page
     {
+        DAL dal = new DAL();
         public  Booking Booking { get; set; }
         public SelectedBookingPage(Booking booking)
         {
@@ -28,10 +29,10 @@ namespace Funhall2
             InitializeComponent();            
             this.DataContext = Booking;
 
-            ObservableCollection<Activity> activities = Activity.getBookedActivities(Booking);
+            ObservableCollection<Activity> activities = dal.GetBookedActivities(Booking);
             Activities.ItemsSource = activities;
 
-            ObservableCollection<Customer> guests = Customer.GetCustomers(Booking);
+            ObservableCollection<Customer> guests = dal.GetCustomers(Booking);
             Guests.ItemsSource = guests;
         }
 

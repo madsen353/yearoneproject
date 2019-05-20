@@ -35,5 +35,6 @@
         <Button Content="Alle aktiviter er slut" HorizontalAlignment="Left" Margin="100,50,0,0" Grid.Row="1" VerticalAlignment="Top" Width="172" Click="AllActivitiesHaveEnded"/>
         <Button Content="Se total score" HorizontalAlignment="Right" Margin="0,150,100,0" Grid.Row="1" VerticalAlignment="Top" Width="172" Click="DisplayScoreTotal"/>
         <Button Content="Gå tilbage til oversigten" HorizontalAlignment="Left" Margin="100,150,0,0" Grid.Row="1" VerticalAlignment="Top" Width="172" Click="GoBackToOverview"/>
+        <Button Content="Ændre bruger data" HorizontalAlignment="Center" Margin="0,0,0,0" Grid.Row="1" VerticalAlignment="center" Width="172" Click="ChangeUserData"/>
     </Grid>
 </Page>

@@ -24,46 +24,42 @@ namespace Funhall2.XAML.PointSystem
     /// //Made by Rasmus
     public partial class AllActivities : Page
     {
-        public Booking Booking { get; set; }
-        public AllActivities(Booking booking)
+        DAL dal = new DAL();
+
+        public Booking booking;
+        public AllActivities(Booking inputBooking)
         {
             //Made by Rasmus
-            Booking = booking;
+            booking = inputBooking;
             InitializeComponent();
-            this.DataContext = Booking;
-
-            ObservableCollection<Activity> activities = Activity.getBookedActivities(Booking);
+            this.DataContext = booking;
+            ObservableCollection<Activity> activities = dal.GetBookedActivities(booking);
             ObservableCollection<Activity> activitiesToShow = new ObservableCollection<Activity>();
-            int i = 0;
             foreach (Activity activity in activities)
             {
-                if (activities[i].IsFinished == 0)
+                if (activity.IsFinished == 0)
                 {
-                    activitiesToShow.Add(activities[i]);
+                    activitiesToShow.Add(activity);
                 }
-
-                i++;
             }
             Activities.ItemsSource = activitiesToShow;
-
-        }
+            }
 
         private void ShowSelectedActivity(object sender, RoutedEventArgs e)
         {
             //Made by Rasmus
             Activity a = Activities.SelectedItem as Activity;
-            CurrentActivity currentActivity = new CurrentActivity(a, Booking);
+            CurrentActivity currentActivity = new CurrentActivity(a, booking);
             this.NavigationService.Navigate(currentActivity);
         }
-
-
-        //NEED UPDATE LOGIC!!!
 
         private void AllActivitiesHaveEnded(object sender, RoutedEventArgs e)
         {
             //Made by Rasmus
+            string fileToPrint = DiplomaMaker.GeneratePDF(booking);
+            Printer.Print(fileToPrint);
             Mailer mailer = new Mailer();
-            mailer.SendDiplomaEmails(Booking);
+            mailer.SendDiplomaEmails(booking);
             ChooseYourBooking chooseYourBooking = new ChooseYourBooking();
             this.NavigationService.Navigate(chooseYourBooking);
         }
@@ -71,7 +67,7 @@ namespace Funhall2.XAML.PointSystem
         private void DisplayScoreTotal(object sender, RoutedEventArgs e)
         {
             //Made by Rasmus
-            ScoreTotal scorePage  = new ScoreTotal(Booking);
+            ScoreTotal scorePage = new ScoreTotal(booking);
             this.NavigationService.Navigate(scorePage);
         }
 
@@ -80,6 +76,12 @@ namespace Funhall2.XAML.PointSystem
             //Made by Rasmus
             ChooseYourBooking chooseYourBooking = new ChooseYourBooking();
             this.NavigationService.Navigate(chooseYourBooking);
+        }
+
+        private void ChangeUserData(object sender, RoutedEventArgs e)
+        {
+            SelectedBookingPage page = new SelectedBookingPage(booking);
+            this.NavigationService.Navigate(page);
         }
     }
 }
