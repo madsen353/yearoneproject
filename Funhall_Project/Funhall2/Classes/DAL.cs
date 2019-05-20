@@ -120,7 +120,7 @@ namespace Funhall2.Classes
                     a.TimeDesc = reader[1].ToString();
                     a.StartTime = DateTime.Parse(reader[2].ToString());
                     a.EndTime = DateTime.Parse(reader[3].ToString());
-                   // a.IsFinished = (int) reader[4];
+                    a.IsFinished = (int) reader[4];
                     activities.Add(a);
                 }
             }
