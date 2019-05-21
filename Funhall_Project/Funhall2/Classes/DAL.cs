@@ -214,8 +214,6 @@ namespace Funhall2.Classes
         }
         public void AddActivities(Customer cus)
         {
-
-            //Denne metode virker ikke, der bliver ikke gemt data i databasen.
             //Made by Eby
             cmd.Parameters.Add("@Email", SqlDbType.NVarChar).Value = cus.Email;
             //cmd.Parameters.Add("@BookingId", SqlDbType.NVarChar).Value = cus.BookingId;       
@@ -224,7 +222,7 @@ namespace Funhall2.Classes
                               "FROM BookedActivities b" +
                               " inner JOIN Guests g on g.BookingId = b.BookingId " +
                               "where g.Email=@Email";
-            con.Open();
+            OpenConnection(con);
             if (connectionStatus == true)
             {
                 cmd.ExecuteNonQuery();
