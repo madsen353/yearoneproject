@@ -11,6 +11,7 @@ namespace Funhall2.Classes
 {
     public class CustomerActivity
     {
+
         //Made by Eby
         public Customer Customer { get; set; }
         public Activity  Activity { get; set; }

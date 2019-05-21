@@ -7,6 +7,7 @@ using System.Linq;
 using System.Security.Permissions;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 
 namespace Funhall2.Classes
 {
@@ -22,6 +23,8 @@ namespace Funhall2.Classes
 
         public int GetTotalAmountOfPoints()
         {
+            try
+            {  
             //Made by Rasmus
             int guestId = CusId;
             int totalAmountOfPoints = 0;
@@ -33,6 +36,12 @@ namespace Funhall2.Classes
                 totalAmountOfPoints += point;
             }
             return totalAmountOfPoints;
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+                return 0;
+            }
         }
     }
 }

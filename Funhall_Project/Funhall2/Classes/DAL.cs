@@ -18,28 +18,55 @@ namespace Funhall2.Classes
 
         public DAL()
         {
+            try
+            {
             cmd.Connection = con;
             cmd.CommandType = CommandType.Text;
+            }
+            catch
+            {
+                throw;
+            }
         }
         public void ResetDAL()
         {
+            try
+            {
             con.Close();
             con = new SqlConnection("Data Source=.;Initial Catalog=FunHall;" + "Integrated Security=true;");
             cmd = new SqlCommand {Connection = con, CommandType = CommandType.Text};
+            }
+            catch
+            {
+                throw;
+            }
+            finally
+            {
+                con.Close();
+            }
         }
             
 
         private SqlParameter CreateParam(string name, object value, SqlDbType type)
         {
+            try
+            {
             //Made by Rasmus
             SqlParameter param = new SqlParameter(name, type);
             param.Value = value;
             return param;
+            }
+            catch
+            {
+                throw;
+            }
         }
 
         //Made by Rasmus
         public void UpdateCusActivity(int id, string points, string activityName)
         {
+            try
+            {
             //Made by Rasmus
             con.Open();
             cmd.CommandText = "UPDATE GuestActivities SET Points = @Points WHERE GuestID = @ID AND TimeDesc = @ActivityName";
@@ -47,10 +74,28 @@ namespace Funhall2.Classes
             cmd.Parameters.Add(CreateParam("@Points", points, SqlDbType.NVarChar));
             cmd.Parameters.Add(CreateParam("@ActivityName", activityName, SqlDbType.NVarChar));
             cmd.ExecuteNonQuery();
-            ResetDAL();
+            }
+            catch
+            {
+                throw;
+            }
+            finally
+            {
+                con.Close();
+            }
+            try
+            {
+                ResetDAL();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
         }
         public void EndActivity(string id, int isFinished, string activityName)
         {
+            try
+            {
             //Made by Rasmus
             con.Open();
             cmd.CommandText = "UPDATE BookedActivities SET IsFinished = @IsFinished WHERE BookingId = @ID AND TimeDesc = @ActivityName";
@@ -58,10 +103,29 @@ namespace Funhall2.Classes
             cmd.Parameters.Add(CreateParam("@IsFinished", isFinished, SqlDbType.Int));
             cmd.Parameters.Add(CreateParam("@ActivityName", activityName, SqlDbType.NVarChar));
             cmd.ExecuteNonQuery();
-            ResetDAL();
+            }
+            catch
+            {
+                throw;
+            }
+            finally
+            {
+                con.Close();
+            }
+            try
+            {
+                ResetDAL();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+
         }
         public CustomerActivity GetCusActivitySpecifiedByActivity(Customer cus, Activity act)
         {
+            try
+            {
             //Made by Rasmus
             cmd.Parameters.Add("@Id", SqlDbType.NVarChar).Value = cus.CusId;
             cmd.Parameters.Add("@Act", SqlDbType.NVarChar).Value = act.TimeDesc;
@@ -70,6 +134,13 @@ namespace Funhall2.Classes
                               "where ga.GuestId=@Id AND ga.TimeDesc=@Act";
             ObservableCollection<CustomerActivity> cusActivities = new ObservableCollection<CustomerActivity>();
             con.Open();
+            }
+            catch
+            {
+                con.Close();
+                throw;
+            }
+           
             using (SqlDataReader reader = cmd.ExecuteReader())
             {
                 reader.Read();
@@ -79,13 +150,22 @@ namespace Funhall2.Classes
                 ca.Points = reader[2].ToString();
                 //a.StartTime = DateTime.Parse(reader[2].ToString());
                 //a.EndTime = DateTime.Parse(reader[3].ToString());
-                ResetDAL();
+                try
+                {
+                    ResetDAL();
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show(ex.Message);
+                }
                 return ca;
             }
         }
 
         public List<int> GetTotalAmountOfPoints(int guestID)
         {
+            try
+            {
             //Made by Rasmus
             cmd.Parameters.Add("@Id", SqlDbType.Int).Value = guestID;
             cmd.CommandText = "select Points from GuestActivities where GuestId=@Id";
@@ -99,8 +179,21 @@ namespace Funhall2.Classes
                 int point = int.Parse(pointInString);
                 allPoints.Add(point);
             }
+            }    
             }
-            ResetDAL();
+            catch
+            {
+                throw;
+            }
+            try
+            {
+                ResetDAL();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+           
             return allPoints;
         }
 
@@ -129,6 +222,8 @@ namespace Funhall2.Classes
         }
         public void CheckInCus(Customer cus)
         {
+            try
+            {
             //Made by Eby
             cmd.CommandText = "insert into Guests (BookingId, Name, Email, AgreeTerms, Subscription) values " +
                               "(@BookingId, @Name, @Email, @AgreeTerms, @Subscription)";
@@ -139,11 +234,29 @@ namespace Funhall2.Classes
             cmd.Parameters.Add("@Subscription", SqlDbType.Bit).Value = cus.Subscription;
             con.Open();
             cmd.ExecuteNonQuery();
-            ResetDAL();
+            }
+            catch
+            {
+                throw;
+            }
+            finally
+            {
+                con.Close();
+            }
+            try
+            {
+                ResetDAL();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
         }
 
         public void UpdateCus(Customer cus)
         {
+            try
+            {
             //Made by Eby
             cmd.CommandText = "Update Guests set  Name=@Name, Email=@Email, AgreeTerms=@AgreeTerms," +
                               "Subscription=@Subscription";
@@ -153,10 +266,28 @@ namespace Funhall2.Classes
             cmd.Parameters.Add("@Subscription", SqlDbType.Bit).Value = cus.Subscription;
             con.Open();
             cmd.ExecuteNonQuery();
-            ResetDAL();
+            }
+            catch
+            {
+                throw;
+            }
+            finally
+            {
+                con.Close();
+            }
+            try
+            {
+                ResetDAL();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
         }
         public void AddActivities(Customer cus)
         {
+            try
+            {
             //Made by Eby
             cmd.Parameters.Add("@Email", SqlDbType.NVarChar).Value = cus.Email;
             //cmd.Parameters.Add("@BookingId", SqlDbType.NVarChar).Value = cus.BookingId;       
@@ -168,7 +299,23 @@ namespace Funhall2.Classes
                               "where g.Email=@Email";
             con.Open();
             cmd.ExecuteNonQuery();
-            ResetDAL();
+            }
+            catch
+            {
+                throw;
+            }
+            finally
+            {
+                con.Close();
+            }
+            try
+            {
+                ResetDAL();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
         }
         public ObservableCollection<CustomerActivity> GetCusActivities(Customer cus)
         {
@@ -227,6 +374,7 @@ namespace Funhall2.Classes
             cmd.CommandText = "select * from Bookings";
             ObservableCollection<Booking> bookings = new ObservableCollection<Booking>();
             con.Open();
+            
             using (SqlDataReader reader = cmd.ExecuteReader())
             {
                 while (reader.Read())
@@ -250,6 +398,8 @@ namespace Funhall2.Classes
 
         public static void AddParam(SqlCommand cmd, object value, string name, SqlDbType sqlDbType)
         {
+            try
+            {
             //Made by Eby
             SqlParameter parameter = new SqlParameter();
             parameter.ParameterName = "@" + name;
@@ -264,9 +414,18 @@ namespace Funhall2.Classes
             parameter.SqlDbType = sqlDbType;
             parameter.Size = 255;
             cmd.Parameters.Add(parameter);
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+            
+
         }
         public void InsertBookingToDb(Booking booking)
         {//Made by Eby
+            try
+            {
             con.Open();
             cmd.Parameters.Clear();
             if (booking.flexyId != null && booking.name != null && booking.cusTel != null)
@@ -293,21 +452,31 @@ namespace Funhall2.Classes
 
                 cmd.CommandText = "insert into Bookings (BookingId, Name, CusTel, CusTelAlt, Cusmail, Date, TotalPrice, CusComment, IntComment)" +
                     " values (@BookingId, @Name, @CusTel, @CusTelAlt, @Cusmail, @Date, @TotalPrice, @CusComment, @IntComment)";
-                try
-                {
                     cmd.ExecuteNonQuery();
                     MessageBox.Show("Record added Successfully!");
                 }
-                catch (Exception ex)
-                {
-                    // MessageBox.Show(ex.Message);
-
-                }
             }
-            ResetDAL();
+            catch (Exception)
+            {
+                //throw;
+            }
+            finally
+            {
+                con.Close();
+            }
+            try
+            {
+                ResetDAL();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
         }
         public void InsertBookedActivitiesToDb(Booking booking)
         {
+            try
+            {
             List<Booking.Time> times = booking.times;
             //Made by Eby
             con.Open();
@@ -332,21 +501,32 @@ namespace Funhall2.Classes
                     cmd.CommandText = "insert into BookedActivities(BookingId, TimeDesc, StartTime, Endtime, IsFinished)" +
                                       "values (@BookingId, @Desc, @StartTime, @Endtime, @IsFinished)";
 
-                    try
-                    {
                         cmd.ExecuteNonQuery();
                         // MessageBox.Show("Record added Successfully!");
-                    }
-                    catch (Exception ex)
-                    {
-                        // MessageBox.Show(ex.Message);
-                    }
                 }
             }
-            ResetDAL();
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+            finally
+            {
+                con.Close();
+            }
+            try
+            {
+                ResetDAL();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
         }
         public void InsertActivityToDb(Booking booking)
         {//Made by Eby
+            try
+            {
             List<Booking.Time> times = booking.times;
             con.Open();
 
@@ -361,21 +541,32 @@ namespace Funhall2.Classes
 
                     cmd.CommandText = "insert into Activities (Description)" +
                                       " values (@Desc)";
-                    try
-                    {
-                        cmd.ExecuteNonQuery();
-                        MessageBox.Show("Record added Successfully!");
-                    }
-                    catch (Exception ex)
-                    {
-                        //MessageBox.Show(ex.Message);
-                    }
+                 cmd.ExecuteNonQuery();
                 }
             }
+                
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+            finally
+            {
+                con.Close();
+            }
+            try
+            {
             ResetDAL();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
         }
         public void InsertBookedProductsToDb(Booking booking)
         {
+            try
+            {
             List<Booking.Product> products = booking.products;
             //Made by Eby
             con.Open();
@@ -400,18 +591,27 @@ namespace Funhall2.Classes
                     cmd.CommandType = CommandType.Text;
                     cmd.CommandText = "insert into BookedProducts (BookingId, ProductDesc, productPrice, productTotPrice, productAmount)" +
                                       " values (@BookingId, @ProductDesc, @productPrice, @productTotPrice, @productAmount)";
-                    try
-                    {
                         cmd.ExecuteNonQuery();
-                        MessageBox.Show("Record added Successfully!");
-                    }
-                    catch (Exception ex)
-                    {
-                        // MessageBox.Show(ex.Message);
-                    }
                 }
             }
+                    
+            }
+            catch (Exception)
+            {
+                throw;     
+            }
+            finally
+            {
+                con.Close();
+            }
+            try
+            {
             ResetDAL();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
         }
     }
 }
