@@ -14,6 +14,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using Funhall2.XAML.PointSystem;
 
 namespace Funhall2
 {
@@ -22,8 +23,10 @@ namespace Funhall2
     {
         DAL dal = new DAL();
         public  Booking Booking { get; set; }
-        public SelectedBookingPage(Booking booking)
+        public string globalPageHistory = "";
+        public SelectedBookingPage(Booking booking, string pageHistory)
         {
+            globalPageHistory = pageHistory;
             //Made by Eby
             Booking = booking;
             InitializeComponent();            
@@ -55,6 +58,16 @@ namespace Funhall2
 
         private void Back_Button(object sender, RoutedEventArgs e)
         {
+            if (globalPageHistory == "AllBookingsPage")
+            {
+                AllBookingsPage AllBookings = new AllBookingsPage();
+                this.NavigationService.Navigate(AllBookings);
+            }
+            else if (globalPageHistory == "AllActivities")
+            {
+                AllActivities allActivities = new AllActivities(Booking);
+                this.NavigationService.Navigate(allActivities);
+            }
             this.NavigationService.GoBack();
         }
     }

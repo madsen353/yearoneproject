@@ -25,7 +25,6 @@ namespace Funhall2
         {
             
             //Made by Rasmus
-
             RemoteServerConfig config = ConfigurationReader.Read();
             RemoteServer server = new RemoteServer(config);
             List<Booking> _bookings = new List<Booking>();
@@ -35,34 +34,28 @@ namespace Funhall2
             }
             if (_bookings[0].name == "ServerErrorOccured")
             {
-                MessageBox.Show("Der opstod en fejl i i forsøget til at forbinde til serveren. \n Du bliver sendt tilbage til forsiden");
-                NavigateToMainMenu();
+                MessageBox.Show("Der opstod en fejl i forsøget,' på at forbinde til serveren. \n Du bliver sendt tilbage til forsiden");
+                RestartApp();
             }
             else
             {
                 //Made by Eby
                 //Refactored by Rasmus(methods moved from Booking class to DAL class.
-
                 foreach (var booking in _bookings)
                 {
                     dal.InsertBookingToDb(booking);
                     dal.InsertBookedActivitiesToDb(booking);
                     dal.InsertActivityToDb(booking);
                     dal.InsertBookedProductsToDb(booking);
-
                 }
-
-
                 //Made by Rasmus
-
                 InitializeComponent();
                 DataContext = this;
-
                 //ListBox Solution:
                 ObservableCollection<Booking> bookings = dal.getBookings();
                 listBox.ItemsSource = bookings;
             }
-            }
+        }
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {
@@ -99,25 +92,26 @@ namespace Funhall2
                     GuestCheckinPage page = new GuestCheckinPage(b);
                     this.NavigationService.Navigate(page);
                 }
-            else
-            {
+                else
+                {
                     MessageBox.Show("Vælg en Booking fra listen");
 
                 }
-                
+
         }
 
         private void GoToMainMenu(object sender, RoutedEventArgs e)
         {
             //Made by Rasmus
-            NavigateToMainMenu();
-        }
-
-        private void NavigateToMainMenu()
-        {
-            //Made by Rasmus
             CheckInPage CheckIn = new CheckInPage();
             this.NavigationService.Navigate(CheckIn);
+
+        }
+
+        private void RestartApp()
+        {
+            System.Diagnostics.Process.Start(Application.ResourceAssembly.Location);
+            Application.Current.Shutdown();
         }
     }
 }

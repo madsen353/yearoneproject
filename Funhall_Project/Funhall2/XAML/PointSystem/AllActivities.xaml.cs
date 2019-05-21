@@ -80,7 +80,8 @@ namespace Funhall2.XAML.PointSystem
 
         private void ChangeUserData(object sender, RoutedEventArgs e)
         {
-            SelectedBookingPage page = new SelectedBookingPage(booking);
+            string currentPage = "AllActivities";
+            SelectedBookingPage page = new SelectedBookingPage(booking, currentPage);
             this.NavigationService.Navigate(page);
         }
     }
