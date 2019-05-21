@@ -53,11 +53,11 @@ namespace Funhall2
             try
             {
                 dal.UpdateCus(cus);
-                MessageBox.Show("Data er redegeret");
+                MessageBox.Show("Data er opdateret");
             }
             catch (Exception)
             {
-                MessageBox.Show("Der sker noget fejl. Prøv igen");                
+                MessageBox.Show("Der skete en fejl, prøv igen");                
             }
             finally
             {

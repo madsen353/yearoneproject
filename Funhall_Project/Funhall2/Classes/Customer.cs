@@ -25,7 +25,7 @@ namespace Funhall2.Classes
         {
             try
             {  
-            //Made by Rasmus
+            //Made by Rasmus, exception handling by Anders & Niels
             int guestId = CusId;
             int totalAmountOfPoints = 0;
             List<int> pointsFromEvents = new List<int>();
@@ -40,7 +40,7 @@ namespace Funhall2.Classes
             catch (Exception ex)
             {
                 MessageBox.Show(ex.Message);
-                return 0;
+                return -1;
             }
         }
     }

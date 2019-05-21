@@ -10,6 +10,8 @@ using System.Windows;
 
 namespace Funhall2.Classes
 {
+
+    //Exception handling in the DAL class is made by Anders & Niels
     public class DAL
     {
         //Made by Rasmus
