@@ -55,8 +55,7 @@ namespace Funhall2
 
         private void Back_Button(object sender, RoutedEventArgs e)
         {
-            AllBookingsPage page = new AllBookingsPage();
-            this.NavigationService.Navigate(page);
+            this.NavigationService.GoBack();
         }
     }
 }
