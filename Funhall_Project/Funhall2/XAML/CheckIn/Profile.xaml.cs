@@ -19,6 +19,7 @@ namespace Funhall2
 {
     public partial class Profile : Page
     {
+        //made by Ebby
         DAL dal = new DAL();
         public Customer Customer { get; set; }
         public Booking Booking { get; set; }
@@ -38,7 +39,7 @@ namespace Funhall2
 
         private void UpdateGuestData(object sender, RoutedEventArgs e)
         {
-            
+            //made by Ebby
             Customer cus = new Customer();
             cus.CusId = Customer.CusId;
             cus.Name = Name.Text;
@@ -71,6 +72,7 @@ namespace Funhall2
 
         private void Back_Button(object sender, RoutedEventArgs e)
         {
+            //made by Ebby
             SelectedBookingPage page = new SelectedBookingPage(Booking, globalPageHistory);
             this.NavigationService.Navigate(page);
 
