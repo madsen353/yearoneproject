@@ -28,10 +28,11 @@ create table BookedActivities
 	TimeDesc nvarchar(254) NOT NULL,
 	StartTime nvarchar(50),
 	Endtime nvarchar(50),
+	IsFinished bit,
 	PRIMARY KEY (BookingId,TimeDesc)
 );
 
-SELECT * from BookedActivities
+----SELECT * from BookedActivities
 
 create table BookedProducts
 (
@@ -44,14 +45,13 @@ create table BookedProducts
 	PRIMARY KEY (BookingId,ProductDesc)
 );
 
-select * from BookedProducts
 
 
 create table Guests
 (
 	GuestId INT Identity(1,1),
 	BookingId nvarchar(20) NOT NULL,
-	Name nvarchar(20) NOT NULL,
+	Name nvarchar(200) NOT NULL,
 	Email nvarchar(100) NOT NULL,
 	AgreeTerms bit,
 	Subscription bit,
@@ -61,11 +61,13 @@ create table Guests
  
 create table GuestActivities
 (
-	GuestId INT Identity(1,1),
+	GuestId INT,
 	TimeDesc nvarchar(200) ,
-	Points nvarchar(200),
+	Points int,	
 	PRIMARY KEY (GuestId,TimeDesc)
 )
 
-select * from Guests
-SELECT * FROM GuestActivities
+
+
+
+

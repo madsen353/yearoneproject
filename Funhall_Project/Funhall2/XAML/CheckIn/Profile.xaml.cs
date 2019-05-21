@@ -62,7 +62,7 @@ namespace Funhall2
             }
             finally
             {
-                Profile page = new Profile(Customer,Booking);
+                SelectedBookingPage page = new SelectedBookingPage(Booking);
                 this.NavigationService.Navigate(page);
             }     
         }

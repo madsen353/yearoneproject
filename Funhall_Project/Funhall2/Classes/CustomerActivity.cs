@@ -14,7 +14,9 @@ namespace Funhall2.Classes
         //Made by Eby
         public Customer Customer { get; set; }
         public Activity  Activity { get; set; }
-        public string  Points { get; set; }
+        public int  Points { get; set; }
+        //public bool IsFinished { get; set; }
+
         public CustomerActivity()
         {
             Customer = new Customer();

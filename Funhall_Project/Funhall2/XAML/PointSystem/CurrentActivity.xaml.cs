@@ -53,8 +53,8 @@ namespace Funhall2.XAML.PointSystem
         private void EndActivity(object sender, RoutedEventArgs e)
         {
             //Made by Rasmus
-            activity.IsFinished = 1;
-            dal.EndActivity(activity.BookingId, activity.IsFinished, activity.TimeDesc);
+            //activity.IsFinished = true;
+            dal.EndActivity(activity.BookingId, true, activity.TimeDesc);
             AllActivities allActivities = new AllActivities(booking);
             this.NavigationService.Navigate(allActivities);
         }

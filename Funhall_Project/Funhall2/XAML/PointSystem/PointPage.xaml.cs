@@ -34,7 +34,7 @@ namespace Funhall2.XAML.PointSystem
             pageActivity = a;
             InitializeComponent();
             Name.Text = c.Name;
-            Points.Text = c.Points;
+            Points.Text = c.Points.ToString();
             guestID = c.Customer.CusId;
             activity = c.Activity.TimeDesc;
             }

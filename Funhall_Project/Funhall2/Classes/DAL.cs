@@ -46,18 +46,18 @@ namespace Funhall2.Classes
             con.Open();
             cmd.CommandText = "UPDATE GuestActivities SET Points = @Points WHERE GuestID = @ID AND TimeDesc = @ActivityName";
             cmd.Parameters.Add(CreateParam("@ID", id, SqlDbType.NVarChar));
-            cmd.Parameters.Add(CreateParam("@Points", points, SqlDbType.NVarChar));
+            cmd.Parameters.Add(CreateParam("@Points", points, SqlDbType.Int));
             cmd.Parameters.Add(CreateParam("@ActivityName", activityName, SqlDbType.NVarChar));
             cmd.ExecuteNonQuery();
             ResetDAL();
         }
-        public void EndActivity(string id, int isFinished, string activityName)
+        public void EndActivity(string id, bool isFinished, string activityName)
         {
             //Made by Rasmus
             con.Open();
             cmd.CommandText = "UPDATE BookedActivities SET IsFinished = @IsFinished WHERE BookingId = @ID AND TimeDesc = @ActivityName";
             cmd.Parameters.Add(CreateParam("@ID", id, SqlDbType.NVarChar));
-            cmd.Parameters.Add(CreateParam("@IsFinished", isFinished, SqlDbType.Int));
+            cmd.Parameters.Add(CreateParam("@IsFinished", isFinished, SqlDbType.Bit));
             cmd.Parameters.Add(CreateParam("@ActivityName", activityName, SqlDbType.NVarChar));
             cmd.ExecuteNonQuery();
             ResetDAL();
@@ -78,7 +78,7 @@ namespace Funhall2.Classes
                 CustomerActivity ca = new CustomerActivity(cus, act);
                 ca.Customer.CusId = (int) reader[0];
                 ca.Activity.TimeDesc = reader[1].ToString();
-                ca.Points = reader[2].ToString();
+                ca.Points = (int)reader[2];
                 //a.StartTime = DateTime.Parse(reader[2].ToString());
                 //a.EndTime = DateTime.Parse(reader[3].ToString());
                 ResetDAL();
@@ -97,8 +97,9 @@ namespace Funhall2.Classes
             {    
             while (reader.Read())
             {
-                string pointInString = reader[0].ToString();
-                int point = int.Parse(pointInString);
+                //string pointInString = reader[0].ToString();
+                //int point = int.Parse(pointInString);
+                int point = (int)reader[0];
                 allPoints.Add(point);
             }
             }
@@ -122,7 +123,7 @@ namespace Funhall2.Classes
                     a.TimeDesc = reader[1].ToString();
                     a.StartTime = DateTime.Parse(reader[2].ToString());
                     a.EndTime = DateTime.Parse(reader[3].ToString());
-                    a.IsFinished = (int) reader[4];
+                    a.IsFinished = reader.GetBoolean(4);
                     activities.Add(a);
                 }
             }
@@ -164,11 +165,10 @@ namespace Funhall2.Classes
             //Made by Eby
             cmd.Parameters.Add("@Email", SqlDbType.NVarChar).Value = cus.Email;
             //cmd.Parameters.Add("@BookingId", SqlDbType.NVarChar).Value = cus.BookingId;       
-            cmd.CommandText = "set IDENTITY_INSERT GuestActivities ON " +
-                              "INSERT INTO GuestActivities (GuestId, TimeDesc, Points) " +
-                              "SELECT  g.GuestId, b.TimeDesc, '0'" +
-                              "FROM BookedActivities b  " +
-                              "inner JOIN Guests g on  g.BookingId = b.BookingId " +
+            cmd.CommandText = "INSERT INTO GuestActivities (GuestId, TimeDesc, Points) " +
+                              "SELECT  g.GuestId, b.TimeDesc, 0" +
+                              "FROM BookedActivities b" +
+                              " inner JOIN Guests g on g.BookingId = b.BookingId " +
                               "where g.Email=@Email";
             con.Open();
             cmd.ExecuteNonQuery();
@@ -190,7 +190,7 @@ namespace Funhall2.Classes
                     CustomerActivity ca = new CustomerActivity();
                     ca.Customer.CusId = (int) reader[0];
                     ca.Activity.TimeDesc = reader[1].ToString();
-                    ca.Points = reader[2].ToString();
+                    ca.Points = (int)reader[2];
                     //a.StartTime = DateTime.Parse(reader[2].ToString());
                     //a.EndTime = DateTime.Parse(reader[3].ToString());
                     cusActivities.Add(ca);
@@ -300,7 +300,7 @@ namespace Funhall2.Classes
                 try
                 {
                     cmd.ExecuteNonQuery();
-                    MessageBox.Show("Record added Successfully!");
+                   // MessageBox.Show("Record added Successfully!");
                 }
                 catch (Exception ex)
                 {
@@ -325,13 +325,13 @@ namespace Funhall2.Classes
                     string Desc = time.timeDesc;
                     string StartTime = time.start;
                     string Endtime = time.end;
-                    int IsFinished = 0;
+                    bool IsFinished = false;
 
                     AddParam(cmd, FlexyId, "BookingId", SqlDbType.NVarChar);
                     AddParam(cmd, Desc, "Desc", SqlDbType.NVarChar);
                     AddParam(cmd, StartTime, "StartTime", SqlDbType.NVarChar);
                     AddParam(cmd, Endtime, "Endtime", SqlDbType.NVarChar);
-                    AddParam(cmd, IsFinished, "IsFinished", SqlDbType.Int);
+                    AddParam(cmd, IsFinished, "IsFinished", SqlDbType.Bit);
 
                     cmd.CommandText = "insert into BookedActivities(BookingId, TimeDesc, StartTime, Endtime, IsFinished)" +
                                       "values (@BookingId, @Desc, @StartTime, @Endtime, @IsFinished)";
@@ -368,7 +368,7 @@ namespace Funhall2.Classes
                     try
                     {
                         cmd.ExecuteNonQuery();
-                        MessageBox.Show("Record added Successfully!");
+                        //MessageBox.Show("Record added Successfully!");
                     }
                     catch (Exception ex)
                     {
@@ -407,7 +407,7 @@ namespace Funhall2.Classes
                     try
                     {
                         cmd.ExecuteNonQuery();
-                        MessageBox.Show("Record added Successfully!");
+                       // MessageBox.Show("Record added Successfully!");
                     }
                     catch (Exception ex)
                     {

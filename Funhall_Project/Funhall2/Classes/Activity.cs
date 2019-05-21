@@ -17,6 +17,6 @@ namespace Funhall2
         public string TimeDesc { get; set; }
         public DateTime StartTime { get; set; }
         public DateTime EndTime { get; set; }
-        public int IsFinished { get; set; }
+        public bool IsFinished { get; set; }
     }
 }
