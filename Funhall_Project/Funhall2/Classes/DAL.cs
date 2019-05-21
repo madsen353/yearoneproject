@@ -29,6 +29,19 @@ namespace Funhall2.Classes
             con = new SqlConnection("Data Source=.;Initial Catalog=FunHall;" + "Integrated Security=true;");
             cmd = new SqlCommand {Connection = con, CommandType = CommandType.Text};
         }
+
+        public void OpenConnection(SqlConnection con)
+        {
+            try
+            {
+                con.Open();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+            
+        }
             
 
         private SqlParameter CreateParam(string name, object value, SqlDbType type)
@@ -43,7 +56,7 @@ namespace Funhall2.Classes
         public void UpdateCusActivity(int id, string points, string activityName)
         {
             //Made by Rasmus
-            con.Open();
+            OpenConnection(con);
             cmd.CommandText = "UPDATE GuestActivities SET Points = @Points WHERE GuestID = @ID AND TimeDesc = @ActivityName";
             cmd.Parameters.Add(CreateParam("@ID", id, SqlDbType.NVarChar));
             cmd.Parameters.Add(CreateParam("@Points", points, SqlDbType.Int));
@@ -54,7 +67,7 @@ namespace Funhall2.Classes
         public void EndActivity(string id, bool isFinished, string activityName)
         {
             //Made by Rasmus
-            con.Open();
+            OpenConnection(con);
             cmd.CommandText = "UPDATE BookedActivities SET IsFinished = @IsFinished WHERE BookingId = @ID AND TimeDesc = @ActivityName";
             cmd.Parameters.Add(CreateParam("@ID", id, SqlDbType.NVarChar));
             cmd.Parameters.Add(CreateParam("@IsFinished", isFinished, SqlDbType.Bit));
@@ -71,7 +84,7 @@ namespace Funhall2.Classes
             cmd.CommandText = "select ga.GuestId, ga.TimeDesc, ga.Points from GuestActivities ga " +
                               "where ga.GuestId=@Id AND ga.TimeDesc=@Act";
             ObservableCollection<CustomerActivity> cusActivities = new ObservableCollection<CustomerActivity>();
-            con.Open();
+            OpenConnection(con);
             using (SqlDataReader reader = cmd.ExecuteReader())
             {
                 reader.Read();
@@ -92,7 +105,7 @@ namespace Funhall2.Classes
             cmd.Parameters.Add("@Id", SqlDbType.Int).Value = guestID;
             cmd.CommandText = "select Points from GuestActivities where GuestId=@Id";
             List<int> allPoints = new List<int>();
-            con.Open();
+            OpenConnection(con);
             using (SqlDataReader reader = cmd.ExecuteReader())
             {    
             while (reader.Read())
@@ -113,7 +126,7 @@ namespace Funhall2.Classes
             cmd.Parameters.Add("@bookingId", SqlDbType.NVarChar).Value = booking.flexyId;
             cmd.CommandText = "select * from BookedActivities where BookingId = @bookingId";
             ObservableCollection<Activity> activities = new ObservableCollection<Activity>();
-            con.Open();
+            OpenConnection(con);
             using (SqlDataReader reader = cmd.ExecuteReader())
             {
                 while (reader.Read())
@@ -140,7 +153,7 @@ namespace Funhall2.Classes
             cmd.Parameters.Add("@Email", SqlDbType.NVarChar).Value = cus.Email;
             cmd.Parameters.Add("@AgreeTerms", SqlDbType.Bit).Value = cus.Segway;
             cmd.Parameters.Add("@Subscription", SqlDbType.Bit).Value = cus.Subscription;
-            con.Open();
+            OpenConnection(con);
             cmd.ExecuteNonQuery();
             ResetDAL();
         }
@@ -156,7 +169,7 @@ namespace Funhall2.Classes
             cmd.Parameters.Add("@Email", SqlDbType.NVarChar).Value = cus.Email;
             cmd.Parameters.Add("@AgreeTerms", SqlDbType.Bit).Value = cus.Segway;
             cmd.Parameters.Add("@Subscription", SqlDbType.Bit).Value = cus.Subscription;
-            con.Open();
+            OpenConnection(con);
             cmd.ExecuteNonQuery();
             ResetDAL();
         }
@@ -182,7 +195,7 @@ namespace Funhall2.Classes
             cmd.CommandText = "select ga.GuestId, ga.TimeDesc, ga.Points from GuestActivities ga " +
                               "where ga.GuestId=@Id";
             ObservableCollection<CustomerActivity> cusActivities = new ObservableCollection<CustomerActivity>();
-            con.Open();
+            OpenConnection(con);
             using (SqlDataReader reader = cmd.ExecuteReader())
             {
                 while (reader.Read())
@@ -205,7 +218,7 @@ namespace Funhall2.Classes
             cmd.Parameters.Add("@bookingId", SqlDbType.NVarChar).Value = booking.flexyId;
             cmd.CommandText = "select * from Guests where BookingId = @bookingId";
             ObservableCollection<Customer> customers = new ObservableCollection<Customer>();
-            con.Open();
+            OpenConnection(con);
             using (SqlDataReader reader = cmd.ExecuteReader())
             {
                 while (reader.Read())
@@ -230,7 +243,7 @@ namespace Funhall2.Classes
             //Made by Eby
             cmd.CommandText = "select * from Bookings";
             ObservableCollection<Booking> bookings = new ObservableCollection<Booking>();
-            con.Open();
+            OpenConnection(con);
             using (SqlDataReader reader = cmd.ExecuteReader())
             {
                 while (reader.Read())
@@ -271,7 +284,7 @@ namespace Funhall2.Classes
         }
         public void InsertBookingToDb(Booking booking)
         {//Made by Eby
-            con.Open();
+            OpenConnection(con);
             cmd.Parameters.Clear();
             if (booking.flexyId != null && booking.name != null && booking.cusTel != null)
             {
@@ -314,7 +327,7 @@ namespace Funhall2.Classes
         {
             List<Booking.Time> times = booking.times;
             //Made by Eby
-            con.Open();
+            OpenConnection(con);
 
             foreach (var time in times)
             {
@@ -352,7 +365,7 @@ namespace Funhall2.Classes
         public void InsertActivityToDb(Booking booking)
         {//Made by Eby
             List<Booking.Time> times = booking.times;
-            con.Open();
+            OpenConnection(con);
 
             foreach (var time in times)
             {
@@ -382,7 +395,7 @@ namespace Funhall2.Classes
         {
             List<Booking.Product> products = booking.products;
             //Made by Eby
-            con.Open();
+            OpenConnection(con);
 
             foreach (var product in products)
             {

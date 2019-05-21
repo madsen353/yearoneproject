@@ -33,28 +33,35 @@ namespace Funhall2
             {
                 _bookings = server.ReadAllBookings();
             }
-
-            //Made by Eby
-            //Refactored by Rasmus(methods moved from Booking class to DAL class.
-            
-            foreach (var booking in _bookings)
+            if (_bookings[0].name == "ServerErrorOccured")
             {
-                dal.InsertBookingToDb(booking);
-                dal.InsertBookedActivitiesToDb(booking);
-                dal.InsertActivityToDb(booking);
-                dal.InsertBookedProductsToDb(booking);
-                
+                MessageBox.Show("Der opstod en fejl i i forsøget til at forbinde til serveren. \n Du bliver sendt tilbage til forsiden");
+                NavigateToMainMenu();
             }
+            else
+            {
+                //Made by Eby
+                //Refactored by Rasmus(methods moved from Booking class to DAL class.
+
+                foreach (var booking in _bookings)
+                {
+                    dal.InsertBookingToDb(booking);
+                    dal.InsertBookedActivitiesToDb(booking);
+                    dal.InsertActivityToDb(booking);
+                    dal.InsertBookedProductsToDb(booking);
+
+                }
 
 
-            //Made by Rasmus
+                //Made by Rasmus
 
-            InitializeComponent();
-            DataContext = this;
+                InitializeComponent();
+                DataContext = this;
 
-            //ListBox Solution:
-            ObservableCollection<Booking> bookings = dal.getBookings();
-            listBox.ItemsSource = bookings;
+                //ListBox Solution:
+                ObservableCollection<Booking> bookings = dal.getBookings();
+                listBox.ItemsSource = bookings;
+            }
             }
 
         private void Button_Click(object sender, RoutedEventArgs e)
@@ -101,6 +108,12 @@ namespace Funhall2
         }
 
         private void GoToMainMenu(object sender, RoutedEventArgs e)
+        {
+            //Made by Rasmus
+            NavigateToMainMenu();
+        }
+
+        private void NavigateToMainMenu()
         {
             //Made by Rasmus
             CheckInPage CheckIn = new CheckInPage();

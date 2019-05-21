@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Windows;
 using Newtonsoft.Json;
 using Renci.SshNet;
 
@@ -19,26 +20,52 @@ namespace Funhall2
             client = new SftpClient(config.RemoteAddress, config.Username, config.Password);
         }
 
+        private bool ConnectToClient(SftpClient client)
+        {
+            bool connectionStatus = true;
+            try
+            {
+                client.Connect();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+                connectionStatus = false;
+            }
+            return connectionStatus;
+        }
         public List<Booking> ReadAllBookings()
         {
             //Made by Rasmus
-            client.Connect();
-            Console.WriteLine("Is Connected");
-            var files = client.ListDirectory(config.FilePath);//SFTP folder from where the file is to be download
+            bool connectionStatus = ConnectToClient(client);
             var bookings = new List<Booking>();
-            foreach (var file in files)
+            if (connectionStatus == true) 
             {
-                if (file.Name.EndsWith(".json"))
+                Console.WriteLine("Is Connected");
+                var files = client.ListDirectory(config.FilePath);//SFTP folder from where the file is to be download
+                
+                foreach (var file in files)
                 {
-                    string remoteFileName = file.Name;
-                    
-                    // This code loads the data into RAM without persisting it.
-                    var json = client.ReadAllText(config.FilePath + remoteFileName);
-                    Booking rawBooking = JsonConvert.DeserializeObject<Booking>(json);
-                    bookings.Add(rawBooking);
+                    if (file.Name.EndsWith(".json"))
+                    {
+                        string remoteFileName = file.Name;
+
+                        // This code loads the data into RAM without persisting it.
+                        var json = client.ReadAllText(config.FilePath + remoteFileName);
+                        Booking rawBooking = JsonConvert.DeserializeObject<Booking>(json);
+                        bookings.Add(rawBooking);
+                    }
                 }
+                client.Disconnect();
+                return bookings;
             }
-            client.Disconnect();
+            else if (connectionStatus == false)
+            {
+                Booking bookingError = new Booking();
+                bookingError.name = "ServerErrorOccured";
+                bookings.Add(bookingError);
+            }
+
             return bookings;
         }
         public void Dispose()
