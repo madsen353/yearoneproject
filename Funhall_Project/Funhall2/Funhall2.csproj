@@ -92,6 +92,7 @@
     <Compile Include="Classes\Mailer.cs" />
     <Compile Include="Classes\Printer.cs" />
     <Compile Include="Classes\RemoteServer.cs" />
+    <Compile Include="Classes\SystemFunctions.cs" />
     <Compile Include="XAML\CheckIn\GuestCheckinPage.xaml.cs">
       <DependentUpon>GuestCheckinPage.xaml</DependentUpon>
     </Compile>

@@ -38,7 +38,9 @@ namespace Funhall2.Classes
             }
             catch (Exception ex)
             {
-                MessageBox.Show(ex.Message);
+                MessageBox.Show("Databasen er ikke tilgængelig, applikationen genstarter");
+                SystemFunctions.ShutdownApplication();
+
             }
             
         }

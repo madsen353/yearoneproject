@@ -46,7 +46,7 @@ namespace Funhall2
             if (b != null)
             {
                 Customer cus = Guests.SelectedItem as Customer;
-                Profile page = new Profile(cus, b);
+                Profile page = new Profile(cus, b, globalPageHistory);
                 this.NavigationService.Navigate(page);
             }
             else
@@ -68,7 +68,6 @@ namespace Funhall2
                 AllActivities allActivities = new AllActivities(Booking);
                 this.NavigationService.Navigate(allActivities);
             }
-            this.NavigationService.GoBack();
-        }
+            }
     }
 }

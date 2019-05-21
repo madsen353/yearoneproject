@@ -22,8 +22,10 @@ namespace Funhall2
         DAL dal = new DAL();
         public Customer Customer { get; set; }
         public Booking Booking { get; set; }
-        public Profile(Customer cus, Booking b)
+        public string globalPageHistory = "";
+        public Profile(Customer cus, Booking b, string pageHistory)
         {
+            globalPageHistory = pageHistory;
             Customer = cus;
             Booking = b;
             InitializeComponent();
@@ -60,16 +62,16 @@ namespace Funhall2
             {
                 MessageBox.Show("Der skete en fejl, prøv igen.");                
             }
-            finally
-            {
-                SelectedBookingPage page = new SelectedBookingPage(Booking);
-                this.NavigationService.Navigate(page);
-            }     
+            //finally
+            //{
+            //    SelectedBookingPage page = new SelectedBookingPage(Booking);
+            //    this.NavigationService.Navigate(page);
+            //}     
         }
 
         private void Back_Button(object sender, RoutedEventArgs e)
         {
-            SelectedBookingPage page = new SelectedBookingPage(Booking);
+            SelectedBookingPage page = new SelectedBookingPage(Booking, globalPageHistory);
             this.NavigationService.Navigate(page);
 
         }

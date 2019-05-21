@@ -35,7 +35,7 @@ namespace Funhall2
             if (_bookings[0].name == "ServerErrorOccured")
             {
                 MessageBox.Show("Der opstod en fejl i forsøget,' på at forbinde til serveren. \n Du bliver sendt tilbage til forsiden");
-                RestartApp();
+                SystemFunctions.ShutdownApplication();
             }
             else
             {
@@ -72,7 +72,8 @@ namespace Funhall2
             Booking b = listBox.SelectedItem as Booking;
             if (b != null)
             {
-                SelectedBookingPage page = new SelectedBookingPage(b);
+                string currentPageName = "AllBookingsPage";
+                SelectedBookingPage page = new SelectedBookingPage(b, currentPageName);
                 this.NavigationService.Navigate(page); this.NavigationService.Navigate(page);
 
             }
@@ -106,12 +107,6 @@ namespace Funhall2
             CheckInPage CheckIn = new CheckInPage();
             this.NavigationService.Navigate(CheckIn);
 
-        }
-
-        private void RestartApp()
-        {
-            System.Diagnostics.Process.Start(Application.ResourceAssembly.Location);
-            Application.Current.Shutdown();
         }
     }
 }
