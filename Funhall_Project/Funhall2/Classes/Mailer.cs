@@ -2,10 +2,12 @@
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Drawing;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Net.Mail;
+using System.Windows;
 
 namespace Funhall2.Classes
 {
@@ -50,9 +52,38 @@ namespace Funhall2.Classes
             foreach (Customer guest in recipients)
             {
                 MailMessage mail = GenerateEmail(guest);
-                client.Send(mail);
+                try
+                {
+                    client.Send(mail);
+                }
+                catch (Exception e)
+                {
+                    MessageBox.Show(e.Message);
+                    SaveErrorFile(e);
+                }
+                
             }
+        }
+
+        private void SaveErrorFile(Exception exceptionData)
+        {
+            string filePath = "Error.txt";
+            using (StreamWriter writer = new StreamWriter(filePath, true))
+            {
+                writer.WriteLine("-----------------------------------------------------------------------------");
+                writer.WriteLine("Date : " + DateTime.Now.ToString());
+                writer.WriteLine();
+
+                while (exceptionData != null)
+                {
+                    writer.WriteLine(exceptionData.GetType().FullName);
+                    writer.WriteLine("Message : " + exceptionData.Message);
+                    writer.WriteLine("StackTrace : " + exceptionData.StackTrace);
+
+                    exceptionData = exceptionData.InnerException;
+                }
             }
+        }
 
     }
 }
