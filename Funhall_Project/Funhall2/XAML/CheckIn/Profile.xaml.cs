@@ -41,6 +41,7 @@ namespace Funhall2
         {
             //made by Ebby
             Customer cus = new Customer();
+
             cus.CusId = Customer.CusId;
             cus.Name = Name.Text;
             cus.Email = Email.Text;

@@ -205,9 +205,9 @@ namespace Funhall2.Classes
             cmd.Parameters.Add("@Email", SqlDbType.NVarChar).Value = cus.Email;
             cmd.Parameters.Add("@AgreeTerms", SqlDbType.Bit).Value = cus.Segway;
             cmd.Parameters.Add("@Subscription", SqlDbType.Bit).Value = cus.Subscription;
+            OpenConnection(con);
             if (connectionStatus == true)
             {
-                OpenConnection(con);
                 cmd.ExecuteNonQuery();
                 ResetDAL();
             }
