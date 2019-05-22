@@ -7,7 +7,7 @@
         mc:Ignorable="d"
         Title="SegwayAnsvarsFragivelse" Height="450" Width="800">
     <Grid>
-        <Image Margin="10,0,10,-19" Source="Image1.png" Stretch="Fill"/>
+        <Image Source="SegwayDisclaimer.png" Stretch="Fill"/>
 
     </Grid>
 </Window>

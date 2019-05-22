@@ -79,5 +79,25 @@ namespace Funhall2
             this.NavigationService.Navigate(CheckIn);
 
         }
+
+        private void UpdateList(object sender, RoutedEventArgs e)
+        {
+            BookingFetcher bookingFetcher = new BookingFetcher();
+            try
+            {
+                List<Booking> bookings = bookingFetcher.GetBookingsFromRemoteServer();
+                bookingFetcher.InsertBookingsToDB(bookings);
+            }
+            catch (Exception exception)
+            {
+                ExceptionWriter.SaveErrorFile(exception);
+                MessageBox.Show("Der kunne ikke oprettes forbindelse til fjernserveren eller databasen, kontakt personalet eller prøv igen");
+                return;
+            }
+
+            //Made by Anders & Niels
+            AllBookingsPage AllBookings = new AllBookingsPage();
+            this.NavigationService.Navigate(AllBookings);
+        }
     }
 }

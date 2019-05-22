@@ -28,15 +28,10 @@
             </ListBox.ItemTemplate>
         </ListBox>
 
-
-        <!--Datagrid Solution:-->
-        <!--<DataGrid Name="grid" ItemsSource="{Binding bookings}" FontSize="12" Grid.Row="1"  Margin="0,80,-0.4,0" AutoGenerateColumns="False">
-            <DataGrid.Columns>
-                <DataGridTextColumn Header="Name" Binding="{Binding name}"/>
-            </DataGrid.Columns>
-        </DataGrid>-->
         <Button Content="Gå tilbage til hovedemenuen" HorizontalAlignment="Left" Height="23" Margin="148,246,0,0" VerticalAlignment="Top" Width="194" Click="GoToMainMenu" Grid.Row="1"/>
-        <Button Content="Vis liste af gæster" HorizontalAlignment="Right" Margin="0,175,153,0" Grid.Row="1" VerticalAlignment="Top" Width="172" Click="ShowSelectedBooking"/>
-        <Button Content="Meld din ankomst" HorizontalAlignment="Right" Margin="0,170,458,0" Grid.Row="1" VerticalAlignment="Top" Width="194" Click="Checkin_Click" />
+        <Button Content="Vis liste af gæster" HorizontalAlignment="Right" Margin="0,170,152,0" Grid.Row="1" VerticalAlignment="Top" Width="194" Click="ShowSelectedBooking"/>
+        <Button Content="Meld din ankomst" HorizontalAlignment="Left" Margin="148,170,0,0" Grid.Row="1" VerticalAlignment="Top" Width="194" Click="Checkin_Click" />
+        <Button Content="Booking mangler? (Opdater her)" HorizontalAlignment="Right" Margin="0,246,152,0" Grid.Row="1" VerticalAlignment="Top" Width="194" Click="UpdateList" />
+
     </Grid>
 </Page>
