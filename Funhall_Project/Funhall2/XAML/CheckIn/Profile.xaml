@@ -41,15 +41,14 @@
 
         <Grid Margin="10,240,10,0">
             <Label Content="Aktiviteter" Margin="0,9,10,0" Grid.Row="0" VerticalAlignment="Top" Height="33" FontWeight="Bold" FontSize="14"/>
-            <ListView  Name="Activities"  Margin="0,33,0,10"   >
-                <ListView.View>
-                    <GridView >
-                        <GridViewColumn Header="TimeDescription" Width="120" DisplayMemberBinding="{Binding Activity.TimeDesc}"  />
-                        <GridViewColumn Header="Pointer" DisplayMemberBinding="{Binding Points}"  Width="150" />
-                    </GridView>
-                </ListView.View>
-            </ListView>
-
+                <ListView  Name="Activities"  Margin="0,42,0,10" ScrollViewer.VerticalScrollBarVisibility="Auto"  >
+                    <ListView.View>
+                        <GridView >
+                            <GridViewColumn Header="TimeDescription" Width="120" DisplayMemberBinding="{Binding Activity.TimeDesc}"  />
+                            <GridViewColumn Header="Pointer" DisplayMemberBinding="{Binding Points}"  Width="150" />
+                        </GridView>
+                    </ListView.View>
+                </ListView>
         </Grid>
         <Button Content="Tilbage" HorizontalAlignment="Left" Margin="75,6,0,0" VerticalAlignment="Top" Width="75" Click="Back_Button"/>
 

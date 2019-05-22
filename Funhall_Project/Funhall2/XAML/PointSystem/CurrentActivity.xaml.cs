@@ -37,7 +37,10 @@ namespace Funhall2.XAML.PointSystem
             ObservableCollection<CustomerActivity> elementsToShow = new ObservableCollection<CustomerActivity>();
             foreach (Customer guest in guests)
             {
-                elementsToShow.Add(dal.GetCusActivitySpecifiedByActivity(guest, activity));
+                if (guest.Segway != false)
+                {
+                    elementsToShow.Add(dal.GetCusActivitySpecifiedByActivity(guest, activity));
+                }
             }
             Guests.ItemsSource = elementsToShow;
         }
@@ -45,7 +48,7 @@ namespace Funhall2.XAML.PointSystem
         private void UpdateScore(object sender, RoutedEventArgs e)
         {
             //Made by Rasmus
-            CustomerActivity c = Guests.SelectedItem as CustomerActivity;
+            CustomerActivity c = Guests.SelectedItem as CustomerActivity;           
             PointPage pointPage = new PointPage(c,booking,activity);
             this.NavigationService.Navigate(pointPage);
         }

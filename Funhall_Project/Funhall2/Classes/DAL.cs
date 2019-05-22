@@ -162,9 +162,19 @@ namespace Funhall2.Classes
                         Activity a = new Activity();
                         a.BookingId = reader[0].ToString();
                         a.TimeDesc = reader[1].ToString();
-                        a.StartTime = DateTime.Parse(reader[2].ToString());
-                        a.EndTime = DateTime.Parse(reader[3].ToString());
-                        a.IsFinished = reader.GetBoolean(4);
+                        string start = reader[2].ToString();
+                        if (!string.IsNullOrEmpty(start))
+                        {
+                            a.StartTime = DateTime.Parse(start);
+                        }
+                        string end = reader[3].ToString();
+                        if (!string.IsNullOrEmpty(end))
+                        {
+                            a.EndTime = DateTime.Parse(end);
+                        }                        
+                            a.IsFinished = (bool)reader.GetBoolean(4);                    
+
+                        
                         activities.Add(a);
                     }
                 }

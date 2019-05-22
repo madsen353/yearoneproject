@@ -34,7 +34,24 @@ namespace Funhall2
             this.DataContext = Customer;            
             //ObservableCollection<Activity> activities = Activity.getBookedActivities(b);
             ObservableCollection<CustomerActivity> CusActivities = dal.GetCusActivities(cus);
-            Activities.ItemsSource = CusActivities;
+            ObservableCollection<CustomerActivity> CusActivitiesToShow = new ObservableCollection<CustomerActivity>();
+            foreach (var cusAct in CusActivities)
+            {
+                if (cusAct.Activity.TimeDesc == "Segway")
+                {
+                    if (Customer.Segway == true)
+                    {
+                        CusActivitiesToShow.Add(cusAct);
+                    }                   
+                }
+                else if (!(cusAct.Activity.TimeDesc == "Spisning" || cusAct.Activity.TimeDesc == "Fri leg"))
+                {
+                    CusActivitiesToShow.Add(cusAct);
+                }
+
+            }     
+          
+            Activities.ItemsSource = CusActivitiesToShow;
         }
 
         private void UpdateGuestData(object sender, RoutedEventArgs e)
