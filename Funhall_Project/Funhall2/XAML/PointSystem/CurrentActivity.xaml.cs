@@ -46,8 +46,17 @@ namespace Funhall2.XAML.PointSystem
         {
             //Made by Rasmus
             CustomerActivity c = Guests.SelectedItem as CustomerActivity;
-            PointPage pointPage = new PointPage(c,booking,activity);
-            this.NavigationService.Navigate(pointPage);
+            if (c != null)
+            {
+                PointPage pointPage = new PointPage(c, booking, activity);
+                this.NavigationService.Navigate(pointPage);
+            }
+
+            else
+            {
+                MessageBox.Show("Vælg en Person fra listen");
+
+            }
         }
 
         private void EndActivity(object sender, RoutedEventArgs e)

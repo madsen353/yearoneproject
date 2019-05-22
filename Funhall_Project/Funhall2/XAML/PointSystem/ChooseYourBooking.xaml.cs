@@ -35,9 +35,21 @@ namespace Funhall2.XAML.PointSystem
         {
             //Made by Rasmus
             Booking b = listBox.SelectedItem as Booking;
-            AllActivities allActivities = new AllActivities(b);
-            this.NavigationService.Navigate(allActivities);
+            if (b != null)
+            {
+                AllActivities allActivities = new AllActivities(b);
+                this.NavigationService.Navigate(allActivities);
+            }
+
+            else
+            {
+                MessageBox.Show("Vælg en Booking fra listen");
+
+            }
         }
+
+
+
 
         private void GoToFrontPage(object sender, RoutedEventArgs e)
         {
