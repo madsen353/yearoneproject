@@ -49,8 +49,17 @@ namespace Funhall2.XAML.PointSystem
         {
             //Made by Rasmus
             Activity a = Activities.SelectedItem as Activity;
-            CurrentActivity currentActivity = new CurrentActivity(a, booking);
-            this.NavigationService.Navigate(currentActivity);
+            if (a != null)
+            {
+                CurrentActivity currentActivity = new CurrentActivity(a, booking);
+                this.NavigationService.Navigate(currentActivity);
+            }
+
+            else
+            {
+                MessageBox.Show("Vælg en aktivitet fra listen");
+
+            }
         }
 
         private void AllActivitiesHaveEnded(object sender, RoutedEventArgs e)
