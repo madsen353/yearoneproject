@@ -32,7 +32,7 @@ namespace Funhall2.Classes
             PointF fourthLocation = new PointF(1750f, 1485f);
             //FilePaths is bin/debug
             string imageFilePath = "DiplomaTemplate.bmp";
-            string imageSavePath = "DiplomaWithData.bmp";
+            string imageSavePath = $"Diplomas/DiplomaWithData{guest.Name}.bmp";
             Bitmap bitmap = (Bitmap)Image.FromFile(imageFilePath);//load the image file
 
             using (Graphics graphics = Graphics.FromImage(bitmap))

@@ -63,6 +63,7 @@ namespace Funhall2.Classes
                 }
                 
             }
+            //delete all files in diploma
         }
 
         
