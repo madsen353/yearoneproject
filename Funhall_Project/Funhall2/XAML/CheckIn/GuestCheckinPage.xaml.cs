@@ -13,6 +13,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using Funhall2.XAML.CheckIn;
 
 namespace Funhall2
 {
@@ -56,9 +57,9 @@ namespace Funhall2
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {
-            //Made by Anders & Niels
-            SegwayAnsvarsFragivelse window = new SegwayAnsvarsFragivelse();
-            window.ShowDialog();
+            ////Made by Anders & Niels
+            SegwayDisclaimer segway = new SegwayDisclaimer();
+            segway.ShowDialog();
         }
 
         private void Back_Button(object sender, RoutedEventArgs e)

@@ -102,6 +102,9 @@
     <Compile Include="XAML\CheckIn\SegwayAnsvarsFragivelse.xaml.cs">
       <DependentUpon>SegwayAnsvarsFragivelse.xaml</DependentUpon>
     </Compile>
+    <Compile Include="XAML\CheckIn\SegwayDisclaimer.xaml.cs">
+      <DependentUpon>SegwayDisclaimer.xaml</DependentUpon>
+    </Compile>
     <Compile Include="XAML\CheckIn\SelectedBookingPage.xaml.cs">
       <DependentUpon>SelectedBookingPage.xaml</DependentUpon>
     </Compile>
@@ -131,6 +134,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="XAML\CheckIn\GuestCheckinPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="XAML\CheckIn\SegwayDisclaimer.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -217,6 +224,9 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="DiplomaTemplate.bmp" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="SegwayDisclaimer.jpg" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

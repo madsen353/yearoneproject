@@ -1,13 +1,13 @@
-﻿<Window x:Class="Funhall2.SegwayAnsvarsFragivelse"
+﻿<Window x:Class="Funhall2.XAML.CheckIn.SegwayDisclaimer"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:Funhall2"
+        xmlns:local="clr-namespace:Funhall2.XAML.CheckIn"
         mc:Ignorable="d"
-        Title="SegwayAnsvarsFragivelse" Height="450" Width="800">
+        Title="SegwayDisclaimer" Height="1078" Width="1237">
     <Grid>
-        <!--<Image Source="/SegwayDisclaimer.png"/>-->
+        <Image HorizontalAlignment="Left" Source="/Funhall2;component/SegwayDisclaimer.jpg" Stretch="Fill" Margin="0,0,-8,0"/>
 
     </Grid>
 </Window>
