@@ -22,5 +22,6 @@
         </Grid.ColumnDefinitions>
         <Button Content="Check-in" Margin="10,10,11,10" Grid.Row="1" Click="checkIn_Click" FontFamily="Gill Sans MT" FontSize="18"/>
         <Button Content="Point System" Margin="11,10,10,10" Grid.Row="1" Click="point_Click" FontFamily="Gill Sans MT" FontSize="18" Grid.Column="2"/>
+        <TextBlock Name="StatusText" Grid.Column="1" Grid.Row="1" />
     </Grid>
 </Page>

@@ -20,31 +20,12 @@ namespace Funhall2
             this.config = config;
             client = new SftpClient(config.RemoteAddress, config.Username, config.Password);
         }
-
-        private bool ConnectToClient(SftpClient client)
-        {
-            bool connectionStatus = true;
-            try
-            {
-                //Thread til at vise box mens client kører videre?
-                AutoClosingMessageBox.Show("Der bliver forsøgt at oprette forbindelse til serveren der indeholder dagens bookings", "Infromations Box(Kræver ikke handling)", 5000);
-                client.Connect();
-            }
-            catch (Exception ex)
-            {
-                //MessageBox.Show(ex.Message);
-                connectionStatus = false;
-            }
-            return connectionStatus;
-        }
         public List<Booking> ReadAllBookings()
         {
             //Made by Rasmus
-            bool connectionStatus = ConnectToClient(client);
+            client.Connect();
             var bookings = new List<Booking>();
-            if (connectionStatus == true)
-            {
-                MessageBox.Show("Forbindelse er blevet etableret");
+                
                 var files = client.ListDirectory(config.FilePath);//SFTP folder from where the file is to be download
 
                 foreach (var file in files)
@@ -61,15 +42,6 @@ namespace Funhall2
                 }
                 client.Disconnect();
                 return bookings;
-            }
-            else if (connectionStatus == false)
-            {
-                Booking bookingError = new Booking();
-                bookingError.name = "ServerErrorOccured";
-                bookings.Add(bookingError);
-            }
-
-            return bookings;
         }
         public void Dispose()
         {

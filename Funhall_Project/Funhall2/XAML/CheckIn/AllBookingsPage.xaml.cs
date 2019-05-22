@@ -23,38 +23,12 @@ namespace Funhall2
         DAL dal = new DAL();
         public AllBookingsPage()
         {
-            
-            //Made by Rasmus
-            RemoteServerConfig config = ConfigurationReader.Read();
-            RemoteServer server = new RemoteServer(config);
-            List<Booking> _bookings = new List<Booking>();
-            using (server)
-            {
-                _bookings = server.ReadAllBookings();
-            }
-            if (_bookings[0].name == "ServerErrorOccured")
-            {
-                MessageBox.Show("Der opstod en fejl i forsøget,' på at forbinde til serveren. \n Du bliver sendt tilbage til forsiden");
-                SystemFunctions.ShutdownApplication();
-            }
-            else
-            {
-                //Made by Eby
-                //Refactored by Rasmus(methods moved from Booking class to DAL class.
-                foreach (var booking in _bookings)
-                {
-                    dal.InsertBookingToDb(booking);
-                    dal.InsertBookedActivitiesToDb(booking);
-                    dal.InsertActivityToDb(booking);
-                    dal.InsertBookedProductsToDb(booking);
-                }
                 //Made by Rasmus
                 InitializeComponent();
                 DataContext = this;
                 //ListBox Solution:
                 ObservableCollection<Booking> bookings = dal.getBookings();
                 listBox.ItemsSource = bookings;
-            }
         }
 
         private void Button_Click(object sender, RoutedEventArgs e)
@@ -63,9 +37,7 @@ namespace Funhall2
             CheckInPage checkIn = new CheckInPage();
             this.NavigationService.Navigate(checkIn);
         }
-
-
-
+        
         private void ShowSelectedBooking(object sender, RoutedEventArgs e)
         {
             //Made by Eby
@@ -82,8 +54,7 @@ namespace Funhall2
                 MessageBox.Show("Vælg en Booking fra listen");
             }
         }
-            
-
+         
         private void Checkin_Click(object sender, RoutedEventArgs e)
         {
             //Made by Eby

@@ -59,31 +59,13 @@ namespace Funhall2.Classes
                 catch (Exception e)
                 {
                     MessageBox.Show(e.Message);
-                    SaveErrorFile(e);
+                    ExceptionWriter.SaveErrorFile(e);
                 }
                 
             }
         }
 
-        private void SaveErrorFile(Exception exceptionData)
-        {
-            string filePath = "Error.txt";
-            using (StreamWriter writer = new StreamWriter(filePath, true))
-            {
-                writer.WriteLine("-----------------------------------------------------------------------------");
-                writer.WriteLine("Date : " + DateTime.Now.ToString());
-                writer.WriteLine();
-
-                while (exceptionData != null)
-                {
-                    writer.WriteLine(exceptionData.GetType().FullName);
-                    writer.WriteLine("Message : " + exceptionData.Message);
-                    writer.WriteLine("StackTrace : " + exceptionData.StackTrace);
-
-                    exceptionData = exceptionData.InnerException;
-                }
-            }
-        }
+        
 
     }
 }
