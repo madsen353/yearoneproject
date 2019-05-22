@@ -41,17 +41,17 @@
         </Grid>
         <Grid Grid.Row="3" Margin="0,1.333,0,0">
             <Label Content="Checked-in Guester" Margin="22,5,10,0" Grid.Row="0" VerticalAlignment="Top" Height="33" FontWeight="Bold" FontSize="14"/>
-           
-            <ScrollViewer ScrollViewer.VerticalScrollBarVisibility="Auto" Margin="20,38,0,-8">
-                <ListView  Name="Guests" RenderTransformOrigin="0.506,4.68" Grid.Row="2" Height="122" MouseDoubleClick="ViewGuestInfo" >
-                    <ListView.View>
-                        <GridView >
-                            <GridViewColumn Header="Name" Width="120" DisplayMemberBinding="{Binding Name}"  />
-                            <GridViewColumn Header="Email" Width="150" DisplayMemberBinding="{Binding Email}" />
-                        </GridView>
-                    </ListView.View>
-                </ListView>
-            </ScrollViewer>
+
+            <!--<ScrollViewer ScrollViewer.VerticalScrollBarVisibility="Auto" Margin="20,38,0,8">-->
+            <ListView  Name="Guests" RenderTransformOrigin="0.506,4.68" MouseDoubleClick="ViewGuestInfo" Margin="10,43,10,27" >
+                <ListView.View>
+                    <GridView >
+                        <GridViewColumn Header="Name" Width="120" DisplayMemberBinding="{Binding Name}"  />
+                        <GridViewColumn Header="Email" Width="150" DisplayMemberBinding="{Binding Email}" />
+                    </GridView>
+                </ListView.View>
+            </ListView>
+            <!--</ScrollViewer>-->
         </Grid>
 
     </Grid>
