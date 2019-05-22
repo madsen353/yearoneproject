@@ -42,9 +42,7 @@ namespace Funhall2
             catch (Exception exception)
             {
                 ExceptionWriter.SaveErrorFile(exception);
-                System.Threading.Thread.Sleep(5000);
-                StatusText.Text = "Der kunne ikke oprettes forbindelse til fjernserveren, kontakt personalet elller prøv igen";
-                System.Threading.Thread.Sleep(2000);
+                StatusText.Text = "Der kunne ikke oprettes forbindelse til fjernserveren \n eller databasen, kontakt personalet \n eller prøv igen";
                 return;
             }
 

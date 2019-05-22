@@ -32,20 +32,15 @@ namespace Funhall2.Classes
             connectionStatus = false;
         }
 
-        public bool OpenConnection(SqlConnection con)
+        public void OpenConnection(SqlConnection con)
         {
             try
             {
                 con.Open();
-                connectionStatus = true;
-                return connectionStatus;
             }
             catch (Exception ex)
             {
-                MessageBox.Show("Databasen er ikke tilgængelig, applikationen genstarter");
-                SystemFunctions.ShutdownApplication();
-                connectionStatus = false;
-                return connectionStatus;
+                throw ex;
             }
             
         }
@@ -64,23 +59,17 @@ namespace Funhall2.Classes
         {
             //Made by Rasmus
             OpenConnection(con);
-            if (connectionStatus == true)
-            {
                 cmd.CommandText = "UPDATE GuestActivities SET Points = @Points WHERE GuestID = @ID AND TimeDesc = @ActivityName";
                 cmd.Parameters.Add(CreateParam("@ID", id, SqlDbType.NVarChar));
                 cmd.Parameters.Add(CreateParam("@Points", points, SqlDbType.Int));
                 cmd.Parameters.Add(CreateParam("@ActivityName", activityName, SqlDbType.NVarChar));
                 cmd.ExecuteNonQuery();
                 ResetDAL();
-            }
-
         }
         public void EndActivity(string id, bool isFinished, string activityName)
         {
             //Made by Rasmus
             OpenConnection(con);
-            if (connectionStatus == true)
-            {
                 cmd.CommandText =
                     "UPDATE BookedActivities SET IsFinished = @IsFinished WHERE BookingId = @ID AND TimeDesc = @ActivityName";
                 cmd.Parameters.Add(CreateParam("@ID", id, SqlDbType.NVarChar));
@@ -88,7 +77,6 @@ namespace Funhall2.Classes
                 cmd.Parameters.Add(CreateParam("@ActivityName", activityName, SqlDbType.NVarChar));
                 cmd.ExecuteNonQuery();
                 ResetDAL();
-            }
         }
         public CustomerActivity GetCusActivitySpecifiedByActivity(Customer cus, Activity act)
         {
@@ -100,8 +88,6 @@ namespace Funhall2.Classes
                               "where ga.GuestId=@Id AND ga.TimeDesc=@Act";
             ObservableCollection<CustomerActivity> cusActivities = new ObservableCollection<CustomerActivity>();
             OpenConnection(con);
-            if (connectionStatus == true)
-            {
                 using (SqlDataReader reader = cmd.ExecuteReader())
                 {
                     reader.Read();
@@ -114,9 +100,6 @@ namespace Funhall2.Classes
                     ResetDAL();
                     return ca;
                 }
-            }
-            CustomerActivity databaseConnectionFailure = new CustomerActivity();
-            return databaseConnectionFailure;
         }
 
         public List<int> GetTotalAmountOfPoints(int guestID)
@@ -126,24 +109,19 @@ namespace Funhall2.Classes
             cmd.CommandText = "select Points from GuestActivities where GuestId=@Id";
             List<int> allPoints = new List<int>();
             OpenConnection(con);
-            if (connectionStatus == true)
+            using (SqlDataReader reader = cmd.ExecuteReader())
             {
-                using (SqlDataReader reader = cmd.ExecuteReader())
+                while (reader.Read())
                 {
-                    while (reader.Read())
-                    {
-                        //string pointInString = reader[0].ToString();
-                        //int point = int.Parse(pointInString);
-                        int point = (int) reader[0];
-                        allPoints.Add(point);
-                    }
+                    //string pointInString = reader[0].ToString();
+                    //int point = int.Parse(pointInString);
+                    int point = (int) reader[0];
+                    allPoints.Add(point);
                 }
-
-                ResetDAL();
-                return allPoints;
             }
-            allPoints.Add(-1);
+            ResetDAL();
             return allPoints;
+                
         }
 
         public ObservableCollection<Activity> GetBookedActivities(Booking booking)
@@ -153,8 +131,6 @@ namespace Funhall2.Classes
             cmd.CommandText = "select * from BookedActivities where BookingId = @bookingId";
             ObservableCollection<Activity> activities = new ObservableCollection<Activity>();
             OpenConnection(con);
-            if (connectionStatus == true)
-            { 
                 using (SqlDataReader reader = cmd.ExecuteReader())
                 {
                     while (reader.Read())
@@ -172,10 +148,6 @@ namespace Funhall2.Classes
             ResetDAL();
             return activities;
         }
-            Activity databaseConnectionFailure = new Activity();
-            activities.Add(databaseConnectionFailure);
-            return activities;
-        }
         public void CheckInCus(Customer cus)
         {
             //Made by Eby
@@ -187,7 +159,6 @@ namespace Funhall2.Classes
             cmd.Parameters.Add("@AgreeTerms", SqlDbType.Bit).Value = cus.Segway;
             cmd.Parameters.Add("@Subscription", SqlDbType.Bit).Value = cus.Subscription;
             OpenConnection(con);
-            if (connectionStatus == true)
             {
                 cmd.ExecuteNonQuery();
                 ResetDAL();
@@ -206,11 +177,9 @@ namespace Funhall2.Classes
             cmd.Parameters.Add("@AgreeTerms", SqlDbType.Bit).Value = cus.Segway;
             cmd.Parameters.Add("@Subscription", SqlDbType.Bit).Value = cus.Subscription;
             OpenConnection(con);
-            if (connectionStatus == true)
-            {
-                cmd.ExecuteNonQuery();
-                ResetDAL();
-            }
+            cmd.ExecuteNonQuery();
+            ResetDAL();
+            
         }
         public void AddActivities(Customer cus)
         {
@@ -223,11 +192,8 @@ namespace Funhall2.Classes
                               " inner JOIN Guests g on g.BookingId = b.BookingId " +
                               "where g.Email=@Email";
             OpenConnection(con);
-            if (connectionStatus == true)
-            {
                 cmd.ExecuteNonQuery();
                 ResetDAL();
-            }
         }
         public ObservableCollection<CustomerActivity> GetCusActivities(Customer cus)
         {
@@ -238,8 +204,6 @@ namespace Funhall2.Classes
                               "where ga.GuestId=@Id";
             ObservableCollection<CustomerActivity> cusActivities = new ObservableCollection<CustomerActivity>();
             OpenConnection(con);
-            if (connectionStatus == true)
-            {
                 using (SqlDataReader reader = cmd.ExecuteReader())
                 {
                     while (reader.Read())
@@ -256,10 +220,7 @@ namespace Funhall2.Classes
 
                 ResetDAL();
                 return cusActivities;
-            }
-            CustomerActivity dataBaseConnectionError = new CustomerActivity();
-            cusActivities.Add(dataBaseConnectionError);
-            return cusActivities;
+            
         }
         public ObservableCollection<Customer> GetCustomers(Booking booking)
         {
@@ -268,8 +229,6 @@ namespace Funhall2.Classes
             cmd.CommandText = "select * from Guests where BookingId = @bookingId";
             ObservableCollection<Customer> customers = new ObservableCollection<Customer>();
             OpenConnection(con);
-            if (connectionStatus == true)
-            {
                 using (SqlDataReader reader = cmd.ExecuteReader())
                 {
                     while (reader.Read())
@@ -288,19 +247,14 @@ namespace Funhall2.Classes
                 }
                 ResetDAL();
                 return customers;
-            }
-            Customer dataBaseConnectionFailure = new Customer();
-            customers.Add(dataBaseConnectionFailure);
-            return customers;
         }
+
         public ObservableCollection<Booking> getBookings()
         {
             //Made by Eby
             cmd.CommandText = "select * from Bookings";
             ObservableCollection<Booking> bookings = new ObservableCollection<Booking>();
             OpenConnection(con);
-            if (connectionStatus == true)
-            {
                 using (SqlDataReader reader = cmd.ExecuteReader())
                 {
                     while (reader.Read())
@@ -317,11 +271,6 @@ namespace Funhall2.Classes
                 ResetDAL();
                 return bookings;
             }
-            Booking dataBaseConnectionFailure = new Booking();
-            bookings.Add(dataBaseConnectionFailure);
-            return bookings;
-        }
-
 
 
         //REFACTOR THOSE UNDERNEATH
@@ -347,8 +296,6 @@ namespace Funhall2.Classes
         public void InsertBookingToDb(Booking booking)
         {//Made by Eby
             OpenConnection(con);
-            if (connectionStatus == true)
-            {
                 cmd.Parameters.Clear();
                 if (booking.flexyId != null && booking.name != null && booking.cusTel != null)
                 {
@@ -388,16 +335,12 @@ namespace Funhall2.Classes
                 }
 
                 ResetDAL();
-            }
         }
         public void InsertBookedActivitiesToDb(Booking booking)
         {
             List<Booking.Time> times = booking.times;
             //Made by Eby
             OpenConnection(con);
-            if (connectionStatus == true)
-            {
-
                 foreach (var time in times)
                 {
                     if (!time.timeDesc.Equals("#"))
@@ -432,15 +375,11 @@ namespace Funhall2.Classes
                 }
 
                 ResetDAL();
-            }
         }
         public void InsertActivityToDb(Booking booking)
         {//Made by Eby
             List<Booking.Time> times = booking.times;
             OpenConnection(con);
-            if (connectionStatus == true)
-            {
-
                 foreach (var time in times)
                 {
                     if (!time.timeDesc.Equals("#"))
@@ -465,16 +404,12 @@ namespace Funhall2.Classes
                 }
 
                 ResetDAL();
-            }
         }
         public void InsertBookedProductsToDb(Booking booking)
         {
             List<Booking.Product> products = booking.products;
             //Made by Eby
             OpenConnection(con);
-            if (connectionStatus == true)
-            {
-
                 foreach (var product in products)
                 {
                     if (!product.product.Equals("#"))
@@ -510,6 +445,5 @@ namespace Funhall2.Classes
 
                 ResetDAL();
             }
-        }
     }
 }
