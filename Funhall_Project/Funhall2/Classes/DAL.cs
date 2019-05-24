@@ -449,11 +449,12 @@ namespace Funhall2.Classes
                         AddParam(cmd, productPrice, "productPrice", SqlDbType.NVarChar);
                         AddParam(cmd, productTotPrice, "productTotPrice", SqlDbType.NVarChar);
                         AddParam(cmd, productAmount, "productAmount", SqlDbType.NVarChar);
+                        AddParam(cmd, "false", "IsFinished", SqlDbType.Bit);
 
-                        cmd.CommandType = CommandType.Text;
+                    cmd.CommandType = CommandType.Text;
                         cmd.CommandText =
-                            "insert into BookedProducts (BookingId, ProductDesc, productPrice, productTotPrice, productAmount)" +
-                            " values (@BookingId, @ProductDesc, @productPrice, @productTotPrice, @productAmount)";
+                            "insert into BookedProducts (BookingId, ProductDesc, productPrice, productTotPrice, productAmount, IsFinished)" +
+                            " values (@BookingId, @ProductDesc, @productPrice, @productTotPrice, @productAmount, @IsFinished)";
                         try
                         {
                             cmd.ExecuteNonQuery();
