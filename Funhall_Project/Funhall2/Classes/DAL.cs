@@ -78,6 +78,17 @@ namespace Funhall2.Classes
                 cmd.ExecuteNonQuery();
                 ResetDAL();
         }
+        public void EndBooking(string id, bool isFinished)
+        {
+            //Made by Rasmus
+            OpenConnection(con);
+            cmd.CommandText =
+                "UPDATE Bookings SET IsFinished = @IsFinished WHERE BookingId = @ID";
+            cmd.Parameters.Add(CreateParam("@ID", id, SqlDbType.NVarChar));
+            cmd.Parameters.Add(CreateParam("@IsFinished", isFinished, SqlDbType.Bit));
+            cmd.ExecuteNonQuery();
+            ResetDAL();
+        }
         public CustomerActivity GetCusActivitySpecifiedByActivity(Customer cus, Activity act)
         {
             //Made by Rasmus
