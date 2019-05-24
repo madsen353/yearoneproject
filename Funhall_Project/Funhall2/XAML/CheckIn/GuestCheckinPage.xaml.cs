@@ -41,12 +41,11 @@ namespace Funhall2
             if (InputValidation.ValidateName(Name.Text))
             {
                 cus.Name = Name.Text;
-            }
-            if (InputValidation.ValidateEmail(Email.Text))
-            {
-                cus.Email = Email.Text;
-            }
 
+                if (InputValidation.ValidateEmail(Email.Text))
+                {
+                    cus.Email = Email.Text;              
+           
             if (Subscription.IsChecked == true)
                 cus.Subscription = true;
             else
@@ -58,17 +57,21 @@ namespace Funhall2
 
             try
             {
-                dal.CheckInCus(cus);
+                dal.CheckInCus(cus);                
                 dal.AddActivities(cus);
                 MessageBox.Show("Du er checked in");
                 AllBookingsPage AllBookings = new AllBookingsPage();
                 this.NavigationService.Navigate(AllBookings);
+                
             }
-            catch (Exception)
+            catch (Exception ex)
             {
+                //throw ex;
                 MessageBox.Show("Der skete en fejl, prøv igen."); 
+               // MessageBox.Show(ex.Message);
             }           
-
+            }
+            }
         }
 
         private void Button_Click(object sender, RoutedEventArgs e)
