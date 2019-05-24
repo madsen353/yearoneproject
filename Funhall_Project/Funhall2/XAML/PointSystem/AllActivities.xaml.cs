@@ -73,6 +73,7 @@ namespace Funhall2.XAML.PointSystem
             Printer.Print(fileToPrint);
             Mailer mailer = new Mailer();
             mailer.SendDiplomaEmails(booking);
+            dal.EndBooking(booking.flexyId, true);
             ChooseYourBooking chooseYourBooking = new ChooseYourBooking();
             this.NavigationService.Navigate(chooseYourBooking);
         }
