@@ -32,26 +32,42 @@ namespace Funhall2
 
         private void AddGuestToDb(object sender, RoutedEventArgs e)
         {
-            DAL dal = new DAL();
+            //DAL dal = new DAL();
             //Made by Eby
-            Customer cus = new Customer();
+            IDAL dal = Factory.CreateDAL();
+            //Customer cus = new Customer();
+            ICustomer cus = Factory.CreateCustomer();
             cus.BookingId = Booking.flexyId;
-            cus.Name = Name.Text;
-            cus.Email = Email.Text;
+            if (InputValidation.ValidateName(Name.Text))
+            {
+                cus.Name = Name.Text;
+            }
+            if (InputValidation.ValidateEmail(Email.Text))
+            {
+                cus.Email = Email.Text;
+            }
+
             if (Subscription.IsChecked == true)
                 cus.Subscription = true;
             else
                 cus.Subscription = false;
-            
             if (Segway.IsChecked == true)
-                  cus.Segway = true;
+                cus.Segway = true;
             else
                 cus.Segway = false;
 
-            dal.CheckInCus(cus);
-            dal.AddActivities(cus);
-            AllBookingsPage AllBookings = new AllBookingsPage();
-            this.NavigationService.Navigate(AllBookings);
+            try
+            {
+                dal.CheckInCus(cus);
+                dal.AddActivities(cus);
+                MessageBox.Show("Du er checked in");
+                AllBookingsPage AllBookings = new AllBookingsPage();
+                this.NavigationService.Navigate(AllBookings);
+            }
+            catch (Exception)
+            {
+                MessageBox.Show("Der skete en fejl, prøv igen."); 
+            }           
 
         }
 

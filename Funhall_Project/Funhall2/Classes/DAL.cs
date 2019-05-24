@@ -7,10 +7,11 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
+using Funhall2.Classes;
 
 namespace Funhall2.Classes
 {
-    public class DAL
+    public class DAL : IDAL
     {
         //Made by Rasmus
         private SqlConnection con = new SqlConnection("Data Source=.;Initial Catalog=FunHall;" + "Integrated Security=true;");
@@ -158,20 +159,43 @@ namespace Funhall2.Classes
             ResetDAL();
             return activities;
         }
-        public void CheckInCus(Customer cus)
+        public void CheckInCus(ICustomer cus)
         {
             //Made by Eby
-            cmd.CommandText = "insert into Guests (BookingId, Name, Email, AgreeTerms, Subscription) values " +
-                              "(@BookingId, @Name, @Email, @AgreeTerms, @Subscription)";
+            
             cmd.Parameters.Add("@BookingId", SqlDbType.NVarChar).Value = cus.BookingId;
             cmd.Parameters.Add("@Name", SqlDbType.NVarChar).Value = cus.Name;
             cmd.Parameters.Add("@Email", SqlDbType.NVarChar).Value = cus.Email;
             cmd.Parameters.Add("@AgreeTerms", SqlDbType.Bit).Value = cus.Segway;
             cmd.Parameters.Add("@Subscription", SqlDbType.Bit).Value = cus.Subscription;
+            cmd.Parameters.Add("@CheckedInTime", SqlDbType.DateTime).Value = DateTime.Now;
+
+            // check for duplicate email
             OpenConnection(con);
+            cmd.CommandText = "select * from Guests where Email = @Email and BookingId = @BookingId ";
+            int nuOfRecords = (int)cmd.ExecuteScalar();
+            ResetDAL();
+            if (nuOfRecords != 0)
             {
-                cmd.ExecuteNonQuery();
-                ResetDAL();
+                MessageBox.Show("Email already exists");
+            }
+            else
+            {                   
+                cmd.CommandText = "insert into Guests (BookingId, Name, Email, AgreeTerms, Subscription, CheckedInTime) values " +
+                                  "(@BookingId, @Name, @Email, @AgreeTerms, @Subscription, @CheckedInTime)";
+                
+                try
+                {
+                    OpenConnection(con);
+                    cmd.ExecuteNonQuery();
+                    ResetDAL();
+                }
+                catch (Exception)
+                {
+
+                    //throw;
+                }               
+                
             }
         }
 
@@ -191,7 +215,7 @@ namespace Funhall2.Classes
             ResetDAL();
             
         }
-        public void AddActivities(Customer cus)
+        public void AddActivities(ICustomer cus)
         {
             //Made by Eby
             cmd.Parameters.Add("@Email", SqlDbType.NVarChar).Value = cus.Email;
