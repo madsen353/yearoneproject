@@ -16,7 +16,7 @@ namespace Funhall2.Classes
         //Made by Rasmus
         private SqlConnection con = new SqlConnection("Data Source=.;Initial Catalog=FunHall;" + "Integrated Security=true;");
         private SqlCommand cmd = new SqlCommand();
-        private bool connectionStatus = false;
+        private bool connectionStatus = true;
 
         public DAL()
         {
@@ -173,16 +173,17 @@ namespace Funhall2.Classes
             // check for duplicate email
             OpenConnection(con);
             cmd.CommandText = "select * from Guests where Email = @Email and BookingId = @BookingId ";
-            int nuOfRecords = (int)cmd.ExecuteScalar();
-            ResetDAL();
-            if (nuOfRecords != 0)
+            int count = Convert.ToInt32(cmd.ExecuteScalar());
+            con.Close();
+            if (count > 0)
             {
-                MessageBox.Show("Email already exists");
+                //MessageBox.Show("Email already exists");
+                throw new System.ArgumentException("Du er allerede checked ind.");
             }
             else
             {                   
-                cmd.CommandText = "insert into Guests (BookingId, Name, Email, AgreeTerms, Subscription, CheckedInTime) values " +
-                                  "(@BookingId, @Name, @Email, @AgreeTerms, @Subscription, @CheckedInTime)";
+                cmd.CommandText = "insert into Guests (BookingId, Name, Email, AgreeTerms, Subscription) values " +
+                                  "(@BookingId, @Name, @Email, @AgreeTerms, @Subscription)";
                 
                 try
                 {
@@ -192,7 +193,6 @@ namespace Funhall2.Classes
                 }
                 catch (Exception)
                 {
-
                     //throw;
                 }               
                 
