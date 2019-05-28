@@ -12,15 +12,12 @@ namespace Funhall2.Classes
     {
         //Made by Eby
         public ICustomer Customer { get; set; }
-        public IActivity  Activity { get; set; }
+        public IActivity Activity { get; set; }    
         public int  Points { get; set; }
 
         public CustomerActivity()
         {
-            Customer = new Customer();
-            Activity = new Activity();
-            //Activity = Factory.CreateActivity();
-            //Customer = Factory.CreateCustomer();
+        
         }
         public CustomerActivity(Customer c, Activity a)
         {
