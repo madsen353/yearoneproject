@@ -37,7 +37,9 @@ namespace Funhall2
             try
             {
                 List<Booking> bookings = bookingFetcher.GetBookingsFromRemoteServer();
-                bookingFetcher.InsertBookingsToDB(bookings);
+                // changes for SRP  by eby
+                WriteBookingsToDB bookingItem = new WriteBookingsToDB();
+                bookingItem.InsertBookingsToDB(bookings);
             }
             catch (Exception exception)
             {
