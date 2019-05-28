@@ -23,6 +23,5 @@ namespace Funhall2
         {
             return new Customer();
         }
-
     }
 }
