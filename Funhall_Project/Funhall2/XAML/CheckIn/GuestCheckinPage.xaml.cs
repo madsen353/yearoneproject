@@ -44,33 +44,33 @@ namespace Funhall2
 
                 if (InputValidation.ValidateEmail(Email.Text))
                 {
-                    cus.Email = Email.Text;              
-           
-            if (Subscription.IsChecked == true)
-                cus.Subscription = true;
-            else
-                cus.Subscription = false;
-            if (Segway.IsChecked == true)
-                cus.Segway = true;
-            else
-                cus.Segway = false;
+                    cus.Email = Email.Text;
 
-            try
-            {
-                dal.CheckInCus(cus);                
-                dal.AddActivities(cus);
-                MessageBox.Show("Du er checked in");
-                AllBookingsPage AllBookings = new AllBookingsPage();
-                this.NavigationService.Navigate(AllBookings);
-                
-            }
-            catch (Exception ex)
-            {
-                //throw ex;
-                MessageBox.Show("Der skete en fejl, prøv igen."); 
-               // MessageBox.Show(ex.Message);
-            }           
-            }
+                    if (Subscription.IsChecked == true)
+                        cus.Subscription = true;
+                    else
+                            cus.Subscription = false;
+                    if (Segway.IsChecked == true)
+                        cus.Segway = true;
+                    else
+                        cus.Segway = false;
+
+                    try
+                    {
+                        dal.CheckInCus(cus);
+                        dal.AddActivities(cus);
+                        MessageBox.Show("Du er checked in");
+                        AllBookingsPage AllBookings = new AllBookingsPage();
+                        this.NavigationService.Navigate(AllBookings);
+
+                    }
+                    catch (Exception ex)
+                    {
+                        //throw ex;
+                        MessageBox.Show("Der skete en fejl, prøv igen.");
+                        // MessageBox.Show(ex.Message);
+                    }
+                }
             }
         }
 

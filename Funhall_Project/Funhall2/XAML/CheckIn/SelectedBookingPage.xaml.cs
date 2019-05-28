@@ -21,7 +21,7 @@ namespace Funhall2
     
     public partial class SelectedBookingPage : Page
     {
-        DAL dal = new DAL();
+        IDAL dal = Factory.CreateDAL();
         public  Booking Booking { get; set; }
         public string globalPageHistory = "";
         public SelectedBookingPage(Booking booking, string pageHistory)
