@@ -17,7 +17,8 @@ namespace Funhall2.Classes
 
         public CustomerActivity()
         {
-        
+            Customer = new Customer();
+            Activity = new Activity();
         }
         public CustomerActivity(Customer c, Activity a)
         {
