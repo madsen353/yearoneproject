@@ -14,7 +14,7 @@ namespace Funhall2.Classes
     public class DAL : IDAL
     {
         //Made by Rasmus
-        private SqlConnection con = new SqlConnection("Data Source=.;Initial Catalog=FunHall;" + "Integrated Security=true;");
+        private SqlConnection con = new SqlConnection("Data Source=.;Initial Catalog=FunnHall2;" + "Integrated Security=true;");
         private SqlCommand cmd = new SqlCommand();
 
         public DAL()
@@ -27,7 +27,7 @@ namespace Funhall2.Classes
         {
             //Made by Rasmus
             con.Close();
-            con = new SqlConnection("Data Source=.;Initial Catalog=FunHall;" + "Integrated Security=true;");
+            con = new SqlConnection("Data Source=.;Initial Catalog=FunnHall2;" + "Integrated Security=true;");
             cmd = new SqlCommand {Connection = con, CommandType = CommandType.Text};
         }
 
@@ -138,7 +138,7 @@ namespace Funhall2.Classes
                         {
                             a.EndTime = DateTime.Parse(end);
                         }                        
-                            a.IsFinished = (bool)reader.GetBoolean(4);                    
+                            //a.IsFinished = (bool)reader.GetBoolean(4);                    
 
                         
                         activities.Add(a);
@@ -171,8 +171,8 @@ namespace Funhall2.Classes
             }
             else
             {                   
-                cmd.CommandText = "insert into Guests (BookingId, Name, Email, AgreeTerms, Subscription) values " +
-                                  "(@BookingId, @Name, @Email, @AgreeTerms, @Subscription)";
+                cmd.CommandText = "insert into Guests (BookingId, Name, Email, AgreeTerms, Subscription,ChekedInTime) values " +
+                                  "(@BookingId, @Name, @Email, @AgreeTerms, @Subscription,@CheckedInTime)";
                 
                 try
                 {
@@ -342,6 +342,7 @@ namespace Funhall2.Classes
                     string TotalPrice = booking.totalPrice;
                     string CusComment = booking.cusComment;
                     string IntComment = booking.intComment;
+                    bool IsFinished = false;
 
                     AddParam(cmd, BookingId, "BookingId", SqlDbType.NVarChar);
                     AddParam(cmd, Name, "Name", SqlDbType.NVarChar);
@@ -352,10 +353,12 @@ namespace Funhall2.Classes
                     AddParam(cmd, TotalPrice, "TotalPrice", SqlDbType.NVarChar);
                     AddParam(cmd, CusComment, "CusComment", SqlDbType.NVarChar);
                     AddParam(cmd, IntComment, "intComment", SqlDbType.NVarChar);
+                    AddParam(cmd, IsFinished, "IsFinished", SqlDbType.Bit);
 
-                    cmd.CommandText =
-                        "insert into Bookings (BookingId, Name, CusTel, CusTelAlt, Cusmail, Date, TotalPrice, CusComment, IntComment)" +
-                        " values (@BookingId, @Name, @CusTel, @CusTelAlt, @Cusmail, @Date, @TotalPrice, @CusComment, @IntComment)";
+
+                cmd.CommandText =
+                        "insert into Bookings (BookingId, Name, CusTel, CusTelAlt, Cusmail, Date, TotalPrice, CusComment, IntComment, IsFinished)" +
+                        " values (@BookingId, @Name, @CusTel, @CusTelAlt, @Cusmail, @Date, @TotalPrice, @CusComment, @IntComment,@IsFinished)";
                     try
                     {
                         cmd.ExecuteNonQuery();
@@ -393,8 +396,8 @@ namespace Funhall2.Classes
                         AddParam(cmd, IsFinished, "IsFinished", SqlDbType.Bit);
 
                         cmd.CommandText =
-                            "insert into BookedActivities(BookingId, TimeDesc, StartTime, Endtime, IsFinished)" +
-                            "values (@BookingId, @Desc, @StartTime, @Endtime, @IsFinished)";
+                            "insert into BookedActivities(BookingId, TimeDesc, StartTime, Endtime,Isfinished)" +
+                            "values (@BookingId, @Desc, @StartTime, @Endtime,@IsFinished)";
 
                         try
                         {
