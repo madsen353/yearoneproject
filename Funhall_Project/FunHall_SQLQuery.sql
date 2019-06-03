@@ -11,7 +11,8 @@ create table Bookings
 	Date nvarchar(100),
 	TotalPrice nvarchar(100),
 	CusComment text,
-	IntComment text	
+	IntComment text,
+	IsFinished bit	
 );
 
 create table Activities
@@ -49,14 +50,13 @@ create table BookedProducts
 
 create table Guests
 (
-	GuestId INT Identity(1,1),
+	GuestId INT Identity(1,1) primary key,
 	BookingId nvarchar(20) NOT NULL,
 	Name nvarchar(200) NOT NULL,
 	Email nvarchar(100) NOT NULL,
 	AgreeTerms bit,
 	Subscription bit,
-	ChekedInTime datetime,
-	PRIMARY KEY (BookingId,Email)
+	ChekedInTime datetime,	
 )
  
 create table GuestActivities
@@ -66,8 +66,6 @@ create table GuestActivities
 	Points int,	
 	PRIMARY KEY (GuestId,TimeDesc)
 )
-
-
 
 
 
