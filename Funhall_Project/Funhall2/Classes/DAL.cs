@@ -289,6 +289,7 @@ namespace Funhall2.Classes
             //Made by Eby
             //cmd.CommandText = "select * from Bookings ";
             cmd.CommandText = "SELECT* FROM Bookings b where b.IsFinished = 'false'";
+            //If we where to only select this days bookings, we would alter the query above, so it had the extension"AND convert(date,Date)=Convert(DATE,getdate())"
             ObservableCollection<Booking> bookings = new ObservableCollection<Booking>();
             OpenConnection(con);
             using (SqlDataReader reader = cmd.ExecuteReader())
