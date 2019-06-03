@@ -16,7 +16,6 @@ namespace Funhall2.Classes
         //Made by Rasmus
         private SqlConnection con = new SqlConnection("Data Source=.;Initial Catalog=FunHall;" + "Integrated Security=true;");
         private SqlCommand cmd = new SqlCommand();
-        private bool connectionStatus = true;
 
         public DAL()
         {
@@ -30,23 +29,13 @@ namespace Funhall2.Classes
             con.Close();
             con = new SqlConnection("Data Source=.;Initial Catalog=FunHall;" + "Integrated Security=true;");
             cmd = new SqlCommand {Connection = con, CommandType = CommandType.Text};
-            connectionStatus = false;
         }
 
         public void OpenConnection(SqlConnection con)
         {
-            try
-            {
                 con.Open();
-            }
-            catch (Exception ex)
-            {
-                throw ex;
-            }
-            
         }
-            
-
+        
         private SqlParameter CreateParam(string name, object value, SqlDbType type)
         {
             //Made by Rasmus
@@ -286,29 +275,28 @@ namespace Funhall2.Classes
         public ObservableCollection<Booking> getBookings()
         {
             //Made by Eby
-            cmd.CommandText = "select * from Bookings";
+            //cmd.CommandText = "select * from Bookings ";
+            cmd.CommandText = "SELECT* FROM Bookings b where b.BookingId in " +
+                              "(SELECT DISTINCT ba.BookingId from BookedActivities ba  where ba.IsFinished = 'false' )";
             ObservableCollection<Booking> bookings = new ObservableCollection<Booking>();
             OpenConnection(con);
-                using (SqlDataReader reader = cmd.ExecuteReader())
+            using (SqlDataReader reader = cmd.ExecuteReader())
+            {
+                while (reader.Read())
                 {
-                    while (reader.Read())
-                    {
-                        Booking b = new Booking();
-                        b.flexyId = reader[0].ToString();
-                        ;
-                        b.name = reader[1].ToString();
-                        b.date = reader[5].ToString();
-                        bookings.Add(b);
-                    }
+                    Booking b = new Booking();
+                    b.flexyId = reader[0].ToString();
+                    ;
+                    b.name = reader[1].ToString();
+                    b.date = reader[5].ToString();
+                    bookings.Add(b);
                 }
-
-                ResetDAL();
-                return bookings;
             }
 
-
-        //REFACTOR THOSE UNDERNEATH
-        // All uses the ADDPARAM method.
+            ResetDAL();
+            return bookings;
+        }
+        //If there is time, the methods below should be rewritten. They are using a duplicate Param method.
 
         public static void AddParam(SqlCommand cmd, object value, string name, SqlDbType sqlDbType)
         {

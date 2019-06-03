@@ -32,46 +32,45 @@ namespace Funhall2
 
         private void AddGuestToDb(object sender, RoutedEventArgs e)
         {
-            //DAL dal = new DAL();
-            //Made by Eby
-            IDAL dal = Factory.CreateDAL();
-            //Customer cus = new Customer();
-            ICustomer cus = Factory.CreateCustomer();
-            cus.BookingId = Booking.flexyId;
-            if (InputValidation.ValidateName(Name.Text))
+            try
             {
-                cus.Name = Name.Text;
-
-                if (InputValidation.ValidateEmail(Email.Text))
+                //DAL dal = new DAL();
+                //Made by Eby
+                IDAL dal = Factory.CreateDAL();
+                //Customer cus = new Customer();
+                ICustomer cus = Factory.CreateCustomer();
+                cus.BookingId = Booking.flexyId;
+                if (InputValidation.ValidateName(Name.Text))
                 {
-                    cus.Email = Email.Text;
+                    cus.Name = Name.Text;
 
-                    if (Subscription.IsChecked == true)
-                        cus.Subscription = true;
-                    else
-                            cus.Subscription = false;
-                    if (Segway.IsChecked == true)
-                        cus.Segway = true;
-                    else
-                        cus.Segway = false;
-
-                    try
+                    if (InputValidation.ValidateEmail(Email.Text))
                     {
+                        cus.Email = Email.Text;
+
+                        if (Subscription.IsChecked == true)
+                            cus.Subscription = true;
+                        else
+                            cus.Subscription = false;
+                        if (Segway.IsChecked == true)
+                            cus.Segway = true;
+                        else
+                            cus.Segway = false;
+
                         dal.CheckInCus(cus);
                         dal.AddActivities(cus);
                         MessageBox.Show("Du er checked in");
                         AllBookingsPage AllBookings = new AllBookingsPage();
                         this.NavigationService.Navigate(AllBookings);
-
-                    }
-                    catch (Exception ex)
-                    {
-                        //throw ex;
-                        MessageBox.Show("Der skete en fejl, prøv igen.");
-                        // MessageBox.Show(ex.Message);
                     }
                 }
             }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+                ExceptionWriter.SaveErrorFile(ex);
+            }
+            
         }
 
         private void Button_Click(object sender, RoutedEventArgs e)
@@ -83,8 +82,17 @@ namespace Funhall2
 
         private void Back_Button(object sender, RoutedEventArgs e)
         {
-            AllBookingsPage page = new AllBookingsPage();
-            this.NavigationService.Navigate(page);
+            try
+            {
+                AllBookingsPage page = new AllBookingsPage();
+                this.NavigationService.Navigate(page);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+                ExceptionWriter.SaveErrorFile(ex);
+            }
+            
 
         }
     }
