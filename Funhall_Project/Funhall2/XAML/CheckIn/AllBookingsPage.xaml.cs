@@ -20,16 +20,21 @@ namespace Funhall2
     
     public partial class AllBookingsPage : Page
     {
-        DAL dal = new DAL();
+        IDAL dal = Factory.CreateDAL();
+
         public AllBookingsPage()
         {
                 //Made by Rasmus
                 InitializeComponent();
                 DataContext = this;
-                //ListBox Solution:
-                ObservableCollection<Booking> bookings = dal.getBookings();
-                listBox.ItemsSource = bookings;
+            //ListBox Solution:
+            // ObservableCollection<Booking> bookings = dal.getBookings();
+            // listBox.ItemsSource = bookings;
+
+            ObservableCollection<Booking> bookings = dal.getBookings();
+            listBox.ItemsSource = bookings;
         }
+        
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {
@@ -118,7 +123,9 @@ namespace Funhall2
             try
             {
                 List<Booking> bookings = bookingFetcher.GetBookingsFromRemoteServer();
-                bookingFetcher.InsertBookingsToDB(bookings);
+                // changes for SRP  by eby
+                WriteBookingsToDB bookingItem = new WriteBookingsToDB();
+                bookingItem.InsertBookingsToDB(bookings);
             }
             catch (Exception exception)
             {

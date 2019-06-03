@@ -22,19 +22,6 @@ namespace Funhall2.Classes
             }
             return _bookings;
         }
-
-        public void InsertBookingsToDB(List<Booking> _bookings)
-        { 
-        //Made by Eby
-        //Refactored by Rasmus(methods moved from Booking class to DAL class.
-        DAL dal = new DAL();
-        foreach (var booking in _bookings)
-            {
-            dal.InsertBookingToDb(booking);
-            dal.InsertBookedActivitiesToDb(booking);
-            dal.InsertActivityToDb(booking);
-            dal.InsertBookedProductsToDb(booking);
-            }
-        }
+       
     }
 }

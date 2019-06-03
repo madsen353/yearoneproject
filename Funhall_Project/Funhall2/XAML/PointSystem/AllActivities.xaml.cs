@@ -37,6 +37,7 @@ namespace Funhall2.XAML.PointSystem
             ObservableCollection<Activity> activitiesToShow = new ObservableCollection<Activity>();
             foreach (Activity activity in activities)
             {
+                //Made by Eby
                 if (!(activity.TimeDesc == "Spisning" || activity.TimeDesc == "Fri leg"))
                 {
 

@@ -90,9 +90,16 @@
     <Compile Include="Classes\DAL.cs" />
     <Compile Include="Classes\DiplomaMaker.cs" />
     <Compile Include="Classes\ExceptionWriter.cs" />
+    <Compile Include="Interfaces\ICustomerActivity.cs" />
+    <Compile Include="Classes\InputValidation.cs" />
+    <Compile Include="Interfaces\IDAL.cs" />
+    <Compile Include="Interfaces\IActivity.cs" />
+    <Compile Include="Interfaces\ICustomer.cs" />
     <Compile Include="Classes\Mailer.cs" />
     <Compile Include="Classes\Printer.cs" />
     <Compile Include="Classes\RemoteServer.cs" />
+    <Compile Include="Factory.cs" />
+    <Compile Include="Classes\WriteBookingsToDB.cs" />
     <Compile Include="XAML\CheckIn\GuestCheckinPage.xaml.cs">
       <DependentUpon>GuestCheckinPage.xaml</DependentUpon>
     </Compile>

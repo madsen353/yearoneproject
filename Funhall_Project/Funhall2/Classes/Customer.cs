@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 
 namespace Funhall2.Classes
 {
-    public class Customer
+    public class Customer : ICustomer
     {
         public int CusId { get; set; }
         public string BookingId { get; set; }

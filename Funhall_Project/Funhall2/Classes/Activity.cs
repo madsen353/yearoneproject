@@ -11,7 +11,7 @@ using Funhall2.Classes;
 namespace Funhall2
 {
     //Made by Eby
-    public class Activity
+    public class Activity : IActivity
     {
         public string BookingId { get; set; }
         public string TimeDesc { get; set; }

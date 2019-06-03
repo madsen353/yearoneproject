@@ -33,11 +33,14 @@ namespace Funhall2
 
         private void checkIn_Click(object sender, RoutedEventArgs e)
         {
+            
             try
             {
                 BookingFetcher bookingFetcher = new BookingFetcher();
                 List<Booking> bookings = bookingFetcher.GetBookingsFromRemoteServer();
-                bookingFetcher.InsertBookingsToDB(bookings);
+                // changes for SRP  by eby
+                WriteBookingsToDB bookingItem = new WriteBookingsToDB();
+                bookingItem.InsertBookingsToDB(bookings);
 
                 //Made by Anders & Niels
                 AllBookingsPage AllBookings = new AllBookingsPage();
@@ -49,22 +52,24 @@ namespace Funhall2
                 StatusText.Text = "Der kunne ikke oprettes forbindelse til fjernserveren \n eller databasen, kontakt personalet \n eller prøv igen";
                 return;
             }
+
         }
         
         private void point_Click(object sender, RoutedEventArgs e)
         {
-            //Made by Rasmus
             try
             {
+                //Made by Rasmus
                 ChooseYourBooking chooseYourBooking = new ChooseYourBooking();
                 this.NavigationService.Navigate(chooseYourBooking);
             }
-            catch (Exception exception)
+            catch (Exception ex)
             {
-                ExceptionWriter.SaveErrorFile(exception);
+                ExceptionWriter.SaveErrorFile(ex);
                 StatusText.Text = "Der kunne ikke oprettes forbindelse til fjernserveren \n eller databasen, kontakt personalet \n eller prøv igen";
                 return;
             }
+            
         }
     }
 }

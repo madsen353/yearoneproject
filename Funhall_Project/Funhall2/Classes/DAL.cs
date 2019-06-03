@@ -4,14 +4,14 @@ using System.Collections.ObjectModel;
 using System.Data;
 using System.Data.SqlClient;
 using System.Linq;
-using System.Linq.Expressions;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
+using Funhall2.Classes;
 
 namespace Funhall2.Classes
 {
-    public class DAL
+    public class DAL : IDAL
     {
         //Made by Rasmus
         private SqlConnection con = new SqlConnection("Data Source=.;Initial Catalog=FunHall;" + "Integrated Security=true;");
@@ -33,7 +33,7 @@ namespace Funhall2.Classes
 
         public void OpenConnection(SqlConnection con)
         {
-            con.Open();
+                con.Open();
         }
         
         private SqlParameter CreateParam(string name, object value, SqlDbType type)
@@ -67,17 +67,6 @@ namespace Funhall2.Classes
                 cmd.Parameters.Add(CreateParam("@ActivityName", activityName, SqlDbType.NVarChar));
                 cmd.ExecuteNonQuery();
                 ResetDAL();
-        }
-        public void EndBooking(string id, bool isFinished)
-        {
-            //Made by Rasmus
-            OpenConnection(con);
-            cmd.CommandText =
-                "UPDATE Bookings SET IsFinished = @IsFinished WHERE BookingId = @ID";
-            cmd.Parameters.Add(CreateParam("@ID", id, SqlDbType.NVarChar));
-            cmd.Parameters.Add(CreateParam("@IsFinished", isFinished, SqlDbType.Bit));
-            cmd.ExecuteNonQuery();
-            ResetDAL();
         }
         public CustomerActivity GetCusActivitySpecifiedByActivity(Customer cus, Activity act)
         {
@@ -159,21 +148,56 @@ namespace Funhall2.Classes
             ResetDAL();
             return activities;
         }
-        public void CheckInCus(Customer cus)
+        public void CheckInCus(ICustomer cus)
         {
             //Made by Eby
-            cmd.CommandText = "insert into Guests (BookingId, Name, Email, AgreeTerms, Subscription) values " +
-                              "(@BookingId, @Name, @Email, @AgreeTerms, @Subscription)";
+            
             cmd.Parameters.Add("@BookingId", SqlDbType.NVarChar).Value = cus.BookingId;
             cmd.Parameters.Add("@Name", SqlDbType.NVarChar).Value = cus.Name;
             cmd.Parameters.Add("@Email", SqlDbType.NVarChar).Value = cus.Email;
             cmd.Parameters.Add("@AgreeTerms", SqlDbType.Bit).Value = cus.Segway;
             cmd.Parameters.Add("@Subscription", SqlDbType.Bit).Value = cus.Subscription;
+            cmd.Parameters.Add("@CheckedInTime", SqlDbType.DateTime).Value = DateTime.Now;
+
+            // check for duplicate email
             OpenConnection(con);
+            cmd.CommandText = "select * from Guests where Email = @Email and BookingId = @BookingId ";
+            int count = Convert.ToInt32(cmd.ExecuteScalar());
+            con.Close();
+            if (count > 0)
             {
-                cmd.ExecuteNonQuery();
-                ResetDAL();
+                //MessageBox.Show("Email already exists");
+                throw new System.ArgumentException("Du er allerede checked ind.");
             }
+            else
+            {                   
+                cmd.CommandText = "insert into Guests (BookingId, Name, Email, AgreeTerms, Subscription) values " +
+                                  "(@BookingId, @Name, @Email, @AgreeTerms, @Subscription)";
+                
+                try
+                {
+                    OpenConnection(con);
+                    cmd.ExecuteNonQuery();
+                    ResetDAL();
+                }
+                catch (Exception)
+                {
+                    //throw;
+                }               
+                
+            }
+        }
+
+        public void EndBooking(string id, bool isFinished)
+        {
+            //Made by Rasmus
+            OpenConnection(con);
+            cmd.CommandText =
+                "UPDATE Bookings SET IsFinished = @IsFinished WHERE BookingId = @ID";
+            cmd.Parameters.Add(CreateParam("@ID", id, SqlDbType.NVarChar));
+            cmd.Parameters.Add(CreateParam("@IsFinished", isFinished, SqlDbType.Bit));
+            cmd.ExecuteNonQuery();
+            ResetDAL();
         }
 
         public void UpdateCus(Customer cus)
@@ -192,7 +216,7 @@ namespace Funhall2.Classes
             ResetDAL();
             
         }
-        public void AddActivities(Customer cus)
+        public void AddActivities(ICustomer cus)
         {
             //Made by Eby
             cmd.Parameters.Add("@Email", SqlDbType.NVarChar).Value = cus.Email;
@@ -265,27 +289,25 @@ namespace Funhall2.Classes
             //Made by Eby
             //cmd.CommandText = "select * from Bookings ";
             cmd.CommandText = "SELECT* FROM Bookings b where b.BookingId in " +
-                "(SELECT DISTINCT ba.BookingId from BookedActivities ba  where ba.IsFinished = 'false' )";
+                              "(SELECT DISTINCT ba.BookingId from BookedActivities ba  where ba.IsFinished = 'false' )";
             ObservableCollection<Booking> bookings = new ObservableCollection<Booking>();
             OpenConnection(con);
-                using (SqlDataReader reader = cmd.ExecuteReader())
+            using (SqlDataReader reader = cmd.ExecuteReader())
+            {
+                while (reader.Read())
                 {
-                    while (reader.Read())
-                    {
-                        Booking b = new Booking();
-                        b.flexyId = reader[0].ToString();
-                        ;
-                        b.name = reader[1].ToString();
-                        b.date = reader[5].ToString();
-                        bookings.Add(b);
-                    }
+                    Booking b = new Booking();
+                    b.flexyId = reader[0].ToString();
+                    ;
+                    b.name = reader[1].ToString();
+                    b.date = reader[5].ToString();
+                    bookings.Add(b);
                 }
-
-                ResetDAL();
-                return bookings;
             }
 
-
+            ResetDAL();
+            return bookings;
+        }
         //If there is time, the methods below should be rewritten. They are using a duplicate Param method.
 
         public static void AddParam(SqlCommand cmd, object value, string name, SqlDbType sqlDbType)
@@ -438,12 +460,11 @@ namespace Funhall2.Classes
                         AddParam(cmd, productPrice, "productPrice", SqlDbType.NVarChar);
                         AddParam(cmd, productTotPrice, "productTotPrice", SqlDbType.NVarChar);
                         AddParam(cmd, productAmount, "productAmount", SqlDbType.NVarChar);
-                        AddParam(cmd, "false", "IsFinished", SqlDbType.Bit);
 
-                    cmd.CommandType = CommandType.Text;
+                        cmd.CommandType = CommandType.Text;
                         cmd.CommandText =
-                            "insert into BookedProducts (BookingId, ProductDesc, productPrice, productTotPrice, productAmount, IsFinished)" +
-                            " values (@BookingId, @ProductDesc, @productPrice, @productTotPrice, @productAmount, @IsFinished)";
+                            "insert into BookedProducts (BookingId, ProductDesc, productPrice, productTotPrice, productAmount)" +
+                            " values (@BookingId, @ProductDesc, @productPrice, @productTotPrice, @productAmount)";
                         try
                         {
                             cmd.ExecuteNonQuery();

@@ -37,6 +37,7 @@ namespace Funhall2.XAML.PointSystem
             ObservableCollection<CustomerActivity> elementsToShow = new ObservableCollection<CustomerActivity>();
             foreach (Customer guest in guests)
             {
+                //Made by Eby
                 if (guest.Segway != false)
                 {
                     elementsToShow.Add(dal.GetCusActivitySpecifiedByActivity(guest, activity));

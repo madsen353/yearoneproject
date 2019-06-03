@@ -5,17 +5,15 @@ using System.Data;
 using System.Data.SqlClient;
 using System.Linq;
 using System.Text;
-using System.Threading.Tasks;
 
 namespace Funhall2.Classes
 {
-    public class CustomerActivity
+    public class CustomerActivity : ICustomerActivity
     {
         //Made by Eby
-        public Customer Customer { get; set; }
-        public Activity  Activity { get; set; }
+        public ICustomer Customer { get; set; }
+        public IActivity Activity { get; set; }    
         public int  Points { get; set; }
-        //public bool IsFinished { get; set; }
 
         public CustomerActivity()
         {
@@ -38,6 +36,7 @@ namespace Funhall2.Classes
                 return Customer.Name;
             }
         }
+        //Made by Rasmus
         public override string ToString()
         {
             return Customer.Name;

@@ -20,7 +20,7 @@ namespace Funhall2
     public partial class Profile : Page
     {
         //made by Ebby
-        DAL dal = new DAL();
+        IDAL dal = Factory.CreateDAL();
         public Customer Customer { get; set; }
         public Booking Booking { get; set; }
         public string globalPageHistory = "";
@@ -48,7 +48,6 @@ namespace Funhall2
                 {
                     CusActivitiesToShow.Add(cusAct);
                 }
-
             }     
           
             Activities.ItemsSource = CusActivitiesToShow;
@@ -60,13 +59,21 @@ namespace Funhall2
             Customer cus = new Customer();
 
             cus.CusId = Customer.CusId;
-            cus.Name = Name.Text;
-            cus.Email = Email.Text;
+            if (InputValidation.ValidateName(Name.Text))
+            {
+                cus.Name = Name.Text;
+            }
+            if (InputValidation.ValidateEmail(Email.Text))
+            {
+                cus.Email = Email.Text;
+            }
+           // cus.Name = Name.Text;
+            //cus.Email = Email.Text;
+
             if (Subscription.IsChecked == true)
                 cus.Subscription = true;
             else
                 cus.Subscription = false;
-
             if (Segway.IsChecked == true)
                 cus.Segway = true;
             else
@@ -81,11 +88,10 @@ namespace Funhall2
             {
                 MessageBox.Show("Der skete en fejl, prøv igen.");                
             }
-            //finally
-            //{
-            //    SelectedBookingPage page = new SelectedBookingPage(Booking);
-            //    this.NavigationService.Navigate(page);
-            //}     
+            
+               //SelectedBookingPage page = new SelectedBookingPage(Booking, "AllBookingsPage");
+               //this.NavigationService.Navigate(page);
+                
         }
 
         private void Back_Button(object sender, RoutedEventArgs e)
