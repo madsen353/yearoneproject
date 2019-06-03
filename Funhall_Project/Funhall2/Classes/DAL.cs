@@ -288,8 +288,7 @@ namespace Funhall2.Classes
         {
             //Made by Eby
             //cmd.CommandText = "select * from Bookings ";
-            cmd.CommandText = "SELECT* FROM Bookings b where b.BookingId in " +
-                              "(SELECT DISTINCT ba.BookingId from BookedActivities ba  where ba.IsFinished = 'false' )";
+            cmd.CommandText = "SELECT* FROM Bookings b where b.IsFinished = 'false'";
             ObservableCollection<Booking> bookings = new ObservableCollection<Booking>();
             OpenConnection(con);
             using (SqlDataReader reader = cmd.ExecuteReader())
