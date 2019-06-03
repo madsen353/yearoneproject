@@ -188,6 +188,18 @@ namespace Funhall2.Classes
             }
         }
 
+        public void EndBooking(string id, bool isFinished)
+        {
+            //Made by Rasmus
+            OpenConnection(con);
+            cmd.CommandText =
+                "UPDATE Bookings SET IsFinished = @IsFinished WHERE BookingId = @ID";
+            cmd.Parameters.Add(CreateParam("@ID", id, SqlDbType.NVarChar));
+            cmd.Parameters.Add(CreateParam("@IsFinished", isFinished, SqlDbType.Bit));
+            cmd.ExecuteNonQuery();
+            ResetDAL();
+        }
+
         public void UpdateCus(Customer cus)
         {
             //Made by Eby
