@@ -55,8 +55,17 @@ namespace Funhall2.XAML.PointSystem
             Activity a = Activities.SelectedItem as Activity;
             if (a != null)
             {
-                CurrentActivity currentActivity = new CurrentActivity(a, booking);
-                this.NavigationService.Navigate(currentActivity);
+                try
+                {
+                    CurrentActivity currentActivity = new CurrentActivity(a, booking);
+                    this.NavigationService.Navigate(currentActivity);
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show(ex.Message);
+                    ExceptionWriter.SaveErrorFile(ex);
+                }
+
             }
 
             else
@@ -69,34 +78,67 @@ namespace Funhall2.XAML.PointSystem
         private void AllActivitiesHaveEnded(object sender, RoutedEventArgs e)
         {
             //Made by Rasmus
-            string fileToPrint = DiplomaMaker.GeneratePDF(booking);
-            Printer.Print(fileToPrint);
-            Mailer mailer = new Mailer();
-            mailer.SendDiplomaEmails(booking);
-            dal.EndBooking(booking.flexyId, true);
-            ChooseYourBooking chooseYourBooking = new ChooseYourBooking();
-            this.NavigationService.Navigate(chooseYourBooking);
+            try
+            {
+                string fileToPrint = DiplomaMaker.GeneratePDF(booking);
+                Printer.Print(fileToPrint);
+                Mailer mailer = new Mailer();
+                mailer.SendDiplomaEmails(booking);
+                dal.EndBooking(booking.flexyId, true);
+                ChooseYourBooking chooseYourBooking = new ChooseYourBooking();
+                this.NavigationService.Navigate(chooseYourBooking);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+                ExceptionWriter.SaveErrorFile(ex);
+            }
+            
         }
 
         private void DisplayScoreTotal(object sender, RoutedEventArgs e)
         {
             //Made by Rasmus
-            ScoreTotal scorePage = new ScoreTotal(booking);
-            this.NavigationService.Navigate(scorePage);
+            try
+            {
+                ScoreTotal scorePage = new ScoreTotal(booking);
+                this.NavigationService.Navigate(scorePage);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+                ExceptionWriter.SaveErrorFile(ex);
+            }
         }
 
         private void GoBackToOverview(object sender, RoutedEventArgs e)
         {
-            //Made by Rasmus
-            ChooseYourBooking chooseYourBooking = new ChooseYourBooking();
-            this.NavigationService.Navigate(chooseYourBooking);
+            try
+            {
+                //Made by Rasmus
+                ChooseYourBooking chooseYourBooking = new ChooseYourBooking();
+                this.NavigationService.Navigate(chooseYourBooking);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+                ExceptionWriter.SaveErrorFile(ex);
+            }
         }
 
         private void ChangeUserData(object sender, RoutedEventArgs e)
         {
-            string currentPage = "AllActivities";
-            SelectedBookingPage page = new SelectedBookingPage(booking, currentPage);
-            this.NavigationService.Navigate(page);
+            try
+            {
+                string currentPage = "AllActivities";
+                SelectedBookingPage page = new SelectedBookingPage(booking, currentPage);
+                this.NavigationService.Navigate(page);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+                ExceptionWriter.SaveErrorFile(ex);
+            }
         }
     }
 }

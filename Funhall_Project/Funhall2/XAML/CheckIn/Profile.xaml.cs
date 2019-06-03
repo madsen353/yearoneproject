@@ -91,8 +91,17 @@ namespace Funhall2
         private void Back_Button(object sender, RoutedEventArgs e)
         {
             //made by Ebby
-            SelectedBookingPage page = new SelectedBookingPage(Booking, globalPageHistory);
-            this.NavigationService.Navigate(page);
+            try
+            {
+                SelectedBookingPage page = new SelectedBookingPage(Booking, globalPageHistory);
+                this.NavigationService.Navigate(page);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+                ExceptionWriter.SaveErrorFile(ex);
+            }
+
 
         }
     }

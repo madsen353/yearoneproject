@@ -51,8 +51,17 @@ namespace Funhall2.XAML.PointSystem
             CustomerActivity c = Guests.SelectedItem as CustomerActivity;
             if (c != null)
             {
-                PointPage pointPage = new PointPage(c, booking, activity);
-                this.NavigationService.Navigate(pointPage);
+                try
+                {
+                    PointPage pointPage = new PointPage(c, booking, activity);
+                    this.NavigationService.Navigate(pointPage);
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show(ex.Message);
+                    ExceptionWriter.SaveErrorFile(ex);
+                }
+
             }
 
             else
@@ -65,17 +74,33 @@ namespace Funhall2.XAML.PointSystem
         private void EndActivity(object sender, RoutedEventArgs e)
         {
             //Made by Rasmus
-            //activity.IsFinished = true;
-            dal.EndActivity(activity.BookingId, true, activity.TimeDesc);
-            AllActivities allActivities = new AllActivities(booking);
-            this.NavigationService.Navigate(allActivities);
+            try
+            {
+                dal.EndActivity(activity.BookingId, true, activity.TimeDesc);
+                AllActivities allActivities = new AllActivities(booking);
+                this.NavigationService.Navigate(allActivities);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+                ExceptionWriter.SaveErrorFile(ex);
+            }
         }
 
         private void GoBackToOverview(object sender, RoutedEventArgs e)
         {
-            //Made by Rasmus
-            AllActivities allActivities = new AllActivities(booking);
-            this.NavigationService.Navigate(allActivities);
+            try
+            {
+                //Made by Rasmus
+                AllActivities allActivities = new AllActivities(booking);
+                this.NavigationService.Navigate(allActivities);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+                ExceptionWriter.SaveErrorFile(ex);
+            }
+            
         }
     }
 

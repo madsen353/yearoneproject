@@ -37,9 +37,17 @@ namespace Funhall2.XAML.PointSystem
 
         private void GoBackToOverview(object sender, RoutedEventArgs e)
         {
-            //Made by Rasmus
-            AllActivities allActivities = new AllActivities(booking);
-            this.NavigationService.Navigate(allActivities);
+            try
+            {
+                //Made by Rasmus
+                AllActivities allActivities = new AllActivities(booking);
+                this.NavigationService.Navigate(allActivities);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+                ExceptionWriter.SaveErrorFile(ex);
+            }
         }
     }
 }

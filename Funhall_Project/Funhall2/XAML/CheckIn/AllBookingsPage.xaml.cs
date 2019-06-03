@@ -34,8 +34,16 @@ namespace Funhall2
         private void Button_Click(object sender, RoutedEventArgs e)
         {
             //Made by Anders & Niels
-            CheckInPage checkIn = new CheckInPage();
-            this.NavigationService.Navigate(checkIn);
+            try
+            {
+                CheckInPage checkIn = new CheckInPage();
+                this.NavigationService.Navigate(checkIn);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+                ExceptionWriter.SaveErrorFile(ex);
+            }
         }
         
         private void ShowSelectedBooking(object sender, RoutedEventArgs e)
@@ -44,11 +52,18 @@ namespace Funhall2
             Booking b = listBox.SelectedItem as Booking;
             if (b != null)
             {
-                string currentPageName = "AllBookingsPage";
-                SelectedBookingPage page = new SelectedBookingPage(b, currentPageName);
-                this.NavigationService.Navigate(page); this.NavigationService.Navigate(page);
-
-            }
+                try
+                {
+                    string currentPageName = "AllBookingsPage";
+                    SelectedBookingPage page = new SelectedBookingPage(b, currentPageName);
+                    this.NavigationService.Navigate(page); this.NavigationService.Navigate(page);
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show(ex.Message);
+                    ExceptionWriter.SaveErrorFile(ex);
+                }
+                }
             else
             {
                 MessageBox.Show("Vælg en Booking fra listen");
@@ -61,13 +76,21 @@ namespace Funhall2
                 Booking b = listBox.SelectedItem as Booking;
                 if (b != null)
                 {
-                    GuestCheckinPage page = new GuestCheckinPage(b);
-                    this.NavigationService.Navigate(page);
+                    try
+                    {
+                        GuestCheckinPage page = new GuestCheckinPage(b);
+                        this.NavigationService.Navigate(page);
+                }
+                    catch (Exception ex)
+                    {
+                    MessageBox.Show(ex.Message);
+                    ExceptionWriter.SaveErrorFile(ex);
+                }
+                    
                 }
                 else
                 {
                     MessageBox.Show("Vælg en Booking fra listen");
-
                 }
 
         }
@@ -75,8 +98,17 @@ namespace Funhall2
         private void GoToMainMenu(object sender, RoutedEventArgs e)
         {
             //Made by Rasmus
-            CheckInPage CheckIn = new CheckInPage();
-            this.NavigationService.Navigate(CheckIn);
+            try
+            {
+                CheckInPage CheckIn = new CheckInPage();
+                this.NavigationService.Navigate(CheckIn);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+                ExceptionWriter.SaveErrorFile(ex);
+            }
+            
 
         }
 
@@ -95,9 +127,18 @@ namespace Funhall2
                 return;
             }
 
-            //Made by Anders & Niels
-            AllBookingsPage AllBookings = new AllBookingsPage();
-            this.NavigationService.Navigate(AllBookings);
+            try
+            {
+                //Made by Anders & Niels
+                AllBookingsPage AllBookings = new AllBookingsPage();
+                this.NavigationService.Navigate(AllBookings);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+                ExceptionWriter.SaveErrorFile(ex);
+            }
+            
         }
     }
 }

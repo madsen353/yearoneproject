@@ -4,6 +4,7 @@ using System.Collections.ObjectModel;
 using System.Data;
 using System.Data.SqlClient;
 using System.Linq;
+using System.Linq.Expressions;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
@@ -15,7 +16,6 @@ namespace Funhall2.Classes
         //Made by Rasmus
         private SqlConnection con = new SqlConnection("Data Source=.;Initial Catalog=FunHall;" + "Integrated Security=true;");
         private SqlCommand cmd = new SqlCommand();
-        private bool connectionStatus = false;
 
         public DAL()
         {
@@ -29,23 +29,13 @@ namespace Funhall2.Classes
             con.Close();
             con = new SqlConnection("Data Source=.;Initial Catalog=FunHall;" + "Integrated Security=true;");
             cmd = new SqlCommand {Connection = con, CommandType = CommandType.Text};
-            connectionStatus = false;
         }
 
         public void OpenConnection(SqlConnection con)
         {
-            try
-            {
-                con.Open();
-            }
-            catch (Exception ex)
-            {
-                throw ex;
-            }
-            
+            con.Open();
         }
-            
-
+        
         private SqlParameter CreateParam(string name, object value, SqlDbType type)
         {
             //Made by Rasmus
@@ -296,8 +286,7 @@ namespace Funhall2.Classes
             }
 
 
-        //REFACTOR THOSE UNDERNEATH
-        // All uses the ADDPARAM method.
+        //If there is time, the methods below should be rewritten. They are using a duplicate Param method.
 
         public static void AddParam(SqlCommand cmd, object value, string name, SqlDbType sqlDbType)
         {

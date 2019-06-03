@@ -37,8 +37,17 @@ namespace Funhall2.XAML.PointSystem
             Booking b = listBox.SelectedItem as Booking;
             if (b != null)
             {
-                AllActivities allActivities = new AllActivities(b);
-                this.NavigationService.Navigate(allActivities);
+                try
+                {
+                    AllActivities allActivities = new AllActivities(b);
+                    this.NavigationService.Navigate(allActivities);
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show(ex.Message);
+                    ExceptionWriter.SaveErrorFile(ex);
+                }
+
             }
 
             else
@@ -47,15 +56,21 @@ namespace Funhall2.XAML.PointSystem
 
             }
         }
-
-
-
-
+        
         private void GoToFrontPage(object sender, RoutedEventArgs e)
         {
             //Made by Rasmus
-            CheckInPage CheckIn = new CheckInPage();
-            this.NavigationService.Navigate(CheckIn);
+            try
+            {
+                CheckInPage CheckIn = new CheckInPage();
+                this.NavigationService.Navigate(CheckIn);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+                ExceptionWriter.SaveErrorFile(ex);
+            }
+           
         }
     }
 }

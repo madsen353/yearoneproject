@@ -58,16 +58,25 @@ namespace Funhall2
 
         private void Back_Button(object sender, RoutedEventArgs e)
         {
-            if (globalPageHistory == "AllBookingsPage")
+            try
             {
-                AllBookingsPage AllBookings = new AllBookingsPage();
-                this.NavigationService.Navigate(AllBookings);
+                if (globalPageHistory == "AllBookingsPage")
+                {
+                    AllBookingsPage AllBookings = new AllBookingsPage();
+                    this.NavigationService.Navigate(AllBookings);
+                }
+                else if (globalPageHistory == "AllActivities")
+                {
+                    AllActivities allActivities = new AllActivities(Booking);
+                    this.NavigationService.Navigate(allActivities);
+                }
             }
-            else if (globalPageHistory == "AllActivities")
+            catch (Exception ex)
             {
-                AllActivities allActivities = new AllActivities(Booking);
-                this.NavigationService.Navigate(allActivities);
+                MessageBox.Show(ex.Message);
+                ExceptionWriter.SaveErrorFile(ex);
             }
+
             }
     }
 }

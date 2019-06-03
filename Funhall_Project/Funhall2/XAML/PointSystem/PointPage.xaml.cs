@@ -41,10 +41,19 @@ namespace Funhall2.XAML.PointSystem
 
         private void button_Click(object sender, RoutedEventArgs e)
         {
-            //Made by Rasmus
-            dal.UpdateCusActivity(guestID, Points.Text,activity);
-            CurrentActivity currentActivity = new CurrentActivity(pageActivity, pageBooking);
-            this.NavigationService.Navigate(currentActivity);
+            try
+            {
+                //Made by Rasmus
+                dal.UpdateCusActivity(guestID, Points.Text, activity);
+                CurrentActivity currentActivity = new CurrentActivity(pageActivity, pageBooking);
+                this.NavigationService.Navigate(currentActivity);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+                ExceptionWriter.SaveErrorFile(ex);
+            }
+            
 
         }
     }
