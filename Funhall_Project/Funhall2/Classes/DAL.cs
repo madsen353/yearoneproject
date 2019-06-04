@@ -14,7 +14,7 @@ namespace Funhall2.Classes
     public class DAL : IDAL
     {
         //Made by Rasmus
-        private SqlConnection con = new SqlConnection("Data Source=.;Initial Catalog=FunnHall2;" + "Integrated Security=true;");
+        private SqlConnection con = new SqlConnection("Data Source=.;Initial Catalog=FunHall;" + "Integrated Security=true;");
         private SqlCommand cmd = new SqlCommand();
 
         public DAL()
@@ -27,7 +27,7 @@ namespace Funhall2.Classes
         {
             //Made by Rasmus
             con.Close();
-            con = new SqlConnection("Data Source=.;Initial Catalog=FunnHall2;" + "Integrated Security=true;");
+            con = new SqlConnection("Data Source=.;Initial Catalog=FunHall;" + "Integrated Security=true;");
             cmd = new SqlCommand {Connection = con, CommandType = CommandType.Text};
         }
 
