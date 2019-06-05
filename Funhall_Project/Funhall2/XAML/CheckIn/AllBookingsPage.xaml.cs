@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Data.SqlTypes;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -63,7 +64,11 @@ namespace Funhall2
                     SelectedBookingPage page = new SelectedBookingPage(b, currentPageName);
                     this.NavigationService.Navigate(page); this.NavigationService.Navigate(page);
                 }
-                catch (Exception ex)
+                //catch(SqlNullValueException)//Made by Eby
+                //{
+                //    MessageBox.Show("No checked in guests available");
+                //}
+                catch (Exception ex)//Made by Rasmus
                 {
                     MessageBox.Show(ex.Message);
                     ExceptionWriter.SaveErrorFile(ex);

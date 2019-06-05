@@ -38,9 +38,17 @@ namespace Funhall2.XAML.PointSystem
             foreach (Customer guest in guests)
             {
                 //Made by Eby
-                if (guest.Segway != false)
+                if (activity.TimeDesc == "Segway")
+                {               
+                    if (guest.Segway == true)
+                    {
+                        elementsToShow.Add(dal.GetCusActivitySpecifiedByActivity(guest, activity));
+                    }
+                }
+                else
                 {
                     elementsToShow.Add(dal.GetCusActivitySpecifiedByActivity(guest, activity));
+
                 }
             }
             Guests.ItemsSource = elementsToShow;
