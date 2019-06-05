@@ -118,7 +118,7 @@ namespace Funhall2.Classes
         {
             //Made by Eby
             cmd.Parameters.Add("@bookingId", SqlDbType.NVarChar).Value = booking.flexyId;
-            cmd.CommandText = "select * from BookedActivities where BookingId = @bookingId";
+            cmd.CommandText = "select * from BookedActivities where BookingId = @bookingId and IsFinished = 'false'";
             ObservableCollection<Activity> activities = new ObservableCollection<Activity>();
             OpenConnection(con);
                 using (SqlDataReader reader = cmd.ExecuteReader())
